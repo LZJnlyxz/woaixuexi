@@ -15,6 +15,11 @@ function rolling() {
   time++; // 转动次数加1
   clearTimeout(rollTime);
   rollTime = setTimeout(() => {
+    let className = `.li${time % 8}`
+if (time % 8 === 0) {
+    className = `.li8`
+}
+$(`${className}`).addClass("active").siblings().removeClass("active")
     window.requestAnimationFrame(rolling); // 进行递归动画
   }, speed);
 
