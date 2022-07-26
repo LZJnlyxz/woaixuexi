@@ -1256,7 +1256,7 @@ jquery排他思想：利用隐式迭代
 
 ![image-20220726214715754](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726214715754.png)
 
-案例：淘宝精品栏切换
+案例：淘宝服饰精品栏
 
 ![image-20220726214957413](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726214957413.png)
 
