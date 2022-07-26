@@ -1208,13 +1208,13 @@ DOM对象和jquery对象相互转换
 
 
 
-### 4.jquery常用API
+### 3.jquery常用API
 
 ![image-20220726184635709](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184635709.png)
 
 ![image-20220726185818881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726185818881.png)
 
-1.jquery选择器
+#### 1.jquery选择器
 
 ![image-20220726190233754](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726190233754.png)
 
@@ -1245,3 +1245,47 @@ DOM对象和jquery对象相互转换
 筛选方法
 
 ![image-20220726193354984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726193354984.png)
+
+案例：新浪下拉菜单
+
+![image-20220726214134504](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726214134504.png)
+
+
+
+jquery排他思想：利用隐式迭代
+
+![image-20220726214715754](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726214715754.png)
+
+案例：淘宝精品栏切换
+
+![image-20220726214957413](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726214957413.png)
+
+![image-20220726215307757](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215307757.png)
+
+
+
+
+
+
+
+jquery链式编程
+
+![image-20220726215606137](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215606137.png)
+
+![image-20220726215653711](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215653711.png)
+
+
+
+
+
+#### 2.jquery操作样式
+
+1.操作css方法
+
+![image-20220726220122252](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726220122252.png)
+
+![image-20220726220203040](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726220203040.png)
+
+
+
+2.设置类样式方法
