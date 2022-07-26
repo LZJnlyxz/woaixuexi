@@ -1111,3 +1111,137 @@ classList类名操作
 ###### 2.阿里百秀轮播图制作
 
 #### 6.本地存储
+
+![image-20220726141148451](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726141148451.png)
+
+
+
+##### 1.本地存储之sessionStorage
+
+![image-20220726141735103](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726141735103.png)
+
+![image-20220726142958885](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726142958885.png)
+
+>
+>
+>注意：键值对中的键一般需要用单引号引起来
+>
+>生命周期为单个窗口
+
+
+
+
+
+##### 2.本地存储之localStorage
+
+![image-20220726144254373](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726144254373.png)
+
+>
+>
+>注意：第二弹可以实现同浏览器比如chrome数据共享
+
+
+
+##### 3.案例：记住用户名
+
+![image-20220726145006819](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145006819.png)
+
+
+
+
+
+
+
+## jQuery
+
+![image-20220726145201365](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145201365.png)
+
+![image-20220726145210659](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145210659.png)
+
+### 1.jQuery概述
+
+![image-20220726145358835](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145358835.png)
+
+![image-20220726145409899](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145409899.png)
+
+>
+>
+>注意：区别：原生js和jquery（JavaScript库）
+
+![image-20220726145637700](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145637700.png)
+
+![image-20220726145648126](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145648126.png)
+
+![image-20220726145755193](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145755193.png)
+
+### 2.jquery的基本使用
+
+#### 1.jquery的入口函数
+
+![image-20220726150717706](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726150717706.png)
+
+![image-20220726150657811](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726150657811.png)
+
+
+
+#### 2.jquery的顶级对象$
+
+![image-20220726183358425](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183358425.png)
+
+#### 3.jquery对象和DOM对象
+
+![image-20220726183902505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183902505.png)
+
+![image-20220726183929442](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183929442.png)
+
+![image-20220726183836039](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183836039.png)
+
+
+
+DOM对象和jquery对象相互转换
+
+![image-20220726184515678](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184515678.png)
+
+![image-20220726184534032](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184534032.png)
+
+
+
+
+
+### 4.jquery常用API
+
+![image-20220726184635709](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184635709.png)
+
+![image-20220726185818881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726185818881.png)
+
+1.jquery选择器
+
+![image-20220726190233754](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726190233754.png)
+
+
+
+![image-20220726190950660](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726190950660.png)
+
+隐式迭代
+
+![image-20220726192709324](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726192709324.png)
+
+![image-20220726192740311](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726192740311.png)
+
+
+
+
+
+筛选选择器
+
+![image-20220726192809410](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726192809410.png)
+
+![image-20220726193231759](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726193231759.png)
+
+
+
+
+
+筛选方法
+
+![image-20220726193354984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726193354984.png)
