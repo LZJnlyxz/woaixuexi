@@ -1,4 +1,93 @@
-# JavaScriptAPI
+# JavaScript基础
+
+## 重要的知识点
+
+1. 倒计时实现
+
+   ```javascript
+   function Daojishi(time) {
+       var now=+new Date();  
+       var ddl=+new Date(time);
+       var distance=((ddl-now)/1000);//转换成秒
+       var day=parseInt(distance/60/60/24);
+       day = day<10?'0'+day:day;
+       var hour=parseInt(distance/3600%24);
+       hour = hour<10?'0'+hour:hour;
+       var minutes=parseInt(distance/60%60);
+       minutes = minutes<10?'0'+minutes:minutes;
+       var seconds=parseInt(distance%60);
+       seconds = seconds<10?'0'+seconds:seconds;
+       var daojishi=day+'天'+hour+'时'+minutes+'分'+seconds+'秒';
+       console.log(daojishi);
+       }
+   Daojishi('2022-7-17 00:00:00');
+   ```
+
+2. 数组去重
+
+   ```javascript
+   var oldArr=['a','a','a','c','c','b','x','x','z'];
+      function unique (arr) {
+       var newArr=[];
+       for(var i=0;i<oldArr.length;i++) {
+       if(newArr.indexOf(oldArr[i])===-1) {
+           newArr.push(oldArr[i]);
+       }
+      }
+      return newArr;
+      }
+      console.log(unique(oldArr));
+   ```
+
+   3. 返回字符位置
+
+      核心算法：先找到指定字符的第一个位置,然后从该位置的索引+1处继续开始寻找
+
+      ```javascript
+      var str='abcoefoxyozzopp';
+      var index=str.indexOf('o');
+      while(index!=-1) {
+      console.log(index);
+      index=str.indexOf('o',index+1);
+      }//反思:结合所学先找到核心算法，再思考代码实现;从底层去思考，例如不要为了用循环而用循环
+      ```
+
+      4. 统计字符串中出现次数最多的字符的出现次数
+
+         ```javascript
+         //1.
+         //核心算法:利用charAt()遍历字符串,并叫字符存储到一个对象中，有就加一，没有就初始化为1
+         var str='abcoefoxyozzopp';
+            var temp={};
+            for(var i=0;i<str.length;i++) {
+             var chars=str.charAt(i);
+             if(temp[chars]) { //注意：访问对象的字符型属性不需要加单引号
+                temp[chars]++;
+            }else {
+             temp[chars]=1;
+            }
+         }
+             console.log(temp);
+         ```
+
+         5. 遍历对象取最大值
+
+            ```javascript
+             var max=0;
+                var ch='';
+                for(var k in temp){
+                    //k得到属性名  temp[k]得到属性值
+                    if(temp[k]>max) {
+                        max=temp[k];
+                        ch=k;        
+                    }
+                }
+                console.log(ch,max);
+            ```
+
+            
+
+
 
 ## DOM
 
@@ -1426,6 +1515,10 @@ div>ul>li*7>a *2>big&&small>.current
 
 ![image-20220727125707369](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727125707369.png)
 
+案例：购物车模块-增减商品数量以及修改商品小计
+
+
+
 
 
 #### 7.jquery元素操作
@@ -1433,3 +1526,133 @@ div>ul>li*7>a *2>big&&small>.current
 ##### 1.jquery遍历对象方法
 
 ![image-20220727130004075](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727130004075.png)
+
+![image-20220727191419991](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727191419991.png)
+
+
+
+2.jquery遍历数据$.each
+
+![image-20220727191640398](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727191640398.png)
+
+![image-20220727191931990](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727191931990.png)
+
+
+
+
+
+##### 2.创建，添加，删除元素
+
+![image-20220727193443231](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727193443231.png)
+
+![image-20220727193717334](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727193717334.png)
+
+![image-20220727193842568](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727193842568.png)
+
+![image-20220727193943816](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727193943816.png)
+
+![image-20220727194108861](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727194108861.png)  
+
+案例：购物车模块-清理购物车以及选中商品添加背景颜色
+
+#### 8.jquery尺寸方法
+
+![image-20220727194515686](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727194515686.png)
+
+![image-20220727194721881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727194721881.png)
+
+#### 9.jquery位置方法
+
+![image-20220727195039463](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727195039463.png)
+
+![image-20220727195230952](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727195230952.png)
+
+![image-20220727195246591](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727195246591.png)
+
+
+
+#### 10.jquery被卷去头部方法
+
+![image-20220727200345192](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727200345192.png)
+
+#### 11.jquery事件
+
+##### 1.事件处理on绑定一个或者多个事件
+
+![image-20220727214853847](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214853847.png)
+
+![image-20220727214813695](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214813695.png)
+
+![image-20220727214834108](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214834108.png)
+
+
+
+
+
+##### 2.on实现事件委派和给动态元素绑定事件
+
+![image-20220727215303221](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215303221.png)
+
+![image-20220727215255851](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215255851.png)
+
+![image-20220727215501560](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215501560.png)
+
+
+
+![image-20220727215433777](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215433777.png)
+
+
+
+##### 3.off解绑事件
+
+![image-20220727215814923](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215814923.png)
+
+![image-20220727215712596](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215712596.png)
+
+![image-20220727215833031](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215833031.png)
+
+
+
+##### 4.jquery自动触发事件
+
+![image-20220727220319988](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220319988.png)
+
+![image-20220727220329782](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220329782.png)
+
+![image-20220727220214315](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220214315.png)
+
+
+
+#### 12.jquery事件对象
+
+![image-20220727220419272](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220419272.png)
+
+#### 13.jquery其他方法
+
+![image-20220727220706728](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220706728.png)
+
+##### 1.jquery对象拷贝extend
+
+
+
+![image-20220727220938539](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220938539.png)
+
+##### 2.jquery多库共存
+
+![image-20220727221020133](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727221020133.png)
+
+##### 3.jquery插件
+
+![image-20220727221328025](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727221328025.png)
+
+1.jqeury瀑布流插件使用
+
+2.图片懒加载技术
+
+
+
+3.全屏滚动插件使用
+
+4.bootstrap组件
+
+5.bootstrap.JS插件
