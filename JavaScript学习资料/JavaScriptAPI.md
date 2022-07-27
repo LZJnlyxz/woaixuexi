@@ -1198,7 +1198,7 @@ classList类名操作
 
 
 
-DOM对象和jquery对象相互转换
+#### 4.DOM对象和jquery对象相互转换
 
 ![image-20220726184515678](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184515678.png)
 
@@ -1268,7 +1268,7 @@ jquery排他思想：利用隐式迭代
 
 
 
-jquery链式编程
+#### 2.jquery链式编程
 
 ![image-20220726215606137](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215606137.png)
 
@@ -1278,9 +1278,9 @@ jquery链式编程
 
 
 
-#### 2.jquery操作样式
+#### 3.jquery操作样式
 
-1.操作css方法
+##### 1.操作css方法
 
 ![image-20220726220122252](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726220122252.png)
 
@@ -1288,4 +1288,148 @@ jquery链式编程
 
 
 
-2.设置类样式方法
+##### 2.设置类样式方法
+
+![image-20220727103220140](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103220140.png)
+
+
+
+>
+>
+>注意：切换类的意思是没有就加上 有就去掉    重点在于“换” 即变化
+
+案例：tab栏切换
+
+![image-20220727103145505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103145505.png)
+
+##### 3.原生js和jquery类操作和className区别
+
+![image-20220727103646959](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103646959.png)
+
+![image-20220727103709179](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103709179.png)
+
+
+
+#### 4.jquery效果
+
+![image-20220727103823079](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103823079.png)
+
+##### 1.jquery显示与隐藏效果
+
+![image-20220727104202924](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727104202924.png)
+
+
+
+
+
+![image-20220727104235591](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727104235591.png)
+
+
+
+![image-20220727105522970](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727105522970.png)
+
+![image-20220727105458769](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727105458769.png)
+
+
+
+>
+>
+>注意：入口函数要分号  普通事件不要分号   效果则需要 
+
+
+
+##### 2.jquery滑动效果
+
+![image-20220727110947647](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727110947647.png)
+
+![image-20220727111001583](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111001583.png)
+
+![image-20220727111020799](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111020799.png)
+
+![image-20220727110923667](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727110923667.png)
+
+
+
+
+
+##### 3.jquery停止动画排队
+
+![image-20220727111710583](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111710583.png)
+
+![image-20220727111725360](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111725360.png)
+
+
+
+##### 4.jquery淡入淡出效果以及突出显示案例
+
+![image-20220727112624205](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112624205.png)
+
+
+
+![image-20220727112704392](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112704392.png)
+
+![image-20220727112723616](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112723616.png)
+
+
+
+![image-20220727112742628](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112742628.png) 
+
+![image-20220727112558576](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112558576.png)
+
+![image-20220727112543489](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112543489.png)
+
+
+
+##### 5.jquery自定义动画animate方法
+
+![image-20220727112905003](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112905003.png)
+
+![image-20220727113110793](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727113110793.png)
+
+
+
+6.案例：王者荣耀手风琴制作
+
+![image-20220727113535093](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727113535093.png)
+
+div>ul>li*7>a *2>big&&small>.current
+
+![image-20220727114510527](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727114510527.png)
+
+![image-20220727114536508](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727114536508.png)
+
+>
+>
+>注意：div.king宽度需要足够大  不然会往下掉
+
+
+
+
+
+#### 5.jquery属性操作
+
+![image-20220727120410175](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727120410175.png)
+
+
+
+![image-20220727120423628](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727120423628.png) 
+
+![image-20220727120309166](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727120309166.png) 
+
+
+
+#### 6.jquery内容文本值
+
+![image-20220727125315184](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727125315184.png)
+
+![image-20220727125833981](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727125833981.png)
+
+![image-20220727125707369](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727125707369.png)
+
+
+
+#### 7.jquery元素操作
+
+##### 1.jquery遍历对象方法
+
+![image-20220727130004075](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727130004075.png)
