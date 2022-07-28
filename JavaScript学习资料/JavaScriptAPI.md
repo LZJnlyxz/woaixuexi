@@ -1643,16 +1643,20 @@ div>ul>li*7>a *2>big&&small>.current
 
 ##### 3.jquery插件
 
+![image-20220728214938489](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728214938489.png)
+
 ![image-20220727221328025](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727221328025.png)
 
 1.jqeury瀑布流插件使用
 
 2.图片懒加载技术
 
-
-
 3.全屏滚动插件使用
 
 4.bootstrap组件
 
 5.bootstrap.JS插件
+
+>
+>
+>vscode使用小技巧：1. ctrl+f快速查找指定元素   2. ctrl+h快速查找并替换指定元素指定内容       
