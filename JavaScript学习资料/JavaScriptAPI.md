@@ -1445,7 +1445,168 @@ jquery排他思想：利用隐式迭代
 
 ![image-20220727111710583](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111710583.png)
 
-![image-20220727111725360](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111725360.png)
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style-type: none;
+        }
+        
+        a {
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .nav {
+            margin: 100px;
+        }
+        
+        .nav>li {
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 41px;
+            text-align: center;
+        }
+        
+        .nav li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 41px;
+            color: #333;
+        }
+        
+        .nav>li>a:hover {
+            background-color: #eee;
+        }
+        
+        .nav ul {
+            display: none;
+            position: absolute;
+            top: 41px;
+            left: 0;
+            width: 100%;
+            border-left: 1px solid #FECC5B;
+            border-right: 1px solid #FECC5B;
+        }
+        
+        .nav ul li {
+            border-bottom: 1px solid #FECC5B;
+        }
+        
+        .nav ul li a:hover {
+            background-color: #FFF5DA;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <ul class="nav">
+        <li>
+            <a href="#">微博</a>
+            <ul>
+                <li>
+                    <a href="">私信</a>
+                </li>
+                <li>
+                    <a href="">评论</a>
+                </li>
+                <li>
+                    <a href="">@我</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">微博</a>
+            <ul>
+                <li>
+                    <a href="">私信</a>
+                </li>
+                <li>
+                    <a href="">评论</a>
+                </li>
+                <li>
+                    <a href="">@我</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">微博</a>
+            <ul>
+                <li>
+                    <a href="">私信</a>
+                </li>
+                <li>
+                    <a href="">评论</a>
+                </li>
+                <li>
+                    <a href="">@我</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">微博</a>
+            <ul>
+                <li>
+                    <a href="">私信</a>
+                </li>
+                <li>
+                    <a href="">评论</a>
+                </li>
+                <li>
+                    <a href="">@我</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $(function() {
+            //鼠标经过
+            // $(".nav>li").mouseover(function() {
+            //     // $(this) jQuery 当前元素  this不要加引号
+            //     // show() 显示元素  hide() 隐藏元素
+            //     $(this).children("ul").slideDown(200);
+            // });
+            // // 鼠标离开
+            // $(".nav>li").mouseout(function() {
+            //     $(this).children("ul").slideUp(200);
+            // });
+            // 1. 事件切换 hover 就是鼠标经过和离开的复合写法
+            // $(".nav>li").hover(function() {
+            //     $(this).children("ul").slideDown(200);
+            // }, function() {
+            //     $(this).children("ul").slideUp(200);
+            // });
+            // 2. 事件切换 hover  如果只写一个函数，那么鼠标经过和鼠标离开都会触发这个函数
+            $(".nav>li").hover(function() {
+                // stop 方法必须写到动画的前面
+                $(this).children("ul").slideToggle();
+                // $(this).children("ul").stop().slideToggle();
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+```
+
+
 
 
 
@@ -1466,6 +1627,73 @@ jquery排他思想：利用隐式迭代
 ![image-20220727112558576](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112558576.png)
 
 ![image-20220727112543489](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112543489.png)
+
+```javascript
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			#container {
+				background-color: red;
+			}
+			ul {
+				list-style: none;
+			/* 	background-color: red; */
+				width: 420px;
+				margin: 50px auto;
+			}
+			ul li {
+				float: left;
+			}
+		</style>
+		<script src="jquery.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<ul>
+				<li>
+					<img src="image/bar.png">
+				</li>
+				<li>
+						<img src="image/birds.png">
+				</li>
+				<li>
+						<img src="image/cat.png">
+				</li>
+				<li>
+						<img src="image/dog.png">
+				</li>
+				<li>
+						<img src="image/fox.png">
+				</li>
+				<li>
+						<img src="image/lion.png">
+				</li>
+			</ul>
+		</div>
+		<script>
+			$(function() {
+				//鼠标进入的时候，其他li标签透明度0.5
+				//鼠标离开，其他li透明度为1
+				$("#container ul>li").hover(function(){
+					//谁做动画或效果就在谁的前面加stop方法，这样动画和效果就不会排队
+					$(this).siblings().stop().fadeTo(400,0.5);
+				} , function(){
+					$(this).siblings().stop().fadeTo(400,1);
+				})
+			})
+		</script>
+	</body>
+</html>
+```
+
+
 
 
 

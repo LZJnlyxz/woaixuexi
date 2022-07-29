@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			#container {
+				background-color: red;
+			}
+			ul {
+				list-style: none;
+			/* 	background-color: red; */
+				width: 420px;
+				margin: 50px auto;
+			}
+			ul li {
+				float: left;
+			}
+		</style>
+		<script src="jquery.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<ul>
+				<li>
+					<img src="image/bar.png">
+				</li>
+				<li>
+						<img src="image/birds.png">
+				</li>
+				<li>
+						<img src="image/cat.png">
+				</li>
+				<li>
+						<img src="image/dog.png">
+				</li>
+				<li>
+						<img src="image/fox.png">
+				</li>
+				<li>
+						<img src="image/lion.png">
+				</li>
+			</ul>
+		</div>
+		<script>
+			$(function() {
+				//鼠标进入的时候，其他li标签透明度0.5
+				//鼠标离开，其他li透明度为1
+				$("#container ul>li").hover(function(){
+					//谁做动画或效果就在谁的前面加stop方法，这样动画和效果就不会排队
+					$(this).siblings().stop().fadeTo(400,0.5);
+				} , function(){
+					$(this).siblings().stop().fadeTo(400,1);
+				})
+			})
+		</script>
+	</body>
+</html>

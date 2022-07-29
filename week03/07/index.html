@@ -10,47 +10,44 @@
 </head>
 
 <body>
-  <div id="app" v-cloak>
-    <!-- TODO：请在下面实现需求 -->
-    <div class="bar">
-      <a :class="flag?'grid-icon active':'grid-icon'" @click="flag = true"></a>
-      <a :class="!flag?'list-icon active':'list-icon'" @click="flag = false"></a>
+    <div id="app" v-cloak>
+        <!-- TODO：请在下面实现需求 -->
+        <div class="bar">
+            <a :class="{'active':active}" class="grid-icon " @click="grid()"></a>
+            <a :class="{'active':!active}" class="list-icon" @click="list()"></a>
+        </div>
+        <!--grid 示例代码，动态渲染时可删除-->
+        <ul :class="active?'grid':'list'" v-for="item in goodsList" :key="item.url">
+            <li>
+                <a :href="item.url" target="_blank"> <img :src="item.image.large" /></a>
+                <p v-show="!active">{{item.title}}</p>
+            </li>
+        </ul>
     </div>
-    <!--grid 示例代码，动态渲染时可删除-->
-    <ul class="grid" v-if="flag">
-      <li v-for="(goods,index) in goodsList" ::key="index">
-        <a href="#/3814" target="_blank"> <img :src="goods.image.large" /></a>
-      </li>
-    </ul>
-    <ul class="list" v-else>
-      <li v-for="(goods,index) in goodsList" ::key="index">
-        <a href="#/3814" target="_blank"> <img :src="goods.image.small" /></a>
-        <p>{{goods.title}}</p>
-      </li>
-    </ul>
-  </div>
 </body>
+
 </html>
 <script type="text/javascript">
-var vm = new Vue({
-  el: "#app",
-  data: {
-    goodsList: [],
-    flag:true,
-  },
-  mounted() {
-    // TODO：补全代码实现需求
-    this.getData();
-  },
-  methods: {
-    async getData(){
-      var List = await axios.get("./goodsList.json")
-      this.goodsList = List.data
-      console.log(this.goodsList);
-    },
-    altergrid(e){
-      this.flag = true;
-    }
-  },
-});
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            goodsList: [],
+            active: true
+        },
+        mounted() {
+            let _this = this
+                // TODO：补全代码实现需求
+            axios.get('./goodsList.json').then(res => {
+                _this.goodsList = res.data
+            })
+        },
+        methods: {
+            grid() {
+                this.active = true
+            },
+            list() {
+                this.active = false
+            }
+        }
+    });
 </script>
