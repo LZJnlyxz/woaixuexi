@@ -58,13 +58,24 @@
         methods:{
             addToCart(goods){
                 // TODO：修改当前函数，实现购物车加入商品需求
-                
-                goods.num = 1;
-                this.cartList.push(goods);
+                let itemIndex = this.cartList.findIndex(item => item.id == goods.id);
+                if (itemIndex !== -1) {
+                    this.cartList[itemIndex].num++
+                } else {
+                    goods.num = 1;
+                    this.cartList.push(goods);
+                }
+
                 this.cartList = JSON.parse(JSON.stringify(this.cartList));
             },
             removeGoods(goods){
                 // TODO：补全代码实现需求
+                let itemIndex = this.cartList.findIndex(item => item.id == goods.id);
+                if (this.cartList[itemIndex].num > 1) {
+                    this.cartList[itemIndex].num--
+                } else {
+                    this.cartList.splice(itemIndex, 1)
+                }
                 
             }
         }
