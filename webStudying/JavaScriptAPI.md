@@ -1265,6 +1265,10 @@ classList类名操作
 
 ### 2.jquery的基本使用
 
+>
+>
+>必须先引入jquery.js文件
+
 #### 1.jquery的入口函数
 
 ![image-20220726150717706](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726150717706.png)
@@ -1281,9 +1285,13 @@ classList类名操作
 
 ![image-20220726183902505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183902505.png)
 
+![image-20220726183836039](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183836039.png)
+
 ![image-20220726183929442](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183929442.png)
 
-![image-20220726183836039](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183836039.png)
+
+
+
 
 
 
@@ -1359,6 +1367,22 @@ jquery排他思想：利用隐式迭代
 
 #### 2.jquery链式编程
 
+##### 1.链式编程原理：
+
+```javascript
+链式编程原理：return this;
+/通常情况下，只有设置操作才能把链式编程延续下去。因为获取操作的时候，会返回获取到的相应的值，无法返回 this。/
+```
+
+链式编程错误示范：
+
+```javascript
+$("li").parent("ul").parent("div").siblings("div").children("div").html("内容");
+/------------------------------------------------------------------------------
+end(); 
+// 结束当前链最近的一次过滤操作，并且返回匹配元素之前的一次状态。
+```
+
 ![image-20220726215606137](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215606137.png)
 
 ![image-20220726215653711](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726215653711.png)
@@ -1388,6 +1412,8 @@ jquery排他思想：利用隐式迭代
 >注意：切换类的意思是没有就加上 有就去掉    重点在于“换” 即变化
 
 案例：tab栏切换
+
+.tab_list>li*n>.item
 
 ![image-20220727103145505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103145505.png)
 
@@ -1423,7 +1449,7 @@ jquery排他思想：利用隐式迭代
 
 >
 >
->注意：入口函数要分号  普通事件不要分号   效果则需要 
+>注意：入口函数要分号  普通事件不要分号   效果则需要 (都可以不要但影响速度)
 
 
 
@@ -1759,7 +1785,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-2.jquery遍历数据$.each
+2.jquery遍历数据$.each（）
 
 ![image-20220727191640398](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727191640398.png)
 
@@ -1805,9 +1831,13 @@ div>ul>li*7>a *2>big&&small>.current
 
 #### 11.jquery事件
 
-##### 1.事件处理on绑定一个或者多个事件
+##### 
 
 ![image-20220727214853847](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214853847.png)
+
+##### 1.事件处理on绑定一个或者多个事件
+
+` $(element).on({type1:function(){},type2:function(){},....})`
 
 ![image-20220727214813695](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214813695.png)
 
@@ -1819,7 +1849,25 @@ div>ul>li*7>a *2>big&&small>.current
 
 ##### 2.on实现事件委派和给动态元素绑定事件
 
+>
+>
+>注意：只有on可以给动态元素绑定事件，其他的都不行（函数提升优先级大于变量提升）
+
 ![image-20220727215303221](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215303221.png)
+
+>
+>
+>什么是事件委托？
+>
+>事件委托就是利用冒泡的原理，把事件加到父元素或祖先元素上，触发执行效果。
+>
+>事件委托的好处：
+>
+>提高JavaScript性能。事件委托可以显著的提高事件的处理速度，减少[内存](https://so.csdn.net/so/search?q=内存&spm=1001.2101.3001.7020)的占用。
+>
+>应用场景：js动态生成的dom元素，无法直接操作，需要使用事件委托绑定方法。
+>
+>参考网址：https://www.misterma.com/archives/836/
 
 ![image-20220727215255851](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215255851.png)
 

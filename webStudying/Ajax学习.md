@@ -1,4 +1,4 @@
-# AJAX学习
+#  AJAX学习
 
 ![image-20220728090400060](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728090400060.png)
 
@@ -25,6 +25,10 @@
 ![image-20220728091923637](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728091923637.png)
 
 ![image-20220728092217417](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728092217417.png)
+
+>
+>
+>注意：选中doc标签后需选中name框中的某个项目 才可看到response选项
 
 
 
@@ -56,6 +60,8 @@
 
 ![image-20220728094103990](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728094103990.png)
 
+#### 1.$.get()发起get请求
+
 ![image-20220728094208078](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728094208078.png)
 
 ![image-20220728094413736](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728094413736.png)
@@ -64,11 +70,17 @@
 
 ![image-20220728095424574](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728095424574.png)
 
+
+
+#### 2.$.post()函数发起post请求
+
 ![image-20220728095506443](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728095506443.png)
 
 ![image-20220728095802877](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728095802877.png)
 
 ![image-20220728095815984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728095815984.png)
+
+#### 3.$.ajax()函数发起请求
 
 ![image-20220728095920623](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728095920623.png)
 
@@ -78,7 +90,29 @@
 
 ### 7.接口
 
-接口文档
+#### 1.接口相关概念
+
+![image-20220730170208641](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730170208641.png)
+
+![image-20220730170238048](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730170238048.png)
+
+
+
+#### 2.接口测试工具postman
+
+1.使用postman测试get接口
+
+![image-20220730150848396](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730150848396.png)
+
+2.使用postman测试post接口
+
+![image-20220730150942881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730150942881.png)
+
+
+
+
+
+#### 3.接口文档
 
 ![image-20220728110617186](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728110617186.png)
 
@@ -91,3 +125,7 @@
 
 
 ### 8.案例：图书管理
+
+![image-20220730211946083](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730211946083.png)
+
+![image-20220730205132459](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220730205132459.png)
