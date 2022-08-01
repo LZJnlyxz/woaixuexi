@@ -496,3 +496,90 @@ $(function(){
 
 ```
 
+
+
+### 3.模板引擎
+
+#### 1.模板引擎概述
+
+![image-20220801103356582](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801103356582.png)
+
+![image-20220801103409965](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801103409965.png)
+
+
+
+#### 2.模板引擎的基本使用
+
+![image-20220801103428677](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801103428677.png)
+
+#### 3.模板引擎的常用语法
+
+![image-20220801104904276](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801104904276.png)
+
+![image-20220801104920593](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801104920593.png)
+
+![image-20220801104933265](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801104933265.png)
+
+![image-20220801104948198](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801104948198.png)
+
+![image-20220801105017640](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801105017640.png)
+
+![image-20220801105636122](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801105636122.png)
+
+![image-20220801110041072](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801110041072.png)
+
+#### 4.案例:新闻列表
+
+![image-20220801112118303](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801112118303.png)
+
+>
+>
+>==代码见exercise==
+
+#### 5.模板引擎的实现原理
+
+
+
+## 3.Ajax加强
+
+![image-20220801213536217](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801213536217.png)
+
+![image-20220801213549782](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801213549782.png)
+
+
+
+### 1.XmlHttpRequest的基本使用
+
+![image-20220801213715626](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801213715626.png)
+
+#### 1.使用xhr对象发起GET数据请求
+
+![image-20220801214823269](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801214823269.png)
+
+
+
+
+
+#### 2.了解xhr对象的readyState属性
+
+![image-20220801214936747](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801214936747.png)
+
+
+
+#### 3.使用xhr对象发起带参数的GET请求
+
+
+
+![image-20220801215345744](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801215345744.png)
+
+#### 4.查询字符串
+
+![image-20220801215635445](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801215635445.png)
+
+![image-20220801215740289](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801215740289.png)
+
+![image-20220801220338365](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220338365.png)
+
+![image-20220801220845799](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220845799.png)
+
+![image-20220801220906699](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220906699.png)
