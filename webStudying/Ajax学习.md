@@ -583,3 +583,250 @@ $(function(){
 ![image-20220801220845799](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220845799.png)
 
 ![image-20220801220906699](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220906699.png)
+
+
+
+#### 5.使用xhr发起POST请求
+
+![image-20220801220950508](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801220950508.png)
+
+![image-20220801221130776](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221130776.png)
+
+
+
+
+
+
+
+### 2.数据交换格式
+
+#### 1.数据交换格式概述
+
+![image-20220801221509684](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221509684.png)
+
+
+
+#### 2.XML
+
+![image-20220801221606441](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221606441.png)
+
+![image-20220801221627261](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221627261.png)
+
+![image-20220801221654257](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221654257.png)
+
+
+
+#### 4.JSON
+
+![image-20220801221747286](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220801221747286.png)
+
+![image-20220802093336290](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802093336290.png)
+
+![image-20220802093531850](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802093531850.png)
+
+![image-20220802093625319](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802093625319.png)
+
+![image-20220802093856376](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802093856376.png)
+
+![image-20220802094031495](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802094031495.png)
+
+![image-20220802094236590](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802094236590.png)
+
+![image-20220802094745507](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802094745507.png)
+
+
+
+
+
+### 3.封装Ajax函数
+
+![image-20220802095108874](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802095108874.png)
+
+![image-20220802095148851](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802095148851.png)
+
+![image-20220802095348155](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802095348155.png)
+
+![image-20220802100246133](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802100246133.png)
+
+>
+>
+>注意：success（)回调函数依赖于服务器返回的js数据，故需要传入参数result
+
+![image-20220802100344830](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802100344830.png)
+
+
+
+```javascript
+function resolveData(data) {
+    var rows=[];
+    for(var k in data) {
+        rows.push(k+'='+data[k])
+    }
+    return rows.join('&');
+}
+function itheima(options) {
+    var xhr=new XMLHttpRequest();
+    var qs=resolveData(options.data);
+    if(options.method.toUpperCase()==='GET') {
+        xhr.open(options.method,options.url+'?'+qs);
+        xhr.send();
+    }else if(options.method.toUpperCase()==="POST") {
+        xhr.open(options.method,options.url);
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.send(qs);
+    }
+    xhr.onreadystatechange=function() {
+        if(xhr.readyState===4 && xhr.status===200) {
+            var result=JSON.parse(xhr.responseText);
+            options.success(result);
+            
+        }
+    }
+}
+
+```
+
+
+
+
+
+### 4.XMLHttpRequest Level2的新特性
+
+![image-20220802103937087](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802103937087.png)
+
+![image-20220802104020823](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802104020823.png)
+
+![image-20220802104627402](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802104627402.png)
+
+![image-20220802104711182](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802104711182.png)
+
+![image-20220802105444117](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802105444117.png)
+
+![image-20220802105959617](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802105959617.png)
+
+>
+>
+>注意：input标签中新添加的autocomplete属性设置为off时可以防止自动填充
+
+![image-20220802111311224](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802111311224.png)
+
+![image-20220802111444391](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802111444391.png)
+
+![image-20220802111631239](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802111631239.png)
+
+![image-20220802111752915](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802111752915.png)
+
+![image-20220802111833058](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802111833058.png)
+
+![image-20220802112458276](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802112458276.png)
+
+![image-20220802112530785](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802112530785.png)
+
+>
+>
+>注意：控制台network选项卡中的no-throtting（节流）选项可以调节网速快慢
+
+![image-20220802114738580](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802114738580.png)
+
+
+
+
+
+### 5.jquery高级用法（使用jquery上传文件）
+
+![image-20220802120322947](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120322947.png)
+
+![image-20220802120332427](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120332427.png)
+
+![image-20220802120351355](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120351355.png)
+
+![image-20220802120401397](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120401397.png)
+
+![image-20220802120422090](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120422090.png)
+
+![image-20220802120447235](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120447235.png)
+
+
+
+
+
+### ==<u>6.axios</u>==
+
+![image-20220802120625734](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120625734.png)
+
+![image-20220802211921717](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802211921717.png)
+
+>
+>
+>注意：res中只有data才是服务器返回的数据，其他都是axios包装的数据
+
+![image-20220802212339363](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802212339363.png)
+
+![image-20220802212456281](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802212456281.png)
+
+![image-20220802212514910](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802212514910.png)
+
+![image-20220802212706578](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802212706578.png)
+
+
+
+
+
+## 4.跨越和JSONP
+
+### 1.同源
+
+![image-20220802213326905](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802213326905.png)
+
+>
+>
+>注意：未在域名后加上：加数字则是默认端口80；file也是协议
+
+![image-20220802213809568](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802213809568.png)
+
+
+
+### 2.跨域
+
+![image-20220802213929190](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802213929190.png)
+
+![image-20220802214047893](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802214047893.png)
+
+![image-20220802214202577](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802214202577.png)
+
+
+
+### 3.JOSNP
+
+![image-20220802214345886](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802214345886.png)
+
+#### 1.剖析JSONP实现原理
+
+![image-20220802215341612](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802215341612.png)
+
+> ==原理：1.本地定义callback函数   2.利用script标签的src属性不受same origin policy限制的特点并在url后加上查询字符串的方式调用相关函数   3.调用callback函数得到结果==
+
+![image-20220802215718572](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802215718572.png)
+
+![image-20220802220351167](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802220351167.png)
+
+>
+>
+>注意：GET是请求数据，POST是获取数据，故JSONP只能是GET
+
+#### 2.jquery中的JSONP
+
+![image-20220802220714129](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802220714129.png)
+
+>
+>
+>理解：因为JSONP必须有一个callback所以会自动生成一个callback=jQueryxxx的callback
+
+![image-20220802220825798](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802220825798.png)
+
+![image-20220802221101931](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802221101931.png)
+
+
+
+## 5.案例：淘宝搜索
+
