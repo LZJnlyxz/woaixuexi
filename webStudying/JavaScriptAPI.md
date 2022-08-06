@@ -699,7 +699,7 @@ console.log<div.getAttribute('index')>;
 
 
 - 全局作用域或者普通函数中this指向全局对象window（注意定时器中的this指向window，因为window.setTimeout()中window省略了）
-- 方法中调用谁调用this就向谁
+- 方法中谁调用this，this就指向谁
 - 构造函数中this指向构造函数的实例对象
 
 ![image-20220724151054216](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724151054216.png)
