@@ -1,4 +1,4 @@
-# JavaScript基础
+# JavaScript高级
 
 ## 重要的知识点
 

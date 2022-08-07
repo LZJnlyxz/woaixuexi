@@ -1,4 +1,6 @@
-# ES6
+# 一.ES6
+
+es6官方文档地址：https://www.w3cschool.cn/escript6/escript6-pm6z37es.html
 
 ## 1.ES6简介
 
@@ -636,11 +638,29 @@ p.then(value=>{
 
 ```javascript
 <script>
+  class Person{
+      static name='手机';
+      static function(){
+          console.log("我是帅哥");
+      }
+  }
+  let nokia = new Person();
+  console.log(nokia.name);
+</script>
+
+```
+
+
+
+### 4.ES5类继承
+
+```javascript
+<script>
   function Phone(brand,price){
       this.brand=brand;
       this.price=price;
   }
-  Phone.prototype.call=function (){
+  Phone.prototype.call=function (){//原型
       console.log("我可以打电话");
   }
   function SmartPhone(brand,price,color,size){
@@ -660,6 +680,732 @@ p.then(value=>{
   const chuizi = new SmartPhone('锤子',2499,'黑色','5.5inch')
   console.log(chuizi);
 </script>
+
+```
+
+### 5.ES6类继承
+
+```javascript
+<script>
+    class Phone{
+        constructor(brand,price) {
+            this.brand=brand;
+            this.price=price;
+
+        }
+        //父类的成员属性
+        call(){
+            console.log('我可以打电话')
+        }
+    }
+    class SmartPhone extends Phone{
+        constructor(brand,price,color,size) {
+            super(brand,price);
+            this.color=color;
+            this.size=size;
+        }
+        photo(){
+            console.log('拍照');
+        }
+
+        playGame(){
+            console.log('打游戏');
+        }
+    }
+    const xiaomi=new SmartPhone('小米',1999,'黑色','4.7inch')
+    xiaomi.call();
+    xiaomi.photo();
+    xiaomi.playGame();
+</script>
+
+```
+
+### 6.ES6子类对父类方法的重写
+
+```javascript
+<script>
+    class Phone{
+        constructor(brand,price) {
+            this.brand=brand;
+            this.price=price;
+
+        }
+        //父类的成员属性
+        call(){
+            console.log('我可以打电话')
+        }
+    }
+    class SmartPhone extends Phone{
+        constructor(brand,price,color,size) {
+            super(brand,price);
+            this.color=color;
+            this.size=size;
+        }
+        photo(){
+            console.log('拍照');
+        }
+
+        playGame(){
+            console.log('打游戏');
+        }
+
+        //重写！
+        call(){
+            console.log('我可以进行视频通话')
+        }
+    }
+    const xiaomi=new SmartPhone('小米',1999,'黑色','4.7inch')
+    xiaomi.call();
+    xiaomi.photo();
+    xiaomi.playGame();
+</script>
+
+```
+
+### 7.ES6class中getter和setter设置
+
+```
+<script>
+  class Phone{
+      get price(){
+          console.log("价格属性被读取了")
+          return 'I LOVE YOU'
+      }
+
+      set price(val){//Val参数是必须写的
+          console.log('价格属性被修改了')
+          return val;
+      }
+  }
+
+    //实例化对象
+    let s = new Phone();
+    s.price=12  //实质是给price属性赋值，此时会调用price后面的函数，打印出“价格属性被修改了”
+    // console.log(s.price)   //其实是调用price方法
+</script>
+
+```
+
+
+
+### 8.ES6数值的扩展
+
+```javascript
+<script>
+   // Number.EPSILON是 JavaScript的最小精度，属性的值接近于 2.22044...E-16
+   function equal(a,b){
+       if(Math.abs(a-b) < Number.EPSILON){
+           return true;
+       }else {
+           return false;
+       }
+   }
+
+   console.log(equal(0.1 + 0.2 === 0.3))  //false
+   console.log(equal(0.1+0.2,0.3))  //true
+
+   //二进制和八进制
+   let b = 0b1010; //2进制
+   let o = 0o777;  //8进制
+   let d = 100;    //10进制
+   let x = 0xff;   //16进制
+   console.log(x)   //255
+
+   //Number.isFinite（）检测一个数是否为有限数
+   console.log(Number.isFinite(100));  //true
+   console.log(Number.isFinite(100/0));  //false
+   console.log(Number.isFinite(Infinity));  //false
+
+   //Number.isNaN（）检测一个数值是否为NaN
+   console.log(Number.isNaN(123))  //false
+
+   //Number.parseInt/parseFloat（）字符串转整数
+   console.log(Number.parseInt('5213123love')); //5213123
+   console.log(Number.parseFloat('5.123123神器')); //5.123123
+
+   //Number.isInteger（）判断是否为整数
+   console.log(Number.isInteger(5));  //true
+   console.log(Number.isInteger(2.5)); //false
+   
+   //Math.trunc（）将小数部分抹除
+   console.log(Math.trunc(3.45345345345)) //3
+
+   //Math.sign（）检测一个数到底是正数、负数、还是0
+   console.log(Math.sign(100)) //1
+   console.log(Math.sign(0))  //0
+   console.log(Math.sign(-123)) //-1
+</script>
+
+```
+
+>
+>
+>注意：浮点数运算有误差，原因是
+
+
+
+### 9.ES6对象方法的扩展
+
+```javascript
+<script>
+    //1.Object.is ()判断两个值是否完全相等
+    console.log(Object.is(120,120))  //true
+	console.log(Object.is(NaN,NaN))  //false
+
+    //2.Object.assign 对象的合并
+    const a = {
+        name:'ran',
+        age:12
+    }
+    const b = {
+        pass:'i love you'
+        age:13
+    }
+    console.log(Object.assign(a,b))   //{name:'ran',age:'13',pass:'i love you'}//如果存在同名属性，后面的会覆盖前面的
+
+    //3.Object.setPrototypeOf 设置原型对象     Object.getPrototypeof获取原型对象
+    const school = {
+        name:'尚硅谷'
+    }
+    const cities = {
+        xiaoqu:['北京','上海']
+    }
+    Object.setPrototypeOf(school,cities)//设置cities为school原型
+    console.log(Object.getPrototypeOf(school))  //{xiaoqu: Array(2)}
+    console.log(school)  //{name: "尚硅谷"}
+</script>
+
+```
+
+
+
+
+
+## 15.模块化
+
+### 1.模块化概述：
+
+1.模块化是指将一个大的程序文件,拆分成许多小的文件，然后将小文件组合起来。
+
+2.模块化的好处：
+
+- 防止命名冲突
+- 代码复用
+- 高维护性
+- 
+  模块化规范产品
+
+3.ES6之前的模块化规范有：
+
+CommonJS ====> NodeJS、Browserify
+AMD ====> requireJS
+CMD ====> seaJS
+
+### 2.语法
+
+模块功能主要有两个命令构成：export和import
+
+- export命令用于规定模块的对外接口
+- import命令用于输入其他模块提供的功能
+
+```javascript
+export let school = '尚硅谷'//export命令使变量school得以暴露
+export function teach(){//同上
+    console.log('教技能')
+}
+
+<script type="module">
+    //引入m1.js模块内容
+    import * as m1 from "./src/js/m1.js";//将m1.js文件中的暴露内容全部引入m1变量中
+	console.log(m1);
+</script
+
+```
+
+### 3.暴露语法汇总
+
+```javascript
+//1.统一暴露
+let school = '尚硅谷';
+function findjob(){
+    console.log('找工作吧');
+}
+export {school,findjob};//统一暴露
+
+//2.默认暴露
+//默认暴露
+export default {
+    school:'ATGUIGU',
+    change:function(){
+        console.log('我们可以改变你')
+    }
+}
+
+```
+
+![image-20220807104031690](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807104031690.png)
+
+
+
+### 4.引入语法汇总
+
+```javascript
+//1.通用导入方式
+import * as m1 from "./src/js/m1.js"
+import * as m2 from "./src/js/m2.js"
+import * as m3 from "./src/js/m3.js"
+
+//2.解构赋值方式
+import {school,teach} from "./src/js/m1.js"//针对单一暴露
+import {school as guigu,findJob} from "./src/js/m2.js"//as+其他名可以避免重名冲突  针对统一暴露
+import {default as m3 } from "./src/js/m3.js"//针对默认暴露   default是属性，为了避免重名 使用as语法
+
+//3.简便形式（只针对默认暴露）
+import m3 from "./src/js/m3.js"
+
+```
+
+模块化文件引入方式二
+
+```javascript
+<script src="./src//js/app.js" type=modeule></script>
+//创建app.js文件作为所有模块化文件js代码的入口文件
+```
+
+![image-20220807105507760](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807105507760.png)
+
+
+
+### 5.ES6-babel对ES6模块化代码转换
+
+
+
+
+
+# 二.ES7
+
+### 1.概述
+
+1. Array.prototype.includes：用来检测数组中是否包含某个元素，返回布尔类型值
+2. 在ES7中引入指数操作符**，用来实现幂运算，功能与Math.pow结果相同
+
+### 2.应用
+
+```javascript
+<script>
+    //include
+   const mingzhu = ['西游记','红楼梦','水浒传','三国演义']
+   console.log(mingzhu.includes('西游记'))  //true
+   console.log(mingzhu.includes('金瓶梅'))  //false
+
+    //**
+    console.log(2**10) // 1024
+</script>
+
+```
+
+
+
+# 三.ES8
+
+介绍：async和await两种语法结合可以让异步代码像同步代码一样
+
+## 1.async函数
+
+async函数：
+
+- async函数的返回值为promise对象
+- async返回的promise对象的结果值由async函数执行的返回值决定
+
+特性：
+
+```javascript
+async function fn(){
+   //1.如果返回的是一个非Promise的对象，则fn（）返回的结果就是成功状态的Promise对象，值为返回值
+   //2.如果返回的是一个Promise对象，则fn（）返回的结果与内部Promise对象的结果一致
+   //3.如果返回的是抛出错误，则fn（）返回的就是失败状态的Promise对象
+   return new Promise((resolve,reject)=>{
+       resolve('成功的数据');
+   });
+}
+const result = fn();
+result.then(value=>{
+   console.log(value)  //成功的数据
+},reason=>{
+   console.log(reason)
+})
+
+```
+
+
+
+## 2.await表达式
+
+### 1.概述
+
+1. await必须放在async函数中
+2. await右侧的表达式一般为promise对象
+
+3. await可以返回的是右侧promise成功的值(promisevalue)
+4. await右侧的promise如果失败了，就会抛出异常，需要通过try…catch捕获处理
+
+### 2.特性
+
+```javascript
+<script>
+    //创建Promise对象
+    const p = new Promise((resolve, reject) => {
+        // resolve("成功的值")
+        reject("失败了")
+    })
+
+    //await 必须放在async函数中
+    async function main() {
+        try {
+            let res = await p;
+            console.log(res);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    //调用函数
+    main()  //失败了
+</script>
+
+```
+
+### 3应用：发送AJAX请求
+
+```javascript
+<script>
+    //ajax请求返回一个promise
+    function sendAjax(url){
+        return new Promise((resolve, reject) => {
+
+            //创建对象
+            const x =new XMLHttpRequest();
+
+            //初始化
+            x.open('GET',url);
+
+            //发送
+            x.send();
+
+            //时间绑定
+            x.onreadystatechange = ()=>{
+                if(x.readyState === 4 ){
+                    if(x.status >= 200 && x.status < 300){
+                        //成功
+                        resolve(x.response)//这里是成功的值value
+                    }else {
+                        //失败
+                        reject(x.status)
+                    }
+                }
+            }
+        })
+    }
+	//promise then 方法测试
+        sendAjax("https://api.apiopen.top/getJoke").then(value=>		 	        {console.log(value);
+                                                                                    },reason=>{})
+
+   //async 与 await 测试
+    async function main(){
+        let result = await sendAjax("https://api.apiopen.top/getJoke")
+        console.log(result);
+    }
+    main()
+
+</script>
+
+```
+
+### 4.async和await结合读取文件
+
+```javascript
+```
+
+
+
+## 3.ES8对象方法扩展
+
+```javascript
+<script>
+    const school = {
+        name:'尚硅谷',
+        cities:['北京','上海','深圳'],
+        xueke:['前端','Java','大数据','运维']
+    };
+
+    //获取对象所有的键
+    console.log(Object.keys(school));
+
+    //获取对象所有的值
+    console.log(Object.values(school));
+
+    //entries,用来创建map
+    console.log(Object.entries(school));
+    console.log(new Map(Object.entries(school)))
+
+    //对象属性的描述对象
+    console.log(Object.getOwnPropertyDescriptor(school))
+    
+    const obj = Object.create(null,{
+        name:{
+            value:'尚硅谷',
+            //属性特性
+            writable:true,
+            configurable:true,
+            enumerable:true,
+        }
+    })
+</script>
+
+```
+
+
+
+# 四.ES9
+
+## 1.运算扩展符与rest参数
+
+```javascript
+<script>
+    function connect({host,port,...user}){
+        console.log(host);
+        console.log(port);
+        console.log(user)
+    }
+    connect({
+        host:'127.0.0.1',
+        port:3306,
+        username:'root',
+        password:'root',
+        type:'master'
+    })  //127.0.0.1  3306  {username: "root", password: "root", type: "master"}
+
+</script>
+
+<script>
+    const AA={
+        username:'ran'
+    }
+    const BB={
+        password:'lyyrhf'
+    }
+    const CC={
+        job:'Java'
+    }
+    const D={...AA,...BB,...CC};
+    console.log(D) //{username: "ran", password: "lyyrhf", job: "Java"}
+</script>
+
+```
+
+
+
+# 五.ES10
+
+## 1.对象扩展方法
+
+```javascript
+<script>
+   //二维数组
+   const res = Object.fromEntries([
+       ['name','RHF'],
+       ['cities','成都','武汉']
+   ])
+   console.log(res) //{name: "RHF", cities: "成都"}
+
+   //Map
+   const m = new Map();
+   m.set('name','ranhaifeng')
+   const result = Object.fromEntries(m)
+   console.log(result); //{name: "ranhaifeng"}
+</script>
+
+```
+
+
+
+## 2.字符串扩展方法
+
+```javascript
+<script>
+   //trim
+   let str= ' asd  '
+   console.log(str) //asd
+   console.log(str.trimStart()) //asd  清空头空格
+   console.log(str.trimEnd()) //  asd  清空尾空格
+</script>
+
+```
+
+
+
+## 3.flat与flatMap
+
+```javascript
+<script>
+    const arr = [1,2,3,[4,5,6,[7,8,9]]]
+    //参数为深度，是一个数字
+    console.log(arr.flat(2)) //[1,2,3,4,5,6,7,8,9]
+
+	const arr2=[1,2,3,4]
+    const result = arr2.flatmap(item => [item * 10]); //如果map的结果是一个多维数组可以进行flat 是两个操作的结合
+	
+</script>
+
+```
+
+
+
+## 4.Symbol的description
+
+概述：用来获取Symbol的字符串描述
+
+实例：
+
+```javascript
+let s = Symbol('尚硅谷');
+console.log(s.description) //尚硅谷
+
+```
+
+## 5.私有属性
+
+```javascript
+<script>
+    class Person {
+        //公有属性
+        name;
+        //私有属性
+        #age;
+        #weight;
+
+        //构造方法
+        constructor(name, age, weight) {
+            this.name = name;
+            this.#age = age;
+            this.#weight = weight;
+        }
+        intro(){
+            console.log(this.name);
+            console.log(this.#age);
+            console.log(this.#weight);
+        }
+    }
+
+    //实例化
+    const girl = new Person('陈', 18, '45kg');
+    console.log(girl.#age) //error
+    console.log(girl); //Person{name: "陈", #age: 18, #weight: "45kg"}
+    girl.intro(); // 陈 18  45kg
+</script>
+
+```
+
+## 6.Promise
+
+```javascript
+<script>
+    //声明两个promise对象
+    const p1 = new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            resolve('商品数据-1')
+        },1000)
+    })
+
+    const p2 = new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            reject('出错了！')
+        },1000)
+    })
+
+    //调用allsettled方法:返回的结果始终是一个成功的，并且异步任务的结果和状态都存在
+    const res = Promise.allSettled([p1,p2]);
+    console.log(res)
+
+    // Promise {<pending>}
+    //     __proto__: Promise
+    //     [[PromiseState]]: "fulfilled"
+    //     [[PromiseResult]]: Array(2)
+
+    //调用all方法：返回的结果是按照p1、p2的状态来的，如果都成功，则成功，如果一个失败，则失败，失败的结果是失败的Promise的结果
+    const result = Promise.all([p1,p2])
+    console.log(result)
+
+</script>
+
+```
+
+
+
+## 7. 可选链操作符
+
+```javascript
+//相当于一个判断符，如果前面的有，就进入下一层级
+function main(config){
+    const dbHost = config?.db?.host
+    console.log(dbHost) //192.168.1.100
+}
+
+main({
+    db:{
+        host:'192.168.1.100',
+        username:'root'
+    },
+    cache：{
+    	host:'192.168.1.200',
+    	username:'admin'
+	}
+})
+
+```
+
+
+
+## 8.动态import
+
+```javascript
+btn.onclick = function(){
+    //使用之前并未引入，动态引入，返回的其实是一个Promise对象
+    import('./hello.js').then(module=>{
+        module.hello();
+    })
+}
+
+```
+
+
+
+## 9. BigInt类型
+
+```javascript
+//大整型
+let n = 521n;
+console.log(n,typeof(n))  // 521n  n 
+
+//函数
+let n = 123;
+console.log(BigInt(n)) // 123n  //不要使用浮点型，只能用int
+
+//大数值运算
+let max = Number.MAX_SAFE_INTEGER; // 9007199254740991
+console.log(max +1) // 9007199254740992
+console.log(max +2) // 9007199254740992 出问题了
+console.log(BigInt(max)+BigInt(1)) 9007199254740992n
+console.log(BigInt(max)+BigInt(2)) 9007199254740993n
+
+```
+
+
+
+## 10.绝对全局对象globalThis
+
+```javascript
+console.log(globalThis) //window  //适用于复杂环境下直接操作window
 
 ```
 
