@@ -12,7 +12,62 @@ es6官方文档地址：https://www.w3cschool.cn/escript6/escript6-pm6z37es.html
 
 ## 2.let和const变量声明
 
-![image-20220803205502981](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220803205502981.png)
+1.let变量
+
+```javascript
+//变量不能重复声明let star='罗志祥';
+let star='小猪'  //error
+
+//let有块级作用域
+{
+    let girl='周扬青'
+}
+console.log(girl) //error
+//不仅仅针对花括号，例如if（）里面
+
+//不存在变量提前
+console.log(song)   //error
+let song='恋爱达人'
+
+//不影响作用域链
+let school='abc'
+function fn(){
+    console.log(school) //abc
+}
+
+```
+
+案例：
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div class="item" style="width: 50px;height: 50px;background-color: red"></div>
+        <div class="item" style="width: 50px;height: 50px;background-color: red"></div>
+        <div class="item" style="width: 50px;height: 50px;background-color: red"></div>
+    </div>
+    <script>
+        let items=document.getElementsByClassName("item");
+        for (var i=0;i<items.length;i++){
+            items[i].onclick=function (){
+                items[i].style.backgroundColor='pink';
+            }
+        }
+        console.log(windows.i)  //3 
+        // 当var=3的时候，点击事件开始向外层作用域找，找不到，就是windows.i，此时是3，如果是let i，具有块级作用域，所以每一次触碰事件的i都是不同的。
+    </script>
+</body>
+</html>
+
+```
+
+
 
 ![image-20220803211453439](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220803211453439.png)
 
@@ -20,25 +75,121 @@ es6官方文档地址：https://www.w3cschool.cn/escript6/escript6-pm6z37es.html
 
 ![image-20220805094546837](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805094546837.png)
 
-![image-20220805104141913](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805104141913.png)
+
+
+2.const常量
+
+1.一定要赋初始值
+
+2.一般常量使用大写（潜规则）
+
+3.常量的值不能修改
+
+4.也具有块级作用域
+
+```javascript
+//声明常量
+const A = 'abc'
+
+//const常量也具有块级作用域
+{
+    const pyaler = 'uzi'
+}
+console.log(player) //error
+
+//对于数组和对象的元素修改，不算作对常量的修改
+const team = ['uzi','MXLG','Ming','Letme'];
+team.push('Meiko'); //不报错，常量地址没有发生变化
+
+```
 
 >
 >
 >注意：const变量值不变实质是变量申请的地址中保存的数据不变，当const变量被赋值了数组时，实质是在变量中保存了数组的地址
 
-![image-20220805104823187](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805104823187.png)
 
 
 
 
+## 3.解构赋值
 
-## 3.模板字符串
+概述：ES6 允许按照一定模式从数组和对象中提取值，对变量进行赋值，这被称为解构赋值。
 
-![image-20220805110954234](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805110954234.png)
+```javascript
+//数组的解构：
+const F4 = ['小沈阳'，'刘能','赵四','宋小宝']
+let [xiao,liu,zhao,song] = F4; 
+console.log(xiao)
+console.log(liu)
+console.log(zhao)
+console.log(song)
 
-![image-20220805112011680](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805112011680.png)
+//对象的解构
+const zhao = {
+    name : '赵本山'，
+    age: '不详',
+    xiaopin: function(){
+        console.log("我可以演小品")
+    }
+}
+let {name,age,xiaopin} = zhao;
+console.log(name);
+console.log(age);
+console.log(xiaopin);
 
-## 4.箭头函数
+```
+
+
+
+## 4.模板字符串
+
+```javascript
+//1.声明   ES6引入新的声明字符串的方法``
+let str = `我也是一个字符串`
+console.log(str,typeof str);
+
+//2.内容中可以直接出现换行符
+let str = `<ul>
+			<li>RHF</li>
+			<li>RHF</li>
+		   </ul>`；
+
+//3.变量拼接
+let lovest = 'RHF';
+let out = `${lovest}是最帅的`;
+console.log(out)  //RHF是最帅的
+
+```
+
+
+
+对象的简化写法
+
+概述：ES6允许在大括号里面，直接写入变量和函数，作为对象的属性和方法,这样的书写更加简洁
+
+特性：
+
+```javascript
+let name = 'aaa';
+let change = function(){
+    console.log('aaa');
+}
+
+const school = {
+    name,
+    change,
+    improve(){
+        consolg.log('bbb');
+    }
+}
+
+```
+
+
+
+## 5.箭头函数
+
+概述：ES6允许使用箭头（=>）定义函数
 
 ![image-20220805162546487](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805162546487.png)
 
@@ -52,13 +203,54 @@ es6官方文档地址：https://www.w3cschool.cn/escript6/escript6-pm6z37es.html
 >
 >4.call方法会改变执行主体
 
-![image-20220805162611332](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805162611332.png)
+特性：
 
-![image-20220805162721620](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805162721620.png)
+```javascript
+1.this是静态的，this始终指向函数声明时所在作用域下的this的值
+function A(){
+    console.log(this.name)
+}
 
-![ ](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805162755312.png)
+let B = () => {
+    console.log(this.name);
+}
 
-![image-20220805162815310](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805162815310.png)
+window.name = '尚硅谷';
+const school = {
+    name: 'ATGUIGU'
+}
+
+//直接调用
+A()   //尚硅谷
+B()  //尚硅谷
+
+//call
+A.call(school); //ATGUIGU
+B.cal(school);  //尚硅谷
+
+2.不能作为构造实例化对象
+let A(name,age) => {
+    this.name=name;
+    this.age=age;
+}
+let me = new A('xiao',123);
+console.me //error
+
+3.不能使用arguments变量
+let fn = () => {
+    console.log(arguments)；
+}
+fn(1,2,3)  //error
+
+4.简写
+-省略小括号，当形参有且只有一个的时候
+let add = n => {
+    return n + 1;
+}
+-省略花括号，当代码体只有一条语句的时候，此时return也必须省略,而且语句执行的结果就是函数的返回值
+let add = n => n+1;
+
+```
 
 
 
@@ -90,19 +282,43 @@ es6官方文档地址：https://www.w3cschool.cn/escript6/escript6-pm6z37es.html
 >
 >注意：filter（）方法的使用
 
-## 5.函数参数默认值设置
+## 6.函数参数默认值设置
 
-![image-20220805170606665](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805170606665.png)
+概述：ES6允许给函数参数赋值初始值
+
+特性：
+
+```javascript
+1.可以给形参赋初始值，一般位置要靠后（潜规则）
+function add(a,b,c=12){
+    return a+b+c; 
+}
+let result = add (1,2);
+console.log(result) // 15
+
+2.与解构赋值结合
+function A({host='127.0.0.1',username,password,port}){
+    console.log(host+username+password+port)
+}
+A({
+    username:'ran',
+    password:'123456',
+    port:3306
+})
+
+```
 
 
 
-## 6.rest参数
+## 7.rest参数
+
+概述：ES6引入rest参数，用于获取函数的实参，用来代替arguments
 
 ![image-20220805171416552](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805171416552.png)
 
 
 
-## 7.扩展运算符
+## 8.扩展运算符
 
 概述：扩展运算符是能将数组转换为逗号分隔的参数序列
 
@@ -156,7 +372,7 @@ console.log(B) // [div,div,div]
 
 
 
-## 8.Symple
+## 9.Symple
 
 Symple安全创建对象属性
 
@@ -172,7 +388,7 @@ symple内置值
 
 
 
-## 9.迭代器
+## 10.迭代器
 
 ![image-20220805203102460](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220805203102460.png)
 
@@ -216,7 +432,7 @@ symple内置值
 
 
 
-## 10.生成器
+## 11.生成器
 
 ### 1.生成器概述：
 
@@ -323,7 +539,7 @@ iterator.next();
 
 
 
-## 11.Promise 
+## 12.Promise 
 
 ### 1.promise概述
 
@@ -485,7 +701,7 @@ p.then(value=>{
 
 
 
-## 12.set
+## 13.set
 
 ### 1.set概述
 
@@ -557,7 +773,7 @@ p.then(value=>{
 
 
 
-## 13.Map
+## 14.Map
 
 ### 1.map概述:(升级版对象)
 
@@ -599,7 +815,7 @@ p.then(value=>{
 
 
 
-## 14.calss类
+## 15.calss类
 
 ### 1.class概述
 
@@ -881,7 +1097,7 @@ p.then(value=>{
 
 
 
-## 15.模块化
+## 16.模块化
 
 ### 1.模块化概述：
 
@@ -898,7 +1114,7 @@ p.then(value=>{
 3.ES6之前的模块化规范有：
 
 CommonJS ====> NodeJS、Browserify
-AMD ====> requireJS
+AMD===> requireJS
 CMD ====> seaJS
 
 ### 2.语法
