@@ -1,6 +1,6 @@
 # Node.js
 
-## 1.初始node.js和内置模块
+## 一.初始node.js和内置模块
 
 
 
@@ -424,8 +424,18 @@ server.listen(8080, function () {
 >2.在vscode新建的中运行node命令 
 >
 >服务器停止方法：2后ctrl+c即可
+>
+>浏览器只能默认的GET请求
 
-了解req请求对象
+
+
+#### 1.了解req请求对象和res相应对象
+
+![image-20220808112317190](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808112317190.png)
+
+
+
+![image-20220808112611094](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808112611094.png)
 
 ```javascript
 const http = require('http')
@@ -444,6 +454,339 @@ server.on('request', (req, res) => {
 server.listen(80, () => {
   console.log('server running at http://127.0.0.1')
 })
+```
+
+
+
+#### 2.解决中文乱码的问题
+
+![image-20220808113744065](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808113744065.png)
+
+```javascript
+const http = require('http')
+const server = http.createServer()
+
+server.on('request', (req, res) => {
+  // 定义一个字符串，包含中文的内容
+  const str = `您请求的 URL 地址是 ${req.url}，请求的 method 类型为 ${req.method}`
+  // 调用 res.setHeader() 方法，设置 Content-Type 响应头，解决中文乱码的问题
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')//注意设置玩后需要重启服务器才能正常运行
+  // res.end() 将内容响应给客户端
+  res.end(str)
+})
+
+server.listen(80, () => {
+  console.log('server running at http://127.0.0.1')
+})
 
 ```
 
+
+
+#### 3.根据不同url响应不同的htm内容
+
+![image-20220808160740963](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808160740963.png)
+
+![image-20220808160842508](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808160842508.png)
+
+```javascript
+const http = require('http')
+const server = http.createServer()
+
+server.on('request', (req, res) => {
+  // 1. 获取请求的 url 地址
+  const url = req.url
+  // 2. 设置默认的响应内容为 404 Not found
+  let content = '<h1>404 Not found!</h1>'
+  // 3. 判断用户请求的是否为 / 或 /index.html 首页
+  // 4. 判断用户请求的是否为 /about.html 关于页面
+  if (url === '/' || url === '/index.html') {
+    content = '<h1>首页</h1>'
+  } else if (url === '/about.html') {
+    content = '<h1>关于页面</h1>'
+  }
+  // 5. 设置 Content-Type 响应头，防止中文乱码
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
+  // 6. 使用 res.end() 把内容响应给客户端
+  res.end(content)
+})
+
+server.listen(80, () => {
+  console.log('server running at http://127.0.0.1')
+})
+
+```
+
+
+
+#### 4.案例：实现clock时钟的web服务器
+
+![image-20220808172257368](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808172257368.png)
+
+![image-20220808172335127](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808172335127.png)
+
+![image-20220808180428055](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808180428055.png)
+
+![image-20220808180443747](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808180443747.png)
+
+![image-20220808180946308](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808180946308.png)
+
+![image-20220808204122694](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204122694.png)
+
+```javascript
+// 1.1 导入 http 模块
+const http = require('http')
+// 1.2 导入 fs 模块
+const fs = require('fs')
+// 1.3 导入 path 模块
+const path = require('path')
+
+// 2.1 创建 web 服务器
+const server = http.createServer()
+// 2.2 监听 web 服务器的 request 事件
+server.on('request', (req, res) => {
+  // 3.1 获取到客户端请求的 URL 地址
+  //     /clock/index.html
+  //     /clock/index.css
+  //     /clock/index.js
+  const url = req.url
+  // 3.2 把请求的 URL 地址映射为具体文件的存放路径
+  // const fpath = path.join(__dirname, url)
+  // 5.1 预定义一个空白的文件存放路径
+  let fpath = ''
+  if (url === '/') {
+    fpath = path.join(__dirname, './clock/index.html')
+  } else {
+    //     /index.html
+    //     /index.css
+    //     /index.js
+    fpath = path.join(__dirname, '/clock', url)
+  }
+
+  // 4.1 根据“映射”过来的文件路径读取文件的内容
+  fs.readFile(fpath, 'utf8', (err, dataStr) => {
+    // 4.2 读取失败，向客户端响应固定的“错误消息”
+    if (err) return res.end('404 Not found.')
+    // 4.3 读取成功，将读取成功的内容，响应给客户端
+    res.end(dataStr)
+  })
+})
+// 2.3 启动服务器
+server.listen(80, () => {
+  console.log('server running at http://127.0.0.1')
+})
+
+```
+
+
+
+## 二.模块化
+
+![image-20220808204552072](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204552072.png)
+
+![image-20220808204643108](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204643108.png)
+
+### 1.模块化的基本概念
+
+![image-20220808204725227](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204725227.png)
+
+![image-20220808204941018](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204941018.png)
+
+![image-20220808205141778](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808205141778.png)
+
+
+
+### 2.Node.js中的模块的分类
+
+#### 1.模块分类
+
+![image-20220808205501903](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808205501903.png)
+
+
+
+#### 2.加载模块
+
+![image-20220808205723230](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808205723230.png)
+
+
+
+#### 3.模块作用域
+
+![image-20220808210318726](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808210318726.png)
+
+![image-20220808210701287](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808210701287.png)
+
+>
+>
+>注意：模块化文件访问另一个模块化文件中的私有成员及变量和函数时，会由于模块作用域的存在导致返回空对象{}
+
+
+
+#### 4.向外共享模块作用域中的成员
+
+##### 1.module对象
+
+![image-20220808211718755](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808211718755.png)
+
+>
+>
+>注意：在自定义模块中，module.exports对象默认是空对象
+
+
+
+##### 2.module.exports对象
+
+![image-20220808212228786](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212228786.png)
+
+![image-20220808212458376](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212458376.png)
+
+![image-20220808212612090](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212612090.png)
+
+
+
+##### 3.exports对象
+
+![image-20220808212841896](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212841896.png)
+
+>
+>
+>注意：exports===module.exports
+
+
+
+##### 4.使用误区
+
+![image-20220808213432456](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213432456.png)
+
+![image-20220808213442635](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213442635.png)
+
+![image-20220808213600059](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213600059.png)
+
+![image-20220808213809981](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213809981.png)
+
+![image-20220808213753915](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213753915.png)
+
+
+
+
+
+### 3.Node.js中的模块化规范
+
+![image-20220808213917564](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213917564.png)
+
+
+
+### 4.npm和包
+
+#### 1.npm概述
+
+![image-20220808214120684](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214120684.png)
+
+![image-20220808214143432](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214143432.png)
+
+![image-20220808214457527](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214457527.png)
+
+![image-20220808214659311](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214659311.png)
+
+![image-20220808214828310](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214828310.png)
+
+>
+>
+>注意：npm -v中间有一个空格
+
+
+
+#### 2.npm初体验
+
+![image-20220808215306007](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808215306007.png)
+
+```javascript
+// 1. 定义格式化时间的方法
+function dateFormat(dtStr) {
+  const dt = new Date(dtStr)
+
+  const y = dt.getFullYear()
+  const m = padZero(dt.getMonth() + 1)
+  const d = padZero(dt.getDate())
+
+  const hh = padZero(dt.getHours())
+  const mm = padZero(dt.getMinutes())
+  const ss = padZero(dt.getSeconds())
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+}
+
+// 定义补零的函数
+function padZero(n) {
+  return n > 9 ? n : '0' + n
+}
+
+module.exports = {
+  dateFormat
+}
+
+```
+
+
+
+![image-20220808215819425](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808215819425.png)
+
+![image-20220808220045171](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808220045171.png)
+
+1.下载包
+
+![image-20220808220358426](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808220358426.png)
+
+```javascript
+// 1. 导入需要的包
+// 注意：导入的名称，就是装包时候的名称
+const moment = require('moment')
+
+const dt = moment().format('YYYY-MM-DD HH:mm:ss')
+console.log(dt)
+
+```
+
+![image-20220808221739894](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808221739894.png)
+
+![image-20220808221805317](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808221805317.png)
+
+![image-20220808223715377](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808223715377.png)
+
+![image-20220808223931654](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808223931654.png)
+
+
+
+#### 3.包管理配置文件
+
+![image-20220808224240142](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808224240142.png)
+
+![image-20220808224353151](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808224353151.png)
+
+![image-20220808224456946](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808224456946.png)
+
+![image-20220808224616304](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808224616304.png)
+
+>
+>
+>注意：必须在安装npm包之前创建该文件才有用
+
+![image-20220808225103998](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225103998.png)
+
+![image-20220808225352407](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225352407.png)
+
+![image-20220808225539617](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225539617.png)
+
+![image-20220808225704837](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225704837.png)
+
+
+
+#### 4.解决下包慢的问题
+
+![image-20220808225917969](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225917969.png)
+
+![image-20220808230032390](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808230032390.png)
+
+![image-20220808230116177](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808230116177.png)
+
+![image-20220808230415541](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808230415541.png) 
