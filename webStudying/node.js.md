@@ -2149,13 +2149,35 @@ app.listen(80, () => {
 
 ![image-20220811163302412](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811163302412.png)
 
+>
+>
+>注意：每次执行js代码后在MySQL数据库中需要先点击闪电标识执行后才能看到效果变化
+
 ![image-20220811165231065](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811165231065.png)
 
 ![image-20220811165359197](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811165359197.png)
 
+
+
+![image-20220811165836935](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811165836935.png)
+
+
+
 >
 >
 >注意：新增的数据id=5是因为id=4的数据被创建过
+
+
+
+![image-20220811170745279](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811170745279.png)
+
+
+
+![image-20220811170913426](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811170913426.png)
+
+
+
+![image-20220811171247072](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811171247072.png)
 
 ```javascript
 // 1. 导入 mysql 模块
@@ -2259,6 +2281,385 @@ db.query(sqlStr, [1, 6], (err, results) => {
 })
 
 ```
+
+
+
+
+
+## 前后端的身份验证
+
+### Web开发模式
+
+![image-20220811191700647](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811191700647.png)
+
+![image-20220811191801692](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811191801692.png)
+
+![image-20220811191904616](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811191904616.png)
+
+![image-20220811191937305](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811191937305.png)
+
+![image-20220811192047230](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192047230.png)
+
+
+
+![image-20220811192235696](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192235696.png)
+
+
+
+
+
+### 身份认证
+
+![image-20220811192334490](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192334490.png)
+
+![image-20220811192416584](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192416584.png)
+
+![image-20220811192430764](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192430764.png)
+
+
+
+### Session认证机制
+
+![image-20220811192517849](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192517849.png)
+
+![image-20220811192833660](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811192833660.png)
+
+![image-20220811193251578](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811193251578.png)
+
+
+
+![image-20220811193422826](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811193422826.png)
+
+![image-20220811193727175](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811193727175.png)
+
+![image-20220811193948484](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811193948484.png)
+
+
+
+![image-20220811194103512](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811194103512.png)
+
+
+
+
+
+
+
+### 在Express中使用Session认证
+
+![image-20220811194303320](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811194303320.png)
+
+![image-20220811194326715](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811194326715.png)
+
+![image-20220811194829980](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811194829980.png)
+
+![image-20220811195049038](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811195049038.png)
+
+
+
+![image-20220811195318658](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811195318658.png)
+
+>
+>
+>注意：调用destory（）函数只会清空当前用户的session数据，不会清空其他用户的数据
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// TODO_01：请配置 Session 中间件
+const session = require('express-session')
+app.use(
+  session({
+    secret: 'itheima',
+    resave: false,
+    saveUninitialized: true,
+  })
+)
+
+// 托管静态页面
+app.use(express.static('./pages'))
+// 解析 POST 提交过来的表单数据
+app.use(express.urlencoded({ extended: false }))
+
+// 登录的 API 接口
+app.post('/api/login', (req, res) => {
+  // 判断用户提交的登录信息是否正确
+  if (req.body.username !== 'admin' || req.body.password !== '000000') {
+    return res.send({ status: 1, msg: '登录失败' })
+  }
+
+  // TODO_02：请将登录成功后的用户信息，保存到 Session 中
+  // 注意：只有成功配置了 express-session 这个中间件之后，才能够通过 req 点出来 session 这个属性
+  req.session.user = req.body // 用户的信息
+  req.session.islogin = true // 用户的登录状态
+
+  res.send({ status: 0, msg: '登录成功' })
+})
+
+// 获取用户姓名的接口
+app.get('/api/username', (req, res) => {
+  // TODO_03：请从 Session 中获取用户的名称，响应给客户端
+  if (!req.session.islogin) {
+    return res.send({ status: 1, msg: 'fail' })
+  }
+  res.send({
+    status: 0,
+    msg: 'success',
+    username: req.session.user.username,
+  })
+})
+
+// 退出登录的接口
+app.post('/api/logout', (req, res) => {
+  // TODO_04：清空 Session 信息
+  req.session.destroy()
+  res.send({
+    status: 0,
+    msg: '退出登录成功',
+  })
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1:80')
+})
+
+```
+
+
+
+
+
+
+
+
+
+### JWT认证机制
+
+![image-20220811195758870](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811195758870.png)
+
+![image-20220811195815502](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811195815502.png)
+
+
+
+![image-20220811195930454](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811195930454.png)
+
+
+
+![image-20220811200032748](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200032748.png)
+
+
+
+![image-20220811200125118](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200125118.png)
+
+
+
+![image-20220811200247993](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200247993.png)
+
+### 在Express中使用JWT
+
+![image-20220811200355061](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200355061.png)
+
+![image-20220811200413409](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200413409.png)
+
+
+
+>
+>
+>注意：可以在一行npm命令中安装两个及以上的包，只需在每个包之间加上空格
+
+![image-20220811200601177](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200601177.png)
+
+![image-20220811200803128](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811200803128.png)
+
+>
+>
+>注意：sign（）方法的最后一个参数是指token 的有效期
+
+![image-20220811201119582](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811201119582.png)
+
+![image-20220811201208438](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811201208438.png)
+
+>
+>
+>注意：使用postman发起get请求时 提交token时必须在前面加上Bearer 
+
+![image-20220811202131399](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811202131399.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// TODO_01：安装并导入 JWT 相关的两个包，分别是 jsonwebtoken 和 express-jwt
+const jwt = require('jsonwebtoken')
+const expressJWT = require('express-jwt')
+
+// 允许跨域资源共享
+const cors = require('cors')
+app.use(cors())
+
+// 解析 post 表单数据的中间件
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// TODO_02：定义 secret 密钥，建议将密钥命名为 secretKey
+const secretKey = 'itheima No1 ^_^'
+
+// TODO_04：注册将 JWT 字符串解析还原成 JSON 对象的中间件
+// 注意：只要配置成功了 express-jwt 这个中间件，就可以把解析出来的用户信息，挂载到 req.user 属性上
+app.use(expressJWT({ secret: secretKey }).unless({ path: [/^\/api\//] }))
+
+// 登录接口
+app.post('/api/login', function (req, res) {
+  // 将 req.body 请求体中的数据，转存为 userinfo 常量
+  const userinfo = req.body
+  // 登录失败
+  if (userinfo.username !== 'admin' || userinfo.password !== '000000') {
+    return res.send({
+      status: 400,
+      message: '登录失败！',
+    })
+  }
+  // 登录成功
+  // TODO_03：在登录成功之后，调用 jwt.sign() 方法生成 JWT 字符串。并通过 token 属性发送给客户端
+  // 参数1：用户的信息对象
+  // 参数2：加密的秘钥
+  // 参数3：配置对象，可以配置当前 token 的有效期
+  // 记住：千万不要把密码加密到 token 字符中
+  const tokenStr = jwt.sign({ username: userinfo.username }, secretKey, { expiresIn: '30s' })
+  res.send({
+    status: 200,
+    message: '登录成功！',
+    token: tokenStr, // 要发送给客户端的 token 字符串
+  })
+})
+
+// 这是一个有权限的 API 接口
+app.get('/admin/getinfo', function (req, res) {
+  // TODO_05：使用 req.user 获取用户信息，并使用 data 属性将用户信息发送给客户端
+  console.log(req.user)
+  res.send({
+    status: 200,
+    message: '获取用户信息成功！',
+    data: req.user, // 要发送给客户端的用户信息
+  })
+})
+
+// TODO_06：使用全局错误处理中间件，捕获解析 JWT 失败后产生的错误
+app.use((err, req, res, next) => {
+  // 这次错误是由 token 解析失败导致的
+  if (err.name === 'UnauthorizedError') {
+    return res.send({
+      status: 401,
+      message: '无效的token',
+    })
+  }
+  res.send({
+    status: 500,
+    message: '未知的错误',
+  })
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(8888, function () {
+  console.log('Express server running at http://127.0.0.1:8888')
+})
+
+```
+
+
+
+
+
+## 项目事件--大事件p77以后--学完vue再来
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
