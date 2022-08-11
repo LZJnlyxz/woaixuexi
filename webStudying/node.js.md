@@ -1,6 +1,6 @@
 # Node.js
 
-## 一.初始node.js和内置模块
+## 初始node.js和内置模块
 
 
 
@@ -212,7 +212,7 @@ fs.readFile(__dirname + '/files/1.txt', 'utf8', function(err, dataStr) {
 
 
 
-## 3.path路径模块
+## path路径模块
 
 ![image-20220807214048954](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807214048954.png)
 
@@ -371,7 +371,7 @@ function resolveHTML(htmlStr) {
 
 
 
-## 4.http模块
+## http模块
 
 ### 1.初识http模块
 
@@ -580,7 +580,7 @@ server.listen(80, () => {
 
 
 
-## 二.模块化
+## 模块化
 
 ![image-20220808204552072](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204552072.png)
 
@@ -790,3 +790,1176 @@ console.log(dt)
 ![image-20220808230116177](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808230116177.png)
 
 ![image-20220808230415541](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808230415541.png) 
+
+
+
+#### 5.包的分类
+
+![image-20220809124756716](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809124756716.png)
+
+![image-20220809124812290](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809124812290.png)
+
+![image-20220809124825936](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809124825936.png)
+
+![image-20220809124935829](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809124935829.png)
+
+![image-20220809125243932](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809125243932.png)
+
+#### 6.规范的包的结构
+
+![image-20220809131821217](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809131821217.png)
+
+
+
+#### 7.开发属于自己的包
+
+![image-20220809131921945](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809131921945.png)
+
+![image-20220809132015044](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132015044.png)
+
+![image-20220809132159336](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132159336.png)
+
+![image-20220809132212053](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132212053.png)
+
+![image-20220809132429797](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132429797.png)
+
+![image-20220809132742733](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132742733.png)
+
+![image-20220809132916090](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809132916090.png)
+
+```javascript
+// 定义格式化时间的函数
+function dateFormat(dateStr) {
+  const dt = new Date(dateStr)
+
+  const y = dt.getFullYear()
+  const m = padZero(dt.getMonth() + 1)
+  const d = padZero(dt.getDate())
+
+  const hh = padZero(dt.getHours())
+  const mm = padZero(dt.getMinutes())
+  const ss = padZero(dt.getSeconds())
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+}
+
+// 定义一个补零的函数
+function padZero(n) {
+  return n > 9 ? n : '0' + n
+}
+
+module.exports = {
+  dateFormat
+}
+
+```
+
+
+
+>
+>
+>注意：如果在另一文件中导入自定义模块式，require方法的参数中的url不一定要写到具体的执行模块文件，因为require会自动去找package.json文件下的main属性去找该模块的入口文件
+
+![image-20220809133922805](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809133922805.png)
+
+![image-20220809134436196](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809134436196.png)
+
+```javascript
+// 定义转义 HTML 字符的函数
+function htmlEscape(htmlstr) {
+  return htmlstr.replace(/<|>|"|&/g, match => {
+    switch (match) {
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '"':
+        return '&quot;'
+      case '&':
+        return '&amp;'
+    }
+  })
+}
+
+// 定义还原 HTML 字符串的函数
+function htmlUnEscape(str) {
+  return str.replace(/&lt;|&gt;|&quot;|&amp;/g, match => {
+    switch (match) {
+      case '&lt;':
+        return '<'
+      case '&gt;':
+        return '>'
+      case '&quot;':
+        return '"'
+      case '&amp;':
+        return '&'
+    }
+  })
+}
+
+module.exports = {
+  htmlEscape,
+  htmlUnEscape
+}
+
+```
+
+测试文件
+
+```javascript
+const itheima = require('./itheima-tools')
+
+// 格式化时间的功能
+const dtStr = itheima.dateFormat(new Date())
+console.log(dtStr)
+console.log('-----------')
+
+const htmlStr = '<h1 title="abc">这是h1标签<span>123&nbsp;</span></h1>'
+const str = itheima.htmlEscape(htmlStr)
+console.log(str)
+console.log('-----------')
+
+const str2 = itheima.htmlUnEscape(str)
+console.log(str2)
+
+```
+
+
+
+![image-20220809134741052](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809134741052.png)
+
+ ![image-20220809135033930](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809135033930.png)
+
+index.js文件
+
+```javascript
+// 这是包的入口文件
+
+const date = require('./src/dateFormat')
+const escape = require('./src/htmlEscape')
+
+// 向外暴露需要的成员
+module.exports = {
+  ...date,//...扩展运算符可以使展开data的全部属性包括dataFormat方法
+  ...escape//同上
+}
+
+```
+
+
+
+
+
+![image-20220809135333725](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809135333725.png)
+
+README.md文件
+
+````javascript
+## 安装
+```
+npm install itheima-tools
+```
+
+## 导入
+```js
+const itheima = require('itheima-tools')
+```
+
+## 格式化时间
+```js
+// 调用 dateFormat 对时间进行格式化
+const dtStr = itheima.dateFormat(new Date())
+// 结果  2020-04-03 17:20:58
+console.log(dtStr)
+```
+
+## 转义 HTML 中的特殊字符
+```js
+// 带转换的 HTML 字符串
+const htmlStr = '<h1 title="abc">这是h1标签<span>123&nbsp;</span></h1>'
+// 调用 htmlEscape 方法进行转换
+const str = itheima.htmlEscape(htmlStr)
+// 转换的结果 &lt;h1 title=&quot;abc&quot;&gt;这是h1标签&lt;span&gt;123&amp;nbsp;&lt;/span&gt;&lt;/h1&gt;
+console.log(str)
+```
+
+## 还原 HTML 中的特殊字符
+```js
+// 待还原的 HTML 字符串
+const str2 = itheima.htmlUnEscape(str)
+// 输出的结果 <h1 title="abc">这是h1标签<span>123&nbsp;</span></h1>
+console.log(str2)
+```
+
+## 开源协议
+ISC
+````
+
+
+
+#### 8.发布包
+
+![image-20220809135735715](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809135735715.png)
+
+![image-20220809135926295](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809135926295.png)
+
+![image-20220809140344100](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809140344100.png)
+
+![image-20220809140453599](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809140453599.png)
+
+
+
+
+
+#### 9.模块的加载机制
+
+![image-20220809140617191](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809140617191.png)
+
+![image-20220809141137952](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809141137952.png)
+
+![image-20220809141151705](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809141151705.png)
+
+![image-20220809141640900](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809141640900.png)
+
+![image-20220809141742953](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809141742953.png)
+
+
+
+
+
+
+
+## Express
+
+![image-20220809203258755](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203258755.png)
+
+![image-20220809203440364](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203440364.png)
+
+### 初始Express 
+
+![image-20220809203601487](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203601487.png)
+
+![image-20220809203649642](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203649642.png)
+
+![image-20220809203739569](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203739569.png)
+
+
+
+#### 1.Express的基本使用
+
+![image-20220809203817598](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203817598.png)
+
+![image-20220809203846036](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809203846036.png)
+
+![image-20220809204442145](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809204442145.png)
+
+![image-20220809204642984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809204642984.png)
+
+![image-20220809204753517](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809204753517.png)
+
+![image-20220809205116448](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809205116448.png)
+
+>
+>
+>注意：客户端使用查询字符串发送到服务器的参数会被解析到res.query对象中成为其属性
+>
+>测试服务器推荐使用postman软件
+
+![image-20220809205717644](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809205717644.png)
+
+![image-20220809205641929](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809205641929.png)
+
+![image-20220809205832054](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809205832054.png)
+
+>
+>
+>注意：可以在url的:id位置处写任意值以便访问资源
+>
+>且id的键名不一定，可以任意写
+>
+>且动态参数可以不止一个，具体格式见下详细代码
+
+![image-20220809210028877](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809210028877.png)
+
+```javascript
+// 1. 导入 express
+const express = require('express')
+// 2. 创建 web 服务器
+const app = express()
+
+// 4. 监听客户端的 GET 和 POST 请求，并向客户端响应具体的内容
+app.get('/user', (req, res) => {
+  // 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象
+  res.send({ name: 'zs', age: 20, gender: '男' })
+})
+app.post('/user', (req, res) => {
+  // 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串
+  res.send('请求成功')
+})//注意：更新代码后，必须要重启服务器才可以执行新代码
+app.get('/', (req, res) => {
+  // 通过 req.query 可以获取到客户端发送过来的 查询参数
+  // 注意：默认情况下，req.query 是一个空对象
+  console.log(req.query)
+  res.send(req.query)
+})
+// 注意：这里的 :id 是一个动态的参数
+app.get('/user/:ids/:username', (req, res) => {
+  // req.params 是动态匹配到的 URL 参数，默认也是一个空对象
+  console.log(req.params)
+  res.send(req.params)
+})
+
+// 3. 启动 web 服务器
+app.listen(80, () => {
+  console.log('express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+#### 托管静态资源
+
+1.托管单个静态资源服务器
+
+![image-20220809210721799](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809210721799.png)
+
+>
+>
+>原理是托管静态资源文件为静态资源服务器
+
+```javascript
+//注意：下列代码所在的模块文件需要和clock模块文件处于同一根目录下
+const express = require('express')
+const app = express()
+
+// 在这里，调用 express.static() 方法，快速的对外提供静态资源
+app.use('/files', express.static('./files'))
+app.use(express.static('./clock'))
+
+app.listen(80, () => {
+  console.log('express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+2.托管多个静态资源服务器
+
+![image-20220809211549151](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809211549151.png)
+
+![image-20220809211753415](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809211753415.png)
+
+>
+>
+>注意：路径前缀是随意的，故也可以通过挂载不同的路径前缀来改变访问的文件的访问顺序
+
+
+
+
+
+#### 3.nodemon
+
+![image-20220809212046977](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809212046977.png)
+
+![image-20220809212058718](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809212058718.png)
+
+![image-20220809212720863](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809212720863.png)
+
+>
+>
+>注意：上图中的app.js是指执行的文件的具体路径
+>
+>一般只需要人为保存即ctrl+s即可重启服务器
+
+
+
+
+
+### Express路由
+
+![image-20220809213127326](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213127326.png)
+
+>
+>
+>注意：映射关系即对应关系
+
+![image-20220809213112326](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213112326.png)
+
+![image-20220809213318471](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213318471.png)
+
+![image-20220809213331132](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213331132.png)
+
+![image-20220809213719815](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213719815.png)
+
+
+
+2.路由的使用
+
+![image-20220809213807987](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809213807987.png)
+
+>
+>
+>注意：首先必须先使用特定命令创建package.json文件，然后在下载Express模块，最后才能写文件代码
+
+```javascript
+const express = require('express')
+const app = express()
+
+// 挂载路由
+app.get('/', (req, res) => {
+  res.send('hello world.')
+})
+app.post('/', (req, res) => {
+  res.send('Post Request.')
+})
+
+app.listen(80, () => {
+  console.log('http://127.0.0.1')
+})
+
+```
+
+
+
+![image-20220809214519839](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809214519839.png)
+
+![image-20220809214532341](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809214532341.png)
+
+前四步
+
+```javascript
+// 这是路由模块
+// 1. 导入 express
+const express = require('express')
+// 2. 创建路由对象
+const router = express.Router()
+
+// 3. 挂载具体的路由
+router.get('/user/list', (req, res) => {
+  res.send('Get user list.')
+})
+router.post('/user/add', (req, res) => {
+  res.send('Add new user.')
+})
+
+// 4. 向外导出路由对象
+module.exports = router
+
+```
+
+
+
+
+
+![image-20220809215400270](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809215400270.png)
+
+注册模块
+
+```javascript
+const express = require('express')
+const app = express()
+
+// app.use('/files', express.static('./files'))
+
+// 1. 导入路由模块
+const router = require('./03.router')
+// 2. 注册路由模块
+app.use('/api', router)
+
+// 注意： app.use() 函数的作用，就是来注册全局中间件
+
+app.listen(80, () => {
+  console.log('http://127.0.0.1')
+})
+
+```
+
+>
+>
+>注意： app.use() 函数的作用，就是来注册全局中间件及路由模块
+
+
+
+
+
+![image-20220809215847566](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809215847566.png)
+
+
+
+
+
+
+
+### Express中间件
+
+#### 中间件的概述
+
+![image-20220809220005194](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220005194.png)
+
+![image-20220809220050349](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220050349.png)
+
+![image-20220809220424538](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220424538.png)
+
+![image-20220809220555869](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220555869.png)
+
+![image-20220809220740400](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220740400.png)
+
+#### Express中间件的初体验
+
+![image-20220809220839378](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809220839378.png)
+
+![image-20220809221239787](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809221239787.png)
+
+![image-20220810093042202](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810093042202.png)
+
+![image-20220810093255813](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810093255813.png)
+
+>
+>
+>注意：中间件和路由都存在上下游关系
+
+```javascript
+const express = require('express')
+const app = express()
+
+// 这是定义全局中间件的简化形式
+app.use((req, res, next) => {
+  // 获取到请求到达服务器的时间
+  const time = Date.now()
+  // 为 req 对象，挂载自定义属性，从而把时间共享给后面的所有路由
+  req.startTime = time
+  next()
+})
+
+app.get('/', (req, res) => {
+  res.send('Home page.' + req.startTime)
+})
+app.get('/user', (req, res) => {
+  res.send('User page.' + req.startTime)
+})
+
+app.listen(80, () => {
+  console.log('http://127.0.0.1')
+})
+
+```
+
+
+
+
+
+![image-20220810093849883](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810093849883.png)
+
+```javascript
+const express = require('express')
+const app = express()
+
+// 定义第一个全局中间件
+app.use((req, res, next) => {
+  console.log('调用了第1个全局中间件')
+  next()
+})
+// 定义第二个全局中间件
+app.use((req, res, next) => {
+  console.log('调用了第2个全局中间件')
+  next()
+})
+
+// 定义一个路由
+app.get('/user', (req, res) => {
+  res.send('User page.')
+})
+
+app.listen(80, () => {
+  console.log('http://127.0.0.1')
+})
+
+```
+
+
+
+
+
+![image-20220810094013424](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810094013424.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 1. 定义中间件函数
+const mw1 = (req, res, next) => {
+  console.log('调用了局部生效的中间件')
+  next()
+}
+
+// 2. 创建路由
+app.get('/', mw1, (req, res) => {
+  res.send('Home page.')
+})
+app.get('/user', (req, res) => {
+  res.send('User page.')
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+
+
+![image-20220810094239462](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810094239462.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 1. 定义中间件函数
+const mw1 = (req, res, next) => {
+  console.log('调用了第一个局部生效的中间件')
+  next()
+}
+
+const mw2 = (req, res, next) => {
+  console.log('调用了第二个局部生效的中间件')
+  next()
+}
+
+// 2. 创建路由
+app.get('/', [mw1, mw2], (req, res) => {
+  res.send('Home page.')
+})
+app.get('/user', (req, res) => {
+  res.send('User page.')
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+
+
+![image-20220810095928161](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810095928161.png)
+
+#### 中间件的分类
+
+![image-20220810100115058](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810100115058.png)
+
+![image-20220810100202916](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810100202916.png)
+
+![image-20220810100317588](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810100317588.png)
+
+![image-20220810101029835](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810101029835.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 1. 定义路由
+app.get('/', (req, res) => {
+  // 1.1 人为的制造错误
+  throw new Error('服务器内部发生了错误！')
+  res.send('Home page.')
+})
+
+// 2. 定义错误级别的中间件，捕获整个项目的异常错误，从而防止程序的崩溃
+app.use((err, req, res, next) => {
+  console.log('发生了错误！' + err.message)
+  res.send('Error：' + err.message)
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+![image-20220810101350425](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810101350425.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 注意：除了错误级别的中间件，其他的中间件，必须在路由之前进行配置
+// 通过 express.json() 这个中间件，解析表单中的 JSON 格式的数据
+app.use(express.json())
+// 通过 express.urlencoded() 这个中间件，来解析 表单中的 url-encoded 格式的数据
+app.use(express.urlencoded({ extended: false }))
+
+app.post('/user', (req, res) => {
+  // 在服务器，可以使用 req.body 这个属性，来接收客户端发送过来的请求体数据
+  // 默认情况下，如果不配置解析表单数据的中间件，则 req.body 默认等于 undefined
+  console.log(req.body)
+  res.send('ok')
+})
+
+app.post('/book', (req, res) => {
+  // 在服务器端，可以通过 req,body 来获取 JSON 格式的表单数据和 url-encoded 格式的数据
+  console.log(req.body)
+  res.send('ok')
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+
+
+![image-20220810102624610](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810102624610.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 1. 导入解析表单数据的中间件 body-parser
+const parser = require('body-parser')
+// 2. 使用 app.use() 注册中间件
+app.use(parser.urlencoded({ extended: false }))
+// app.use(express.urlencoded({ extended: false }))
+
+app.post('/user', (req, res) => {
+  // 如果没有配置任何解析表单数据的中间件，则 req.body 默认等于 undefined
+  console.log(req.body)
+  res.send('ok')
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+#### 自定义中间件
+
+![image-20220810102738969](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810102738969.png)
+
+![image-20220810102757238](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220810102757238.png)
+
+![image-20220811110330801](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811110330801.png)
+
+![image-20220811110559337](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811110559337.png)
+
+![image-20220811110918246](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811110918246.png)
+
+![image-20220811111123766](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811111123766.png)
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+// 导入 Node.js 内置的 querystring 模块
+const qs = require('querystring')
+
+// 这是解析表单数据的中间件
+app.use((req, res, next) => {
+  // 定义中间件具体的业务逻辑
+  // 1. 定义一个 str 字符串，专门用来存储客户端发送过来的请求体数据
+  let str = ''
+  // 2. 监听 req 的 data 事件
+  req.on('data', (chunk) => {
+    str += chunk
+  })
+  // 3. 监听 req 的 end 事件
+  req.on('end', () => {
+    // 在 str 中存放的是完整的请求体数据
+    // console.log(str)
+    // TODO: 把字符串格式的请求体数据，解析成对象格式
+    const body = qs.parse(str)
+    req.body = body
+    next()
+  })
+})
+
+app.post('/user', (req, res) => {
+  res.send(req.body)
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+![image-20220811111447384](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811111447384.png)
+
+自定义中间件函数模块
+
+```javascript
+// 导入 Node.js 内置的 querystring 模块
+const qs = require('querystring')
+
+const bodyParser = (req, res, next) => {
+  // 定义中间件具体的业务逻辑
+  // 1. 定义一个 str 字符串，专门用来存储客户端发送过来的请求体数据
+  let str = ''
+  // 2. 监听 req 的 data 事件
+  req.on('data', (chunk) => {
+    str += chunk
+  })
+  // 3. 监听 req 的 end 事件
+  req.on('end', () => {
+    // 在 str 中存放的是完整的请求体数据
+    // console.log(str)
+    // TODO: 把字符串格式的请求体数据，解析成对象格式
+    const body = qs.parse(str)
+    req.body = body
+    next()
+  })
+}
+
+module.exports = bodyParser
+
+```
+
+index.js
+
+```javascript
+// 导入 express 模块
+const express = require('express')
+// 创建 express 的服务器实例
+const app = express()
+
+// 1. 导入自己封装的中间件模块
+const customBodyParser = require('./14.custom-body-parser')
+// 2. 将自定义的中间件函数，注册为全局可用的中间件
+app.use(customBodyParser)
+
+app.post('/user', (req, res) => {
+  res.send(req.body)
+})
+
+// 调用 app.listen 方法，指定端口号并启动web服务器
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+
+```
+
+
+
+## 使用express写接口
+
+### 编写GET接口
+
+![image-20220811112320289](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811112320289.png)
+
+![image-20220811112412135](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811112412135.png)
+
+![image-20220811113305596](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811113305596.png)
+
+### 请求POST接口
+
+![image-20220811113838718](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811113838718.png)
+
+>
+>
+>注意：如果不配置中间件就无法获取请求体数据
+
+### CORS跨域资源共享
+
+![image-20220811114136574](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811114136574.png)
+
+![image-20220811114353702](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811114353702.png)
+
+![image-20220811114443760](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811114443760.png)
+
+![image-20220811114810660](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811114810660.png)
+
+![image-20220811114852684](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811114852684.png)
+
+![image-20220811115236647](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115236647.png)
+
+![image-20220811115256336](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115256336.png)
+
+![image-20220811115329683](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115329683.png)
+
+![image-20220811115459520](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115459520.png)
+
+![image-20220811115617597](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115617597.png)
+
+![image-20220811115625840](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115625840.png)
+
+![image-20220811115741915](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115741915.png)
+
+![image-20220811115836810](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811115836810.png)
+
+### JSONP接口
+
+![image-20220811120518256](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811120518256.png)
+
+![image-20220811120644485](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811120644485.png)
+
+>
+>
+>注意：JSONP接口没有包括在router路由模块中，所以需要在接口前添加api前缀
+
+![image-20220811120934513](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811120934513.png)
+
+![image-20220811121300840](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811121300840.png)
+
+![image-20220811121555214](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811121555214.png)
+
+后端服务器综合代码
+
+路由模块代码
+
+```javascript
+const express = require('express')
+const router = express.Router()
+
+// 在这里挂载对应的路由
+router.get('/get', (req, res) => {
+  // 通过 req.query 获取客户端通过查询字符串，发送到服务器的数据
+  const query = req.query
+  // 调用 res.send() 方法，向客户端响应处理的结果
+  res.send({
+    status: 0, // 0 表示处理成功，1 表示处理失败
+    msg: 'GET 请求成功！', // 状态的描述
+    data: query, // 需要响应给客户端的数据
+  })
+})
+
+// 定义 POST 接口
+router.post('/post', (req, res) => {
+  // 通过 req.body 获取请求体中包含的 url-encoded 格式的数据
+  const body = req.body
+  // 调用 res.send() 方法，向客户端响应结果
+  res.send({
+    status: 0,
+    msg: 'POST 请求成功！',
+    data: body,
+  })
+})
+
+// 定义 DELETE 接口
+router.delete('/delete', (req, res) => {
+  res.send({
+    status: 0,
+    msg: 'DELETE请求成功',
+  })
+})
+
+module.exports = router
+
+```
+
+
+
+index.js
+
+```javascript
+// 导入 express
+const express = require('express')
+// 创建服务器实例
+const app = express()
+
+// 配置解析表单数据的中间件
+app.use(express.urlencoded({ extended: false }))
+
+// 必须在配置 cors 中间件之前，配置 JSONP 的接口
+app.get('/api/jsonp', (req, res) => {
+  // TODO: 定义 JSONP 接口具体的实现过程
+  // 1. 得到函数的名称
+  const funcName = req.query.callback
+  // 2. 定义要发送到客户端的数据对象
+  const data = { name: 'zs', age: 22 }
+  // 3. 拼接出一个函数的调用
+  const scriptStr = `${funcName}(${JSON.stringify(data)})`
+  // 4. 把拼接的字符串，响应给客户端
+  res.send(scriptStr)
+})
+
+// 一定要在路由之前，配置 cors 这个中间件，从而解决接口跨域的问题
+const cors = require('cors')
+app.use(cors())
+
+// 导入路由模块
+const router = require('./16.apiRouter')
+// 把路由模块，注册到 app 上
+app.use('/api', router)
+
+// 启动服务器
+app.listen(80, () => {
+  console.log('express server running at http://127.0.0.1')
+})
+
+```
+
+>
+>
+>注意：模板字符串的用法
+
+前端网页代码
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="btnGET">GET</button>
+    <button id="btnPOST">POST</button>
+    <button id="btnDelete">DELETE</button>
+    <button id="btnJSONP">JSONP</button>
+
+    <script>
+      $(function () {
+        // 1. 测试GET接口
+        $('#btnGET').on('click', function () {
+          $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1/api/get',
+            data: { name: 'zs', age: 20 },
+            success: function (res) {
+              console.log(res)
+            },
+          })
+        })
+        // 2. 测试POST接口
+        $('#btnPOST').on('click', function () {
+          $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1/api/post',
+            data: { bookname: '水浒传', author: '施耐庵' },
+            success: function (res) {
+              console.log(res)
+            },
+          })
+        })
+
+        // 3. 为删除按钮绑定点击事件处理函数
+        $('#btnDelete').on('click', function () {
+          $.ajax({
+            type: 'DELETE',
+            url: 'http://127.0.0.1/api/delete',
+            success: function (res) {
+              console.log(res)
+            },
+          })
+        })
+
+        // 4. 为 JSONP 按钮绑定点击事件处理函数
+        $('#btnJSONP').on('click', function () {
+          $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1/api/jsonp',
+            dataType: 'jsonp',
+            success: function (res) {
+              console.log(res)
+            },
+          })
+        })
+      })
+    </script>
+  </body>
+</html>
+
+```
+
+
+
+
+
+## 数据库与身份验证
+
+![image-20220811122140738](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122140738.png)
+
+![image-20220811122207340](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122207340.png)
+
+### 数据库的基本概念
+
+![image-20220811122536869](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122536869.png)
+
+![image-20220811122717952](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122717952.png)
+
+![image-20220811122819422](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122819422.png)
+
+![image-20220811122937396](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811122937396.png)
+
+![image-20220811123047984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811123047984.png)
+
+![image-20220811123230289](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811123230289.png)
+
+### 安装并配置MySQL
+
+![image-20220811123419197](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811123419197.png)
+
+![image-20220811123433305](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811123433305.png)
+
+![image-20220811132234232](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811132234232.png)
+
+
+
+
+
+### MySQL的基本使用
+
+![image-20220811132616189](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811132616189.png)
+
+![image-20220811132628221](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811132628221.png)
+
+![image-20220811133143069](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811133143069.png)
+
+>
+>
+>注意：数据库名称不要中文且空格用下划线代替
+
+![image-20220811134400252](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811134400252.png)
+
+![image-20220811134833859](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811134833859.png)
+
+
+
+### 使用SQL管理数据库
+
+![image-20220811135150904](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135150904.png)
+
+
+
+![image-20220811135234333](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135234333.png)
+
+![image-20220811135303897](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135303897.png)
+
+![image-20220811135502451](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135502451.png)
+
+![image-20220811135545557](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135545557.png)
+
+![image-20220811135727659](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135727659.png)
+
