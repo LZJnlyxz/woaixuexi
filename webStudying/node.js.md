@@ -2147,7 +2147,15 @@ app.listen(80, () => {
 
 ![image-20220811162601317](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811162601317.png)
 
+![image-20220811163302412](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811163302412.png)
 
+![image-20220811165231065](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811165231065.png)
+
+![image-20220811165359197](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811165359197.png)
+
+>
+>
+>注意：新增的数据id=5是因为id=4的数据被创建过
 
 ```javascript
 // 1. 导入 mysql 模块
