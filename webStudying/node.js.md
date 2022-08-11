@@ -16,7 +16,7 @@
 
 ![image-20220807142839950](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807142839950.png)
 
-### 1.初识Node.js
+### 初识Node.js
 
 ![image-20220807143029760](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807143029760.png)
 
@@ -40,19 +40,19 @@
 
 
 
-#### 1.终端快捷键（important）
+#### 终端快捷键（important）
 
 ![image-20220807200218441](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807200218441.png)
 
 
 
-### 2.fs文件系统模块
+### fs文件系统模块
 
-#### 1.fs模块概述
+#### fs模块概述
 
 ![image-20220807200456985](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807200456985.png)
 
-#### 2.读取指定文件中的内容
+#### 读取指定文件中的内容
 
 ![image-20220807200723626](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807200723626.png)
 
@@ -102,7 +102,7 @@ fs.readFile('./files/11.txt', 'utf8', function(err, dataStr) {
 
 
 
-#### 3.向指定的文件中写入内容
+#### 向指定的文件中写入内容
 
 ![image-20220807205413112](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807205413112.png)
 
@@ -133,7 +133,7 @@ fs.writeFile('./files/3.txt', 'ok123', function(err) {//监听写入结果
 
 ```
 
-#### 4.案例：整理成绩
+#### 案例：整理成绩
 
 ![image-20220807210753900](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807210753900.png)
 
@@ -172,7 +172,7 @@ fs.readFile('../素材/成绩.txt', 'utf8', function(err, dataStr) {
 
 
 
-#### 5.路径动态拼接的问题
+#### 路径动态拼接的问题
 
 ![image-20220807213335906](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807213335906.png)
 
@@ -216,7 +216,7 @@ fs.readFile(__dirname + '/files/1.txt', 'utf8', function(err, dataStr) {
 
 ![image-20220807214048954](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220807214048954.png)
 
-### 1.路径拼接
+### 路径拼接
 
 #### 1.path.join()方法的使用
 
@@ -247,7 +247,7 @@ fs.readFile(path.join(__dirname, './files/1.txt'), 'utf8', function(err, dataStr
 
 ```
 
-#### 2获取路径中的文件名
+#### 获取路径中的文件名
 
 ![image-20220808092328075](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808092328075.png)
 
@@ -267,7 +267,7 @@ console.log(nameWithoutExt)
 
 ```
 
-#### 3.获取路径中的文件扩展名
+#### 获取路径中的文件扩展名
 
 ![image-20220808092630595](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808092630595.png)
 
@@ -286,7 +286,7 @@ console.log(fext)
 
 
 
-#### 4.案例：时钟案例
+#### 案例：时钟案例
 
 ![image-20220808093004218](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808093004218.png)
 
@@ -373,13 +373,13 @@ function resolveHTML(htmlStr) {
 
 ## http模块
 
-### 1.初识http模块
+### 初识http模块
 
 ![image-20220808100645639](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808100645639.png)
 
 ![image-20220808101113162](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808101113162.png)
 
-### 2.服务器相关的概念
+### 服务器相关的概念
 
 ![image-20220808101926322](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808101926322.png)
 
@@ -387,7 +387,7 @@ function resolveHTML(htmlStr) {
 
 ![image-20220808102717168](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808102717168.png)
 
-### 3.创建最基本的web服务器
+### 创建最基本的web服务器
 
 ![image-20220808102849317](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808102849317.png)
 
@@ -429,7 +429,7 @@ server.listen(8080, function () {
 
 
 
-#### 1.了解req请求对象和res相应对象
+#### 了解req请求对象和res相应对象
 
 ![image-20220808112317190](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808112317190.png)
 
@@ -458,7 +458,7 @@ server.listen(80, () => {
 
 
 
-#### 2.解决中文乱码的问题
+#### 解决中文乱码的问题
 
 ![image-20220808113744065](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808113744065.png)
 
@@ -483,7 +483,7 @@ server.listen(80, () => {
 
 
 
-#### 3.根据不同url响应不同的htm内容
+#### 根据不同url响应不同的htm内容
 
 ![image-20220808160740963](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808160740963.png)
 
@@ -519,7 +519,7 @@ server.listen(80, () => {
 
 
 
-#### 4.案例：实现clock时钟的web服务器
+#### 案例：实现clock时钟的web服务器
 
 ![image-20220808172257368](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808172257368.png)
 
@@ -586,7 +586,7 @@ server.listen(80, () => {
 
 ![image-20220808204643108](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204643108.png)
 
-### 1.模块化的基本概念
+### 模块化的基本概念
 
 ![image-20220808204725227](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808204725227.png)
 
@@ -596,21 +596,21 @@ server.listen(80, () => {
 
 
 
-### 2.Node.js中的模块的分类
+### Node.js中的模块的分类
 
-#### 1.模块分类
+#### 模块分类
 
 ![image-20220808205501903](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808205501903.png)
 
 
 
-#### 2.加载模块
+#### 加载模块
 
 ![image-20220808205723230](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808205723230.png)
 
 
 
-#### 3.模块作用域
+#### 模块作用域
 
 ![image-20220808210318726](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808210318726.png)
 
@@ -622,9 +622,9 @@ server.listen(80, () => {
 
 
 
-#### 4.向外共享模块作用域中的成员
+#### 向外共享模块作用域中的成员
 
-##### 1.module对象
+##### module对象
 
 ![image-20220808211718755](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808211718755.png)
 
@@ -634,7 +634,7 @@ server.listen(80, () => {
 
 
 
-##### 2.module.exports对象
+##### .module.exports对象
 
 ![image-20220808212228786](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212228786.png)
 
@@ -644,7 +644,7 @@ server.listen(80, () => {
 
 
 
-##### 3.exports对象
+##### exports对象
 
 ![image-20220808212841896](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808212841896.png)
 
@@ -654,7 +654,7 @@ server.listen(80, () => {
 
 
 
-##### 4.使用误区
+##### 使用误区
 
 ![image-20220808213432456](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213432456.png)
 
@@ -670,15 +670,15 @@ server.listen(80, () => {
 
 
 
-### 3.Node.js中的模块化规范
+### Node.js中的模块化规范
 
 ![image-20220808213917564](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808213917564.png)
 
 
 
-### 4.npm和包
+### npm和包
 
-#### 1.npm概述
+#### npm概述
 
 ![image-20220808214120684](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808214120684.png)
 
@@ -696,7 +696,7 @@ server.listen(80, () => {
 
 
 
-#### 2.npm初体验
+#### npm初体验
 
 ![image-20220808215306007](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808215306007.png)
 
@@ -757,7 +757,7 @@ console.log(dt)
 
 
 
-#### 3.包管理配置文件
+#### 包管理配置文件
 
 ![image-20220808224240142](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808224240142.png)
 
@@ -781,7 +781,7 @@ console.log(dt)
 
 
 
-#### 4.解决下包慢的问题
+#### 解决下包慢的问题
 
 ![image-20220808225917969](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808225917969.png)
 
@@ -793,7 +793,7 @@ console.log(dt)
 
 
 
-#### 5.包的分类
+#### 包的分类
 
 ![image-20220809124756716](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809124756716.png)
 
@@ -805,13 +805,13 @@ console.log(dt)
 
 ![image-20220809125243932](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809125243932.png)
 
-#### 6.规范的包的结构
+#### 规范的包的结构
 
 ![image-20220809131821217](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809131821217.png)
 
 
 
-#### 7.开发属于自己的包
+#### 开发属于自己的包
 
 ![image-20220809131921945](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809131921945.png)
 
@@ -997,7 +997,7 @@ ISC
 
 
 
-#### 8.发布包
+#### 发布包
 
 ![image-20220809135735715](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809135735715.png)
 
@@ -1011,7 +1011,7 @@ ISC
 
 
 
-#### 9.模块的加载机制
+#### 模块的加载机制
 
 ![image-20220809140617191](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220809140617191.png)
 
@@ -1949,6 +1949,8 @@ app.listen(80, () => {
 
 ### 使用SQL管理数据库
 
+#### SQL概述
+
 ![image-20220811135150904](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135150904.png)
 
 
@@ -1957,9 +1959,510 @@ app.listen(80, () => {
 
 ![image-20220811135303897](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135303897.png)
 
+#### SQL基本语法
+
+##### select语句
+
 ![image-20220811135502451](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135502451.png)
+
+>
+>
+>注意：大小写不敏感哦
 
 ![image-20220811135545557](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135545557.png)
 
 ![image-20220811135727659](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811135727659.png)
+
+##### insert into语句
+
+![image-20220811151304489](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811151304489.png)
+
+
+
+##### update语句
+
+![image-20220811152031983](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811152031983.png)
+
+![image-20220811152159758](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811152159758.png)
+
+>
+>
+>注意：如果不指定where属性 则会默认修改所有数据
+
+![image-20220811152415721](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811152415721.png)
+
+
+
+```sql
+-- users表中把所有列数据全部查询出来
+-- select * from users
+
+-- 从users表中把username列和password列对应的数据查询出来
+-- select username,password from users
+
+-- 向users表中，插入新数据，username的值为tony stark password的值为098123
+-- insert into users(username,password) values ('tony stark','098123')
+-- select * from users
+
+-- 将users表中的id=2列中的username值改为sc
+-- update users set username='sc' where id=2
+-- select * from users
+```
+
+
+
+##### delete语句
+
+![image-20220811153142079](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811153142079.png)
+
+![image-20220811153155023](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811153155023.png)
+
+
+
+##### where子句
+
+![image-20220811153315494](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811153315494.png)
+
+>
+>
+>理解：子句是因为是限制条件，主句是前面的基本语句
+
+![image-20220811153647060](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811153647060.png)
+
+![image-20220811153746689](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811153746689.png)
+
+
+
+##### and和or运算符
+
+![image-20220811154038498](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154038498.png)
+
+![image-20220811154105359](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154105359.png)
+
+
+
+![image-20220811154206165](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154206165.png)
+
+
+
+##### order by语句(排序)
+
+![image-20220811154435581](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154435581.png)
+
+![image-20220811154516288](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154516288.png)
+
+>
+>
+>注意：asc可以不写   因为默认是升序排序
+
+![image-20220811154605219](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154605219.png)
+
+![image-20220811154725705](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811154725705.png)
+
+
+
+>
+>
+>注意：多重排序的顺序
+
+
+
+
+
+#### count（*）函数
+
+![image-20220811155009324](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811155009324.png)
+
+![image-20220811155041544](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811155041544.png)
+
+![image-20220811155158921](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811155158921.png)
+
+
+
+```sql
+-- 通过 * 把 users 表中所有的数据查询出来
+-- select * from users
+
+-- 从 users 表中把 username 和 password 对应的数据查询出来
+-- select username, password from users
+
+-- 向 users 表中，插入新数据，username 的值为 tony stark  password 的值为 098123
+-- insert into users (username, password) values ('tony stark', '098123')
+-- select * from users
+
+-- 将 id 为 4 的用户密码，更新成 888888
+-- update users set password='888888' where id=4
+-- select * from users
+
+-- 更新 id 为 2 的用户，把用户密码更新为 admin123  同时，把用户的状态更新为 1
+-- update users set password='admin123', status=1 where id=2
+-- select * from users
+
+-- 删除 users 表中， id 为 4 的用户
+-- delete from users where id=4
+-- select * from users
+
+-- 演示 where 子句的使用
+-- select * from users where status=1
+-- select * from users where id>=2
+-- select * from users where username<>'ls'
+-- select * from users where username!='ls'
+
+-- 使用 AND 来显示所有状态为0且id小于3的用户
+-- select * from users where status=0 and id<3
+
+-- 使用 or 来显示所有状态为1 或 username 为 zs 的用户
+-- select * from users where status=1 or username='zs'
+
+-- 对users表中的数据，按照 status 字段进行升序排序
+-- select * from users order by status
+
+-- 按照 id 对结果进行降序的排序  desc 表示降序排序   asc 表示升序排序（默认情况下，就是升序排序的）
+-- select * from users order by id desc
+
+-- 对 users 表中的数据，先按照 status 进行降序排序，再按照 username 字母的顺序，进行升序的排序
+-- select * from users order by status desc, username asc
+
+-- 使用 count(*) 来统计 users 表中，状态为 0 用户的总数量
+-- select count(*) from users where status=0
+
+-- 使用 AS 关键字给列起别名
+-- select count(*) as total from users where status=0
+-- select username as uname, password as upwd from users
+```
+
+
+
+#### 在项目中操作MySQL数据库
+
+![image-20220811161221159](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811161221159.png)
+
+![image-20220811161250473](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811161250473.png)
+
+![image-20220811161346518](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811161346518.png)
+
+![image-20220811162150479](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811162150479.png)
+
+![image-20220811162417759](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811162417759.png)
+
+![image-20220811162601317](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220811162601317.png)
+
+
+
+```javascript
+// 1. 导入 mysql 模块
+const mysql = require('mysql')
+// 2. 建立与 MySQL 数据库的连接关系
+const db = mysql.createPool({
+  host: '127.0.0.1', // 数据库的 IP 地址
+  user: 'root', // 登录数据库的账号
+  password: 'admin123', // 登录数据库的密码
+  database: 'my_db_01', // 指定要操作哪个数据库
+})
+
+// 测试 mysql 模块能否正常工作
+/* db.query('select 1', (err, results) => {
+  // mysql 模块工作期间报错了
+  if(err) return console.log(err.message)
+  // 能够成功的执行 SQL 语句
+  console.log(results)
+}) */
+
+// 查询 users 表中所有的数据
+/* const sqlStr = 'select * from users'
+db.query(sqlStr, (err, results) => {
+  // 查询数据失败
+  if (err) return console.log(err.message)
+  // 查询数据成功
+  // 注意：如果执行的是 select 查询语句，则执行的结果是数组
+  console.log(results)
+}) */
+
+// 向 users 表中，新增一条数据，其中 username 的值为 Spider-Man，password 的值为 pcc123
+/* const user = { username: 'Spider-Man', password: 'pcc123' }
+// 定义待执行的 SQL 语句
+const sqlStr = 'insert into users (username, password) values (?, ?)'
+// 执行 SQL 语句
+db.query(sqlStr, [user.username, user.password], (err, results) => {
+  // 执行 SQL 语句失败了
+  if (err) return console.log(err.message)
+  // 成功了
+  // 注意：如果执行的是 insert into 插入语句，则 results 是一个对象
+  // 可以通过 affectedRows 属性，来判断是否插入数据成功
+  if (results.affectedRows === 1) {
+    console.log('插入数据成功!')
+  }
+}) */
+
+// 演示插入数据的便捷方式
+/* const user = { username: 'Spider-Man2', password: 'pcc4321' }
+// 定义待执行的 SQL 语句
+const sqlStr = 'insert into users set ?'
+// 执行 SQL 语句
+db.query(sqlStr, user, (err, results) => {
+  if (err) return console.log(err.message)
+  if (results.affectedRows === 1) {
+    console.log('插入数据成功')
+  }
+}) */
+
+// 演示如何更新用户的信息
+/* const user = { id: 6, username: 'aaa', password: '000' }
+// 定义 SQL 语句
+const sqlStr = 'update users set username=?, password=? where id=?'
+// 执行 SQL 语句
+db.query(sqlStr, [user.username, user.password, user.id], (err, results) => {
+  if (err) return console.log(err.message)
+  // 注意：执行了 update 语句之后，执行的结果，也是一个对象，可以通过 affectedRows 判断是否更新成功
+  if (results.affectedRows === 1) {
+    console.log('更新成功')
+  }
+}) */
+
+// 演示更新数据的便捷方式
+/* const user = { id: 6, username: 'aaaa', password: '0000' }
+// 定义 SQL 语句
+const sqlStr = 'update users set ? where id=?'
+// 执行 SQL 语句
+db.query(sqlStr, [user, user.id], (err, results) => {
+  if (err) return console.log(err.message)
+  if (results.affectedRows === 1) {
+    console.log('更新数据成功')
+  }
+}) */
+
+// 删除 id 为 5 的用户
+/* const sqlStr = 'delete from users where id=?'
+db.query(sqlStr, 5, (err, results) => {
+  if (err) return console.log(err.message)
+  // 注意：执行 delete 语句之后，结果也是一个对象，也会包含 affectedRows 属性
+  if (results.affectedRows === 1) {
+    console.log('删除数据成功')
+  }
+}) */
+
+// 标记删除
+const sqlStr = 'update users set status=? where id=?'
+db.query(sqlStr, [1, 6], (err, results) => {
+  if (err) return console.log(err.message)
+  if (results.affectedRows === 1) {
+    console.log('标记删除成功')
+  }
+})
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
