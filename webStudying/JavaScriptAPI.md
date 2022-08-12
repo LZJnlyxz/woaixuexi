@@ -95,11 +95,11 @@
 
 ### 一. 自定义属性的操作
 
-#### 1. **获取内置属性值**
+####  **获取内置属性值**
 
 - ` element.attribute`
 
-#### 2. **获取自定义属性值**
+####  **获取自定义属性值**
 
 - ` element.getAttritute('attribute')`
 
@@ -112,25 +112,25 @@ console.log<div.getAttribute('index')>;
 
 -----------
 
-#### 3. **设置内置属性值**
+####  **设置内置属性值**
 
 - ` element.attribute=''`
 
-#### 4. **设置自定义属性值**
+#### **设置自定义属性值**
 
 - ` element.setAttribute('Attribute','value')`
 
 ----
 
-#### 5. **移除属性**
+####  **移除属性**
 
 - ` element.removeAttribute('Attribute')` 
 
-#### 6. <u>案例：Tab栏切换</u>
+####  <u>案例：Tab栏切换</u>
 
 ![image-20220722112237578](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722112237578.png)
 
-#### 7. **H5自定义属性**
+#### **H5自定义属性**
 
 - H5新增命名自定义属性规范：` data-Attribute`
 - H5新增获取自定义属性的两种方法(它只能获取data-开头的自定义属性)，其中dataset中存放了所有以data开头的自定义属性
@@ -146,19 +146,19 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 二. 节点操作
+###  节点操作
 
-#### 1.节点简介
+#### 节点简介
 
 - 节点：按照类型分为元素节点(HTML元素),属性节点，文本节点
 
-#### 2.节点概述
+#### 节点概述
 
 ![image-20220722121631158](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722121631158.png)   
 
-#### 3.节点层级
+#### 节点层级
 
-##### 1. 子节点
+#####  子节点
 
 - ` parentNode.firstChild`返回第一个节点(包括元素节点，文本节点等一切节点)
 - ` parentNode.firstElementChild`返回第一个子元素节点内容，找不到则返回null,有兼容问题
@@ -171,13 +171,13 @@ console.log<div.getAttribute('index')>;
 
 
 
-##### 2. 兄弟节点
+##### 兄弟节点
 
 <img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722124319708.png" alt="image-20220722124319708" style="zoom:150%;" />
 
 ![image-20220722124534163](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722124534163.png)
 
-#### 4. 创建，添加，删除节点(增删改)
+####  创建，添加，删除节点(增删改)
 
 ![image-20220722124753392](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722124753392.png)
 
@@ -187,7 +187,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220722131515000](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722131515000.png)
 
-#### 5.案例：删除留言案例
+#### 案例：删除留言案例
 
 ![image-20220722132738724](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722132738724.png)
 
@@ -237,7 +237,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 6.案例：动态生成表格并实现增删改 
+#### 案例：动态生成表格并实现增删改 
 
 ```javascript
   <style>
@@ -320,7 +320,7 @@ console.log<div.getAttribute('index')>;
 </body>
 ```
 
-#### 7. 改总结
+####  改总结
 
 ![image-20220722195010024](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722195010024.png)
 
@@ -328,7 +328,7 @@ console.log<div.getAttribute('index')>;
 >
 >注意：改的值都需要用单引号引起来
 
-#### 8. 三种动态创建元素的区别
+####  三种动态创建元素的区别
 
 ![image-20220722192726487](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722192726487.png)
 
@@ -338,11 +338,11 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 三. 事件高级
+### 事件高级
 
 ![image-20220722201641915](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722201641915.png)
 
-#### 1.注册事件
+#### 注册事件
 
 ![image-20220722201842817](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722201842817.png)
 
@@ -352,7 +352,7 @@ console.log<div.getAttribute('index')>;
 >
 >注意：type参数处输入事件类型型字符串且不加on，故需加上单引号，如'click'
 
-#### 2.删除事件
+#### 删除事件
 
 ![image-20220722203400394](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722203400394.png)
 
@@ -360,7 +360,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220722203418428](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722203418428.png)
 
-#### 3.DOM事件流
+#### DOM事件流
 
 ![image-20220722205447966](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722205447966.png)
 
@@ -368,7 +368,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220722211534233](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722211534233.png)
 
-#### 4.事件对象
+#### 事件对象
 
 ![image-20220722212620656](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722212620656.png)
 
@@ -378,11 +378,11 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220722212647197](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220722212647197.png)
 
-#### 5.常见事件对象属性和方法
+#### 常见事件对象属性和方法
 
 ![image-20220723094303307](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723094303307.png)
 
-##### 1. e.target和this的区别
+#####  e.target和this的区别
 
 ![image-20220723094056340](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723094056340.png)
 
@@ -392,13 +392,13 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220723094231184](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723094231184.png)
 
-##### 2. 阻止默认行为(事件)
+##### 阻止默认行为(事件)
 
 ![image-20220723095225014](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723095225014.png)
 
 
 
-##### 3. 阻止事件冒泡
+#####  阻止事件冒泡
 
 ![image-20220723100453469](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723100453469.png)
 
@@ -406,7 +406,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-##### 4. 事件委托
+##### 事件委托
 
 ![image-20220723101059612](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723101059612.png)
 
@@ -416,9 +416,9 @@ console.log<div.getAttribute('index')>;
 >
 >注意事项：深入理解DOM事件流，明白事件冒泡的原理：事件按一定顺序传递
 
-#### 5.常见的鼠标事件
+#### 常见的鼠标事件
 
-##### 1.常见鼠标事件
+##### 常见鼠标事件
 
 ![image-20220723103016414](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723103016414.png)
 
@@ -428,13 +428,13 @@ console.log<div.getAttribute('index')>;
 
 
 
-##### 2.鼠标事件对象
+##### 鼠标事件对象
 
 ![image-20220723103304023](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723103304023.png)
 
 ![image-20220723110205621](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723110205621.png)
 
-##### 3.案例：跟随鼠标的天使
+##### 案例：跟随鼠标的天使
 
 ![image-20220723111120020](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723111120020.png)
 
@@ -446,9 +446,9 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 6.常见的键盘事件
+#### 常见的键盘事件
 
-##### 1.常用键盘事件
+##### 常用键盘事件
 
 ![image-20220723111857027](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723111857027.png)
 
@@ -456,7 +456,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-##### 2.键盘事件对象
+##### 键盘事件对象
 
 1.keyCode属性判断用户按下哪个键
 
@@ -483,7 +483,7 @@ console.log<div.getAttribute('index')>;
 </body>
 ```
 
-##### 3.案例：模拟京东快递单号查询
+##### 案例：模拟京东快递单号查询
 
 ![image-20220723142809202](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723142809202.png)
 
@@ -543,7 +543,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220723162429889](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723162429889.png)
 
-### 1.BOM概述
+### BOM概述
 
 ![image-20220723163058409](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723163058409.png)
 
@@ -559,7 +559,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 2.window对象的常见事件
+### window对象的常见事件
 
 ![image-20220723222133674](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220723222133674.png)
 
@@ -571,11 +571,11 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 3.定时器
+### 定时器
 
 ![image-20220724094236004](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724094236004.png)
 
-#### 1.setTimeout（）定时器
+#### setTimeout（）定时器
 
 
 
@@ -591,7 +591,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 2.setInterval（）定时器
+#### setInterval（）定时器
 
 
 
@@ -599,7 +599,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 3.案例：倒计时效果
+#### 案例：倒计时效果
 
 ![image-20220724104411170](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724104411170.png)
 
@@ -659,7 +659,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220724104927121](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724104927121.png)
 
-#### 4.案例：发送短信
+#### 案例：发送短信
 
 ![image-20220724110340411](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724110340411.png)
 
@@ -692,7 +692,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 5.this指向的问题
+#### this指向的问题
 
 ![image-20220724131808665](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724131808665.png)
 
@@ -710,7 +710,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 4.JS执行队列
+### JS执行队列
 
 ![image-20220724151904243](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724151904243.png)
 
@@ -732,9 +732,9 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 5.location对象
+### location对象
 
-#### 1.location对象常见属性
+#### location对象常见属性
 
 ![image-20220724154105550](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724154105550.png)
 
@@ -746,7 +746,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 2.获取URL参数
+#### 获取URL参数
 
 案例：获取URL参数
 
@@ -756,15 +756,15 @@ console.log<div.getAttribute('index')>;
 
 
 
-#### 3.location常见的方法
+#### location常见的方法
 
 ![image-20220724164629122](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724164629122.png)
 
-### 6.navigator对象
+### navigator对象
 
 ![image-20220724165306849](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724165306849.png)
 
-### 7.history对象
+### history对象
 
 ![image-20220724170207869](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724170207869.png)
 
@@ -774,7 +774,7 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220724171027420](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724171027420.png)
 
-### 1.元素偏移量offset系列
+### 元素偏移量offset系列
 
 ![image-20220724201727012](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724201727012.png)
 
@@ -806,11 +806,11 @@ console.log<div.getAttribute('index')>;
 
 ![image-20220725093150416](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725093150416.png)
 
-### 2.元素可视区client系列
+### 元素可视区client系列
 
 ![image-20220724214136738](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724214136738.png)
 
-### 3.立即执行函数
+### 立即执行函数
 
 ![image-20220724215829267](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220724215829267.png)
 
@@ -841,7 +841,7 @@ console.log<div.getAttribute('index')>;
 
 
 
-### 4.元素滚动scroll系列
+### 元素滚动scroll系列
 
 ![image-20220725094719012](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725094719012.png)
 
@@ -863,7 +863,7 @@ scorlltop距离
 
 ![image-20220725105338293](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725105338293.png)
 
-### 5.三大系列总结
+### 三大系列总结
 
 ![image-20220725110230712](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725110230712.png)
 
@@ -877,9 +877,9 @@ scorlltop距离
 >
 >注意：事件冒泡再理解：只在父盒子注册事件，但在子盒子处通过冒泡仍可以触发父盒子的注册事件，例如点击子盒子可以触发父盒子的点击事件
 
-### 7.动画函数封装
+### 动画函数封装
 
-#### 1.动画实现原理
+#### 动画实现原理
 
 ![image-20220725185901099](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725185901099.png)
 
@@ -887,7 +887,7 @@ scorlltop距离
 >
 >注意：一定要给此元素添加定位，因为要使用element.styleleft
 
-#### 2.简单动画函数封装
+#### 简单动画函数封装
 
 ![image-20220725191238764](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725191238764.png)
 
@@ -903,9 +903,9 @@ scorlltop距离
 
 
 
-#### 3.缓动动画
+#### 缓动动画
 
-##### 1.原理：
+##### 原理：
 
 ![image-20220725192709010](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725192709010.png)
 
@@ -913,7 +913,7 @@ scorlltop距离
 
 
 
-##### 2.缓动动画多个目标值之间的移动
+##### 缓动动画多个目标值之间的移动
 
 核心原理：移动距离为正向上取整，移动距离为负向下取整
 
@@ -921,7 +921,7 @@ scorlltop距离
 
 
 
-##### 3.给动画函数添加回调函数
+##### 给动画函数添加回调函数
 
 原理：等待定时器结束后再调用函数
 
@@ -931,31 +931,31 @@ scorlltop距离
 
 
 
-##### 4.动画函数的使用(封装及回调函数的使用)
+##### 动画函数的使用(封装及回调函数的使用)
 
 ![image-20220725195725379](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725195725379.png)
 
 
 
-### 8.常见网页特效案例
+### 常见网页特效案例
 
-#### 1.网页轮播图
+#### 网页轮播图
 
 ![image-20220725204824522](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725204824522.png)
 
-###### 1.鼠标经过显示左右按钮
+###### 鼠标经过显示左右按钮
 
 ![image-20220725204849210](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725204849210.png)
 
-###### 2.动态生成小圆圈
+###### 动态生成小圆圈
 
 ![image-20220725205012211](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725205012211.png)
 
-###### 3.小圆圈的排他思想
+###### 小圆圈的排他思想
 
 ![image-20220725205419273](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725205419273.png)
 
-###### 4.点击小圆圈滚动图片
+###### 点击小圆圈滚动图片
 
 ![image-20220725210601449](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725210601449.png)
 
@@ -967,29 +967,29 @@ scorlltop距离
 >
 >vscode使用技巧：ctrl+f快速查找元素
 
-###### 5.右侧无缝滚动
+###### 右侧无缝滚动
 
 ![image-20220725211652797](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725211652797.png)
 
-###### 6.克隆第一张图片
+###### 克隆第一张图片
 
 ![image-20220725212106346](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725212106346.png)
 
 ![image-20220725212128512](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725212128512.png)
 
-###### 7.点击右侧按钮小圆圈跟着一起变化
+###### 点击右侧按钮小圆圈跟着一起变化
 
 ![image-20220725212513377](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725212513377.png)
 
 ![image-20220725212533689](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725212533689.png)
 
-###### 8.两个bug的解决
+###### 两个bug的解决
 
 ![image-20220725213059306](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725213059306.png)
 
-###### 9.左侧按钮制作及代码优化
+###### 左侧按钮制作及代码优化
 
-###### 10.自动播放功能
+###### 自动播放功能
 
 ![image-20220725214147211](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725214147211.png)
 
@@ -999,7 +999,7 @@ scorlltop距离
 
 ![image-20220725214056719](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725214056719.png)
 
-###### 11.节流阀以及逻辑中断应用
+###### 节流阀以及逻辑中断应用
 
 ![image-20220725214404703](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725214404703.png)
 
@@ -1015,7 +1015,7 @@ scorlltop距离
 
 
 
-##### 2.案例：返回顶部
+##### 案例：返回顶部
 
 ![image-20220725223342860](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725223342860.png)
 
@@ -1033,7 +1033,7 @@ scorlltop距离
 
 
 
-##### 3.案例：筋斗云
+##### 案例：筋斗云
 
 ![image-20220725224124738](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725224124738.png)
 
@@ -1049,13 +1049,13 @@ scorlltop距离
 
 ![image-20220725225154327](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725225154327.png)
 
-### 1.触碰事件
+### 触碰事件
 
-#### 1.触屏事件概述
+#### 触屏事件概述
 
 ![image-20220725230104999](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220725230104999.png)
 
-#### 2.触摸事件对象(TouchEvent)
+#### 触摸事件对象(TouchEvent)
 
 ![image-20220726083141776](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726083141776.png)
 
@@ -1065,7 +1065,7 @@ scorlltop距离
 >
 >` e.targetTouches[0]`会得到正在触摸dom元素的第一个手指的相关信息，如手指的坐标等
 
-#### 3.移动端拖动元素
+#### 移动端拖动元素
 
 ![image-20220726084603161](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726084603161.png)
 
@@ -1075,9 +1075,9 @@ scorlltop距离
 
 
 
-#### 4.移动端常见特效
+#### 移动端常见特效
 
-##### 1.案例：移动端轮播图
+##### 案例：移动端轮播图
 
 >
 >
@@ -1151,7 +1151,7 @@ classList类名操作
 
 ![image-20220726111836996](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726111836996.png)
 
-#### 5.移动端常用开发插件
+#### 移动端常用开发插件
 
 ![image-20220726112141351](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726112141351.png)
 
@@ -1159,7 +1159,7 @@ classList类名操作
 >
 >注意：必须按照插件使用规范
 
-##### 1.fastclick插件使用
+##### fastclick插件使用
 
 ![image-20220726113502404](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726113502404.png)
 
@@ -1167,7 +1167,7 @@ classList类名操作
 
 
 
-##### 2.swiper插件使用
+##### swiper插件使用
 
 1.官网下载文件
 
@@ -1179,17 +1179,17 @@ classList类名操作
 
 
 
-##### 3.其他移动端常见插件
+##### 其他移动端常见插件
 
 ![image-20220726115748916](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726115748916.png)
 
-##### 4.视频插件zy.media.js的使用
+##### 视频插件zy.media.js的使用
 
 ![image-20220726123620111](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726123620111.png)
 
-##### 5.移动端常用开发框架
+##### 移动端常用开发框架
 
-###### 1.bootstrap轮播图
+###### bootstrap轮播图
 
 ![image-20220726140250984](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726140250984.png)
 
@@ -1197,15 +1197,15 @@ classList类名操作
 >
 >注意：先引进css文件再引入jQuery文件最后引入bootstrap.js文件
 
-###### 2.阿里百秀轮播图制作
+###### 阿里百秀轮播图制作
 
-#### 6.本地存储
+#### 本地存储
 
 ![image-20220726141148451](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726141148451.png)
 
 
 
-##### 1.本地存储之sessionStorage
+##### 本地存储之sessionStorage
 
 ![image-20220726141735103](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726141735103.png)
 
@@ -1221,7 +1221,7 @@ classList类名操作
 
 
 
-##### 2.本地存储之localStorage
+##### 本地存储之localStorage
 
 ![image-20220726144254373](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726144254373.png)
 
@@ -1231,7 +1231,7 @@ classList类名操作
 
 
 
-##### 3.案例：记住用户名
+##### 案例：记住用户名
 
 ![image-20220726145006819](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145006819.png)
 
@@ -1247,7 +1247,7 @@ classList类名操作
 
 ![image-20220726145210659](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145210659.png)
 
-### 1.jQuery概述
+### jQuery概述
 
 ![image-20220726145358835](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145358835.png)
 
@@ -1263,13 +1263,13 @@ classList类名操作
 
 ![image-20220726145755193](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726145755193.png)
 
-### 2.jquery的基本使用
+### jquery的基本使用
 
 >
 >
 >必须先引入jquery.js文件
 
-#### 1.jquery的入口函数
+#### jquery的入口函数
 
 ![image-20220726150717706](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726150717706.png)
 
@@ -1277,11 +1277,11 @@ classList类名操作
 
 
 
-#### 2.jquery的顶级对象$
+#### jquery的顶级对象$
 
 ![image-20220726183358425](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183358425.png)
 
-#### 3.jquery对象和DOM对象
+#### jquery对象和DOM对象
 
 ![image-20220726183902505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726183902505.png)
 
@@ -1295,7 +1295,7 @@ classList类名操作
 
 
 
-#### 4.DOM对象和jquery对象相互转换
+#### DOM对象和jquery对象相互转换
 
 ![image-20220726184515678](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184515678.png)
 
@@ -1305,13 +1305,13 @@ classList类名操作
 
 
 
-### 3.jquery常用API
+### jquery常用API
 
 ![image-20220726184635709](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726184635709.png)
 
 ![image-20220726185818881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726185818881.png)
 
-#### 1.jquery选择器
+#### jquery选择器
 
 ![image-20220726190233754](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726190233754.png)
 
@@ -1365,7 +1365,7 @@ jquery排他思想：利用隐式迭代
 
 
 
-#### 2.jquery链式编程
+#### jquery链式编程
 
 ##### 1.链式编程原理：
 
@@ -1391,9 +1391,9 @@ end();
 
 
 
-#### 3.jquery操作样式
+#### jquery操作样式
 
-##### 1.操作css方法
+##### 操作css方法
 
 ![image-20220726220122252](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220726220122252.png)
 
@@ -1401,7 +1401,7 @@ end();
 
 
 
-##### 2.设置类样式方法
+##### 设置类样式方法
 
 ![image-20220727103220140](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103220140.png)
 
@@ -1417,7 +1417,7 @@ end();
 
 ![image-20220727103145505](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103145505.png)
 
-##### 3.原生js和jquery类操作和className区别
+##### 原生js和jquery类操作和className区别
 
 ![image-20220727103646959](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103646959.png)
 
@@ -1425,11 +1425,11 @@ end();
 
 
 
-#### 4.jquery效果
+#### jquery效果
 
 ![image-20220727103823079](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727103823079.png)
 
-##### 1.jquery显示与隐藏效果
+##### jquery显示与隐藏效果
 
 ![image-20220727104202924](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727104202924.png)
 
@@ -1453,7 +1453,7 @@ end();
 
 
 
-##### 2.jquery滑动效果
+##### jquery滑动效果
 
 ![image-20220727110947647](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727110947647.png)
 
@@ -1467,7 +1467,7 @@ end();
 
 
 
-##### 3.jquery停止动画排队
+##### jquery停止动画排队
 
 ![image-20220727111710583](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727111710583.png)
 
@@ -1636,7 +1636,7 @@ end();
 
 
 
-##### 4.jquery淡入淡出效果以及突出显示案例
+##### jquery淡入淡出效果以及突出显示案例
 
 ![image-20220727112624205](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112624205.png)
 
@@ -1723,7 +1723,7 @@ end();
 
 
 
-##### 5.jquery自定义动画animate方法
+##### jquery自定义动画animate方法
 
 ![image-20220727112905003](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727112905003.png)
 
@@ -1749,7 +1749,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-#### 5.jquery属性操作
+#### jquery属性操作
 
 ![image-20220727120410175](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727120410175.png)
 
@@ -1761,7 +1761,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-#### 6.jquery内容文本值
+#### jquery内容文本值
 
 ![image-20220727125315184](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727125315184.png)
 
@@ -1775,9 +1775,9 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-#### 7.jquery元素操作
+#### jquery元素操作
 
-##### 1.jquery遍历对象方法
+##### jquery遍历对象方法
 
 ![image-20220727130004075](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727130004075.png)
 
@@ -1795,7 +1795,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-##### 2.创建，添加，删除元素
+##### 创建，添加，删除元素
 
 ![image-20220727193443231](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727193443231.png)
 
@@ -1809,13 +1809,13 @@ div>ul>li*7>a *2>big&&small>.current
 
 案例：购物车模块-清理购物车以及选中商品添加背景颜色
 
-#### 8.jquery尺寸方法
+#### jquery尺寸方法
 
 ![image-20220727194515686](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727194515686.png)
 
 ![image-20220727194721881](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727194721881.png)
 
-#### 9.jquery位置方法
+#### jquery位置方法
 
 ![image-20220727195039463](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727195039463.png)
 
@@ -1825,17 +1825,17 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-#### 10.jquery被卷去头部方法
+#### jquery被卷去头部方法
 
 ![image-20220727200345192](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727200345192.png)
 
-#### 11.jquery事件
+#### jquery事件
 
-##### 
+
 
 ![image-20220727214853847](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727214853847.png)
 
-##### 1.事件处理on绑定一个或者多个事件
+##### 事件处理on绑定一个或者多个事件
 
 ` $(element).on({type1:function(){},type2:function(){},....})`
 
@@ -1847,7 +1847,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-##### 2.on实现事件委派和给动态元素绑定事件
+##### on实现事件委派和给动态元素绑定事件
 
 >
 >
@@ -1879,7 +1879,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-##### 3.off解绑事件
+##### off解绑事件
 
 ![image-20220727215814923](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727215814923.png)
 
@@ -1889,7 +1889,7 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-##### 4.jquery自动触发事件
+##### jquery自动触发事件
 
 ![image-20220727220319988](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220319988.png)
 
@@ -1899,25 +1899,25 @@ div>ul>li*7>a *2>big&&small>.current
 
 
 
-#### 12.jquery事件对象
+#### jquery事件对象
 
 ![image-20220727220419272](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220419272.png)
 
-#### 13.jquery其他方法
+#### jquery其他方法
 
 ![image-20220727220706728](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220706728.png)
 
-##### 1.jquery对象拷贝extend
+##### jquery对象拷贝extend
 
 
 
 ![image-20220727220938539](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727220938539.png)
 
-##### 2.jquery多库共存
+##### jquery多库共存
 
 ![image-20220727221020133](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220727221020133.png)
 
-##### 3.jquery插件
+##### jquery插件
 
 ![image-20220728214938489](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220728214938489.png)
 

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>天气趋势</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="./js/axios.js"></script>
+    <script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="top-bar">2022年 Y 城全年温度统计图</div>
+        <!-- 主体 -->
+        <div class="container">
+            <!-- 月份 -->
+            <div class="month">
+                <ul>
+                    <!-- TODO：待补充代码 在下面的 li 标签中完成 12个月份 (即 monthList) 的渲染  -->
+                    <!-- 选择月份的英文名称等于数据中的key，代表这条数据选中 -->
+                    <li v-for="(item,key,index) in monthList" :class="[monthName===key?'active':'']" @click="changeMonth(key,index)">
+                        {{item}}</li>
+                </ul>
+            </div>
+            <div class="chart">
+                <!-- TODO：待补充代码  -->
+                <!-- currentMonth  未来七天和本月 tab 切换，只有当前月才显示 -->
+                <!-- 选择月份的序号（对应月份-1）等于当前月份的标志（当前月份-1）时显示 -->
+                <div id="currentMonth" v-if="monthNumber===nowMonth">
+                    <div class="title">
+                        <h3>{{typeTitle}}</h3>
+                        <div class="type" @click="clickType($event)">
+                            <span id="seven" :class="{'active':!type}">未来7天</span>
+                            <span id="current" :class="{'active':type}">本月</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // TODO：待补充代码
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            chart: null, // 图表
+            chartOptions: null, // 图表配置项
+            typeTitle: "本月天气",
+            monthList: {
+                January: "1月",
+                February: "2月",
+                March: "3月",
+                April: "4月",
+                May: "5月",
+                June: "6月",
+                July: "7月",
+                August: "8月",
+                September: "9月",
+                October: "10月",
+                November: "11月",
+                December: "12月",
+            },
+            // 请求到的全部数据
+            data: [],
+            // 选择月份的英文名称
+            monthName: 'January',
+            // 选择月份的序号（对应月份-1）
+            monthNumber: 0,
+            // 当前月份的标志（当前月份-1）
+            nowMonth: new Date().getMonth(),
+            // x轴，y轴数据
+            yData: [],
+            xData: [],
+            // 未来7天和本月数据的状态
+            type: 1
+        },
+
+        mounted: async function() {
+            const res = await axios.get('./js/weather.json');
+            this.data = res.data;
+            // 初始化x轴和y轴数据
+            this.yData = res.data[0]['January'];
+            // 根据y轴温度数据条数的多少判断x轴有多少天
+            this.xData = [...this.yData.map((e, i) => i + 1)];
+            // 初始化 echarts
+            this.$nextTick(() => {
+                this.initChart();
+            });
+        },
+        methods: {
+            initChart() {
+                // 初始化图表
+                this.chart = echarts.init(document.getElementById("chart"));
+                // 配置项
+                this.chartOptions = {
+                    grid: {
+                        top: 35,
+                        bottom: 5,
+                        left: 10,
+                        right: 10,
+                        containLabel: true,
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        axisPointer: {
+                            lineStyle: {
+                                color: {
+                                    type: "linear",
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: "rgba(255,255,255,0)",
+                                    }, {
+                                        offset: 0.5,
+                                        color: "rgba(255,255,255,1)",
+                                    }, {
+                                        offset: 1,
+                                        color: "rgba(255,255,255,0)",
+                                    }, ],
+                                    global: false,
+                                },
+                            },
+                        },
+                    },
+                    xAxis: [{
+                        type: "category",
+                        boundaryGap: false,
+                        axisLabel: {
+                            formatter: "{value}",
+                            fontSize: 12,
+                            margin: 20,
+                            textStyle: {
+                                color: "#bfbfbf",
+                            },
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "#e9e9e9",
+                            },
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#f7f7f7",
+                            },
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        // x 轴显示的数据，日期
+                        data: this.xData,
+                    }, ],
+                    yAxis: [{
+                        boundaryGap: false,
+                        type: "value",
+                        axisLabel: {
+                            textStyle: {
+                                color: "#bfbfbf",
+                            },
+                            formatter: `{value}\u2103`,
+                        },
+                        nameTextStyle: {
+                            color: "#fff",
+                            fontSize: 12,
+                            lineHeight: 40,
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: "#f7f7f7",
+                            },
+                        },
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#e9e9e9",
+                            },
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                    }, ],
+                    series: [{
+                        name: "天气",
+                        type: "line",
+                        smooth: false,
+                        showSymbol: false,
+                        symbolSize: 0,
+                        zlevel: 3,
+                        itemStyle: {
+                            color: "#ff6600",
+                            borderColor: "#a3c8d8",
+                        },
+                        lineStyle: {
+                            normal: {
+                                width: 3,
+                                color: "#ff6600",
+                            },
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0,
+                                    0,
+                                    0,
+                                    1, [{
+                                        offset: 0,
+                                        color: "#ff6600",
+                                    }, {
+                                        offset: 0.8,
+                                        color: "#ff9900",
+                                    }, ],
+                                    false
+                                ),
+                            },
+                        },
+                        //  Y 轴显示的数据，即温度数据
+                        data: this.yData,
+                    }, ],
+                };
+
+                // 调用此方法设置 echarts 数据
+                this.chart.setOption(this.chartOptions);
+            },
+            // 切换月份
+            changeMonth(month, index) {
+                this.monthName = month;
+                this.monthNumber = index;
+
+                this.yData = this.data[index][month];
+                this.xData = [...this.yData.map((e, i) => i + 1)];
+
+                // 如果切换到了当前月份，将type状态重置以下
+                if (index === this.nowMonth) {
+                    this.type = 1
+                }
+                this.initChart()
+            },
+            // 切换未来7天和本月
+            clickType(e) {
+                switch (e.target.id) {
+                    case "seven":
+                        this.type = 0;
+                        // 解构赋值更新x，y坐标轴的数据
+                        [this.xData, this.yData] = this.getSevenData();
+                        break;
+                    case "current":
+                        this.type = 1
+                        this.yData = this.data[this.monthNumber][this.monthName]
+                        this.xData = [...this.yData.map((e, i) => i + 1)]
+                        break;
+                }
+                this.initChart();
+            },
+            // 获取未来七天数据
+            getSevenData() {
+                let newXdata = [],
+                    newYdata = [];
+                // 利用循环一天一天的获取
+                for (let i = 0; i < 7; i++) {
+                    // 当前时间
+                    let now = new Date();
+                    // now.getTime()为当前时间戳 time为需要获取的那天的时间戳
+                    let time = now.getTime() + 1000 * 60 * 60 * 24 * i;
+                    // 用setTime转换，将now转换为需要获取的那天的时间
+                    // now.setTime(time)既是设置now的日期为：从1970.1.1开始走过time毫秒后的日期
+                    now.setTime(time);
+
+                    newXdata.push(`${now.getMonth() + 1}/${now.getDate()}`)
+
+                    if (this.monthNumber === now.getMonth()) {
+                        // 如果当前选择的月份与获取那天的时间所处月份一样，则直接取当前y轴里的数据
+                        newYdata.push(this.yData[now.getDate() - 1])
+                    } else {
+                        // 如果当前选择的月份与获取那天的时间所处月份不同，说明进入到了下一月份，取下一月份的数据
+                        let nextMonth = this.data[now.getMonth()];
+                        // 因为不确定月份数据里的key是啥，不能直接取，所以采用for in遍历对象间接获取数据
+                        for (const key in nextMonth) {
+                            newYdata.push(nextMonth[key][now.getDate() - 1])
+                        }
+                    }
+                }
+                return [newXdata, newYdata]
+
+
+            }
+        },
+    });
+</script>

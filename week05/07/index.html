@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>一起会议吧</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/iconfont/iconfont.css" />
+</head>
+
+<body>
+    <div id="app">
+        <!-- TODO：请在下面实现需求 -->
+        <!-- 登录/注销窗口 -->
+        <div class="login">
+            <div class="left-tools">
+                <a class="close-btn"></a>
+                <a class="shrink-btn"></a>
+            </div>
+            <h3>{{isLogin?'注销':'登录'}}</h3>
+            <p v-if="!isLogin">
+                选择用户：<select id="selectUser" @change="changeOption($event)">
+                    <option :value="item.id" v-for="item in list" :key="item.id">{{item.name}}</option>
+                </select>
+            </p>
+            <p v-else>当前用户为：{{loginUser.name}}</p>
+
+            <a class="login-btn" @click="btn">{{isLogin?'注销':'登录'}}</a>
+        </div>
+
+        <!-- 右侧显示用户列表窗口按钮 -->
+        <button id="show" class="right-btn" v-if="!showUser&&isLogin" @click="showUser=true">
+            <span class="iconfont icon-left-arrow"></span>
+        </button>
+
+        <!-- 用户列表窗口 -->
+        <div class="user-dialog" v-if="isLogin&&showUser">
+            <!-- 用户列表窗口上侧工具栏 -->
+            <ul class="tools">
+                <li class="tools-left">
+                    <button :class="{'active':isButton<0}" @click="isButton=-1">
+                        <span class="iconfont icon-close"></span>
+                    </button>
+                    <button :class="{'active':isButton=='0'}" @click="isButton=0">
+                        <span class="iconfont icon-dialog"></span>
+                    </button>
+                    <button :class="{'active':isButton>0}" @click="isButton=1">
+                        <span class="iconfont icon-list"></span>
+                    </button>
+                </li>
+                <li class="tools-right">
+                    <button class="show-list" @click="showUser=false">
+                        <span class="iconfont icon-retract"></span>
+                    </button>
+                </li>
+            </ul>
+
+            <!-- 用户列表 -->
+            <ul class="say-list">
+                <li>
+                    <span class="iconfont icon-microphone"></span>
+                </li>
+                <li class="line"></li>
+                <li>正在讲话：{{list.find(item=>item.isHost).name}};</li>
+            </ul>
+            <ul class="user-list">
+                <li v-show="isButton>=0">
+                    <img class="header" :src="loginUser.imgPath" />
+                    <div class="user-name">
+                        <span class="iconfont icon-user header-icon" v-if="loginUser.isHost"></span>
+                        <span class="iconfont icon-microphone"></span> {{loginUser.name}}
+                    </div>
+                </li>
+                <li v-for="item in list" :key="item.id" v-if="item.id!==loginUser.id" v-show="isButton>0">
+                    <img class="header" :src="item.imgPath" />
+                    <div class="user-name">
+                        <span class="iconfont icon-user header-icon" v-if="item.isHost"></span>
+                        <span class="iconfont icon-microphone"></span> {{item.name}}
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/axios.min.js"></script>
+    <script type="text/javascript">
+        // TODO：请在下面实现需求
+        new Vue({
+            el: "#app",
+            data: {
+                // 用户列表
+                list: [],
+                // 选择用户id
+                value: '1',
+                // 是否登录
+                isLogin: false,
+                // 是否显示用户参会窗口
+                showUser: true,
+                // 登录的用户信息
+                loginUser: {},
+                // 用户列表显示效果切换的状态
+                isButton: 0
+            },
+            created() {
+                axios.get('./js/userList.json').then(res => {
+                    this.list = res.data
+                })
+            },
+            methods: {
+                btn() {
+                    this.isLogin = !this.isLogin
+                    if (this.isLogin) {
+                        this.loginUser = this.list.find(item => item.id == this.value)
+                    } else {
+                        this.loginUser = {}
+                        this.value = '1'
+                        this.isButton = 0
+                        this.showUser = true
+                    }
+                },
+                // 选择下拉框用户时
+                changeOption(e) {
+                    this.value = e.target.value
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
