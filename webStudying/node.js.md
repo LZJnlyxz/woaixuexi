@@ -224,7 +224,7 @@ fs.readFile(__dirname + '/files/1.txt', 'utf8', function(err, dataStr) {
 
 ![image-20220808092121299](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220808092121299.png)
 
->注意：path.join（）方法会自动屏蔽错误符号，例如/前的.而+不会
+>注意：path.join（）方法会自动屏蔽错误符号，例如/前的.而+不会,所以前面的./可加可不加
 >
 >注意：只有"../"会抵消前面最近的一条路径
 
