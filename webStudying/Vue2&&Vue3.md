@@ -402,3 +402,233 @@ module.exports = {
 ### Vue的基本使用
 
 ![image-20220819151159600](pictureStore/image-20220819151159600.png)
+
+![image-20220820111816581](pictureStore/image-20220820111816581.png)
+
+
+
+### Vue的调试工具
+
+![image-20220820111904611](pictureStore/image-20220820111904611.png)
+
+![image-20220820111914308](pictureStore/image-20220820111914308.png)
+
+![image-20220820111928509](pictureStore/image-20220820111928509.png)
+
+
+
+### Vue的指令和过滤器
+
+#### 指令
+
+data是数据源
+
+![image-20220820112005804](pictureStore/image-20220820112005804.png)
+
+##### 内容渲染指令
+
+![image-20220820112013996](pictureStore/image-20220820112013996.png)
+
+![image-20220820112024711](pictureStore/image-20220820112024711.png)
+
+![image-20220820112033187](pictureStore/image-20220820112033187.png)
+
+>
+>
+>注意：1.插值表达式只能用在元素的内容节点，不能用在元素的属性节点
+>
+>2.插值表达式中只能写简单js表达式，而不能写js语句，例如if else语句等等
+
+![image-20220820112042355](pictureStore/image-20220820112042355.png)
+
+>如果渲染的不是纯文本内容，如包括标签，则info属性的值必须用单引号括起来，看成一个字符串型数据
+>
+>注意：el属性的值其实是选择器，故如果选定了在页面中多次出现的标签，会默认指定为第一个出现的标签
+
+
+
+##### 属性绑定指令
+
+![image-20220820112051088](pictureStore/image-20220820112051088.png)
+
+![image-20220820112100152](pictureStore/image-20220820112100152.png)
+
+![image-20220820112107849](pictureStore/image-20220820112107849.png)
+
+
+
+##### 事件绑定指令
+
+![image-20220820112116091](pictureStore/image-20220820112116091.png)
+
+![image-20220820112125161](pictureStore/image-20220820112125161.png)
+
+![image-20220820112148237](pictureStore/image-20220820112148237.png)
+
+>
+>
+>注意：事件处理函数原型是addCount：function（）{}，但上述写法更简便
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
+  <div id="app">
+    <p>count 的值是：{{ count }}</p>
+    <!-- 在绑定事件处理函数的时候，可以使用 () 传递参数 -->
+    <!-- v-on: 指令可以被简写为 @ -->
+    <button @click="add(1)">+1</button>
+    <button @click="sub">-1</button>
+  </div>
+
+  <!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
+  <script src="./lib/vue-2.6.12.js"></script>
+  <!-- 2. 创建 Vue 的实例对象 -->
+  <script>
+    // 创建 Vue 的实例对象
+    const vm = new Vue({
+      // el 属性是固定的写法，表示当前 vm 实例要控制页面上的哪个区域，接收的值是一个选择器
+      el: '#app',
+      // data 对象就是要渲染到页面上的数据
+      data: {
+        count: 0
+      },
+      // methods 的作用，就是定义事件的处理函数
+      methods: {
+        add(n) {
+          // 在 methods 处理函数中，this 就是 new 出来的 vm 实例对象
+          // console.log(vm === this)
+          console.log(vm)
+          // vm.count += 1
+          this.count += n
+        },
+        sub() {
+          // console.log('触发了 sub 处理函数')
+          this.count -= 1
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+![image-20220820112132840](pictureStore/image-20220820112132840.png)
+
+![image-20220820112140937](pictureStore/image-20220820112140937.png)
+
+
+
+![image-20220820112158434](pictureStore/image-20220820112158434.png)
+
+
+
+![image-20220820112208239](pictureStore/image-20220820112208239.png)
+
+![image-20220820112216290](pictureStore/image-20220820112216290.png)
+
+
+
+##### 双向绑定指令
+
+![image-20220820112224330](pictureStore/image-20220820112224330.png)
+
+>
+>
+>注意：1.v-model实现的是双向数据绑定，故可以通过该指令赋予文本框数据源中的值为默认值，同时，修改文本框内的值也会改变数据源中的值
+>
+>2.该指令当且仅当与表单类元素绑定时具有意义，因为只有该类元素具有交互功能，二普通元素例如div p元素只能用于展示内容而不能产生交互效果
+
+![image-20220820112232046](pictureStore/image-20220820112232046.png)
+
+ >
+ >
+ >注意：lazy是指只在v-model改变结束时才会改变model中的值，改变结束的判断标准是文本框是否失去焦点
+
+
+
+##### 条件渲染指令
+
+![image-20220820112241312](pictureStore/image-20220820112241312.png)
+
+![image-20220820112249609](pictureStore/image-20220820112249609.png)
+
+>
+>
+>注意：如果初始标签时该标签不需要被显示，则使用v-if压根不会创建改元素，但v-show却会创建改元素，从而造成初始渲染开销，此时用v-if更好，所以说，需要认识到的事，没有任何事物或人是完美的，我们能做的只是按需使用，适合自己的才是最好的
+
+![image-20220820112257414](pictureStore/image-20220820112257414.png)
+
+![image-20220820112305174](pictureStore/image-20220820112305174.png)
+
+##### 列表渲染指令
+
+![image-20220820112316397](pictureStore/image-20220820112316397.png)
+
+![image-20220820112341434](pictureStore/image-20220820112341434.png)
+
+>
+>
+>注意：item对象除了可以被li的子元素访问，同时也可以被li元素自身访问
+
+
+
+![image-20220820112354834](pictureStore/image-20220820112354834.png)
+
+看下面哦
+
+![image-20220820195102550](pictureStore/image-20220820195102550.png)
+
+![image-20220820195117686](pictureStore/image-20220820195117686.png)
+
+![image-20220820112402425](pictureStore/image-20220820112402425.png)
+
+>
+>
+>注意：索引其实不具有唯一性，因为index无法与某一项强制绑定，但id却可以
+
+
+
+
+
+
+
+#### 过滤器
+
+![image-20220820112411219](pictureStore/image-20220820112411219.png)
+
+![image-20220820112418440](pictureStore/image-20220820112418440.png)
+
+![image-20220820112510318](pictureStore/image-20220820112510318.png)
+
+![image-20220820112517998](pictureStore/image-20220820112517998.png)
+
+![image-20220820112525818](pictureStore/image-20220820112525818.png)
+
+![image-20220820112535694](pictureStore/image-20220820112535694.png)
+
+![image-20220820112544900](pictureStore/image-20220820112544900.png)
+
+![image-20220820112555230](pictureStore/image-20220820112555230.png)
+
+
+
+### 品牌列表案例
+
+![image-20220820112622375](pictureStore/image-20220820112622375.png)
+
+![image-20220820112629098](pictureStore/image-20220820112629098.png)
+
+![image-20220820112639409](pictureStore/image-20220820112639409.png)
