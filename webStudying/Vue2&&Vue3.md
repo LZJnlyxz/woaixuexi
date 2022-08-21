@@ -557,6 +557,30 @@ data是数据源
  >
  >注意：lazy是指只在v-model改变结束时才会改变model中的值，改变结束的判断标准是文本框是否失去焦点
 
+###### label的for属性
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="checkbox" id="cb1">
+  <label for="cb1">男</label>
+  <hr>
+  <input type="checkbox" id="cb2">
+  <label for="cb2">女</label>
+</body>
+
+</html>
+```
+
 
 
 ##### 条件渲染指令
@@ -603,15 +627,262 @@ data是数据源
 
 
 
+### 品牌列表案例
+
+![image-20220820112622375](pictureStore/image-20220820112622375.png)
 
 
-#### 过滤器
+
+![image-20220820112629098](pictureStore/image-20220820112629098.png)
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>品牌列表案例</title>
+  <link rel="stylesheet" href="./lib/bootstrap.css">
+  <link rel="stylesheet" href="./css/brandlist.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 卡片区域 -->
+    <div class="card">
+      <div class="card-header">
+        添加品牌
+      </div>
+      <div class="card-body">
+        <!-- 添加品牌的表单区域 -->
+        <form @submit.prevent="add">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">品牌名称</div>
+                </div>
+                <input type="text" class="form-control" placeholder="请输入品牌名称" v-model.trim="brand">
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2">添加</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 表格区域 -->
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">品牌名称</th>
+          <th scope="col">状态</th>
+          <th scope="col">创建时间</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in list" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{item.name}}</td>
+          <td> 
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" :id="
+              'cb'+item.id" v-model="item.status">
+              <label class="custom-control-label" :for="'cb'+item.id" v-if="item.status===true">已启用</label>
+              <label class="custom-control-label" :for="'cb'+item.id" v-if="item.status===false">已禁用</label>
+            </div>
+            <!-- 注意label标签的for属性的作用 -->
+            <!-- 注意动态绑定属性的使用时机 -->
+          </td>
+          <td>2022-02-02 11:34:07</td>
+          <td>
+            <a href="javascript:;"  @click="remove(item.id)">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script>
+    const vm=new Vue({
+      el:"#app",
+      data:{
+        nextId:4,
+        brand:'',
+        list:[{id:1,name:"宝马",status:true,time:new Date()},
+              {id:2,name:"奥迪",status:true,time:new Date()},
+              {id:3,name:"奔驰",status:true,time:new Date()}
+      ]
+      },
+      methods:{
+        remove(id) {
+          this.list=this.list.filter(item=>item.id!=id)
+        },
+        add() {
+          if(this.brand==='') return alert('请输入正确的品牌名')
+          const obj={
+            id:this.nextId,
+            name:this.brand,
+            status:true,
+            time:new Date()
+          }
+          // 利用数组push()方法为数组末尾添加一个元素
+          this.list.push(obj)
+          this.brand=''
+          this.nextId++
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+![image-20220820112639409](pictureStore/image-20220820112639409.png)
+
+
+
+
+
+
+
+### 过滤器
 
 ![image-20220820112411219](pictureStore/image-20220820112411219.png)
 
 ![image-20220820112418440](pictureStore/image-20220820112418440.png)
 
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>message 的值是：{{ message | capi }}</p>
+  </div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue.js'
+      },
+      // 过滤器函数，必须被定义到 filters 节点之下
+      // 过滤器本质上是函数
+      filters: {
+        // 注意：过滤器函数形参中的 val，永远都是“管道符”前面的那个值
+        capi(val) {
+          // 字符串有 charAt 方法，这个方法接收索引值，表示从字符串中把索引对应的字符，获取出来
+          // val.charAt(0)
+          const first = val.charAt(0).toUpperCase()
+          // 字符串的 slice 方法，可以截取字符串，从指定索引往后截取
+          const other = val.slice(1)
+          // 强调：过滤器中，一定要有一个返回值
+          return first + other
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
 ![image-20220820112510318](pictureStore/image-20220820112510318.png)
+
+>注意：1.第二个参数函数中的形参也是指管道符前的那个对象
+>
+>2.如果全局过滤器和私有过滤器名字相同而引起冲突，则遵循就近原则，调用私有过滤器
+>
+>3.如果未定义过滤器而直接调用，会报错，failed to reslove filter：过滤器的名字（如下）
+
+![image-20220821104756929](pictureStore/image-20220821104756929.png)
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>message 的值是：{{ message | capi }}</p>
+  </div>
+
+  <div id="app2">
+    <p>message 的值是：{{ message | capi }}</p>
+  </div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script>
+    // 使用 Vue.filter() 定义全局过滤器
+    Vue.filter('capi', function (str) {
+      const first = str.charAt(0).toUpperCase()
+      const other = str.slice(1)
+      return first + other + '~~~'
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello vue.js'
+      },
+      // 过滤器函数，必须被定义到 filters 节点之下
+      // 过滤器本质上是函数
+      filters: {
+        // 注意：过滤器函数形参中的 val，永远都是“管道符”前面的那个值
+        capi(val) {
+          // 字符串有 charAt 方法，这个方法接收索引值，表示从字符串中把索引对应的字符，获取出来
+          // val.charAt(0)
+          const first = val.charAt(0).toUpperCase()
+          // 字符串的 slice 方法，可以截取字符串，从指定索引往后截取
+          const other = val.slice(1)
+          // 强调：过滤器中，一定要有一个返回值
+          return first + other
+        }
+      }
+    })
+
+    // ----------------------------------
+
+    const vm2 = new Vue({
+      el: '#app2',
+      data: {
+        message: 'heima'
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
 
 ![image-20220820112517998](pictureStore/image-20220820112517998.png)
 
@@ -625,10 +896,901 @@ data是数据源
 
 
 
-### 品牌列表案例
 
-![image-20220820112622375](pictureStore/image-20220820112622375.png)
 
-![image-20220820112629098](pictureStore/image-20220820112629098.png)
 
-![image-20220820112639409](pictureStore/image-20220820112639409.png)
+
+
+
+
+
+总结：
+
+### 推荐大家安装的 VScode 中的 Vue 插件
+
+1. Vue 3 Snippets     https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets
+2. Vetur                    https://marketplace.visualstudio.com/items?itemName=octref.vetur
+
+
+
+### 什么是 vue
+
+1. 构建用户界面
+   + 用 vue 往 html 页面中填充数据，非常的方便
+2. 框架
+   + 框架是一套现成的解决方案，程序员只能遵守框架的规范，去编写自己的业务功能！
+   + 要学习 vue，就是在学习 vue 框架中规定的用法！
+   + vue 的指令、组件（是对 UI 结构的复用）、路由、Vuex、vue 组件库
+   + 只有把上面老师罗列的内容掌握以后，才有开发 vue 项目的能力！
+
+
+
+### vue 的两个特性
+
+1. 数据驱动视图：
+
+   + 数据的变化**会驱动视图**自动更新
+   + 好处：程序员只管把数据维护好，那么页面结构会被 vue 自动渲染出来！
+
+2. 双向数据绑定：
+
+   > 在网页中，form 表单负责**采集数据**，Ajax 负责**提交数据**。
+
+   + js 数据的变化，会被自动渲染到页面上
+   + 页面上表单采集的数据发生变化的时候，会被 vue 自动获取到，并更新到 js 数据中
+
+> 注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）
+
+
+
+### vue 指令
+
+
+
+#### 1. 内容渲染指令
+
+1. `v-text` 指令的缺点：会覆盖元素内部原有的内容！
+2. `{{ }}` 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！
+3. `v-html` 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！
+
+
+
+#### 2. 属性绑定指令
+
+>  注意：插值表达式只能用在元素的**内容节点**中，不能用在元素的**属性节点**中！
+
++ 在 vue 中，可以使用 `v-bind:` 指令，为元素的属性动态绑定值；
+
++ 简写是英文的 `:`
+
++ 在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如：
+
+  ```xml
+  <div :title="'box' + index">这是一个 div</div>
+  ```
+
+
+
+#### 3. 事件绑定
+
+1. `v-on:` 简写是 `@`
+
+2. 语法格式为：
+
+   ```xml
+   <button @click="add"></button>
+   
+   methods: {
+      add() {
+   			// 如果在方法中要修改 data 中的数据，可以通过 this 访问到
+   			this.count += 1
+      }
+   }
+   ```
+
+3. `$event` 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个  $event。例如：
+
+   ```xml
+   <button @click="add(3, $event)"></button>
+   
+   methods: {
+      add(n, e) {
+   			// 如果在方法中要修改 data 中的数据，可以通过 this 访问到
+   			this.count += 1
+      }
+   }
+   ```
+
+4. 事件修饰符：
+
+   + `.prevent`
+
+     ```xml
+     <a @click.prevent="xxx">链接</a>
+     ```
+
+   + `.stop`
+
+     ```xml
+     <button @click.stop="xxx">按钮</button>
+     ```
+
+     
+
+#### 4. v-model 指令
+
+1. input 输入框
+   + type="radio"
+   + type="checkbox"
+   + type="xxxx"
+2. textarea
+3. select
+
+
+
+#### 5. 条件渲染指令
+
+1. `v-show` 的原理是：动态为元素添加或移除 `display: none` 样式，来实现元素的显示和隐藏
+   + 如果要频繁的切换元素的显示状态，用 v-show 性能会更好
+2. `v-if` 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏
+   + 如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好
+
+>  在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！
+
+
+
+v-if 指令在使用的时候，有两种方式：
+
+1. 直接给定一个布尔值 true 或 false
+
+   ```xml
+   <p v-if="true">被 v-if 控制的元素</p>
+   ```
+
+2. 给 v-if 提供一个判断条件，根据判断的结果是 true 或 false，来控制元素的显示和隐藏
+
+   ```xml
+   <p v-if="type === 'A'">良好</p>
+   ```
+
+   
+
+   ### 疑难点突破
+
+   通过`this`直接访问到`methods`里面的函数的原因是：因为`methods`里的方法通过 `bind` 指定了`this`为 `new Vue`的实例(`vm`)。
+
+   通过 `this` 直接访问到 `data` 里面的数据的原因是：data里的属性最终会存储到`new Vue`的实例（`vm`）上的 `_data`对象中，访问 `this.xxx`，是访问`Object.defineProperty`代理后的 `this._data.xxx`。
+
+
+
+## Vue基础入门
+
+![image-20220821110238330](pictureStore/image-20220821110238330.png)
+
+![image-20220821110324047](pictureStore/image-20220821110324047.png)
+
+### 侦听器
+
+1. 方法格式的侦听器
+   + 缺点1：无法在刚进入页面的时候，自动触发！！！
+   + 缺点2：如果侦听的是一个对象，如果对象中的属性发生了变化，不会触发侦听器！！！因为方法格式的侦听器是直接侦听data的属性，而不能侦听data属性的属性
+2. 对象格式的侦听器
+   + 好处1：可以通过 **immediate** 选项，让侦听器自动触发！！！
+   + 好处2：可以通过 **deep** 选项，让侦听器深度监听对象中每个属性的变化！！！
+
+
+
+![image-20220821110948686](pictureStore/image-20220821110948686.png)
+
+![image-20220821111012801](pictureStore/image-20220821111012801.png)
+
+
+
+![image-20220821111024003](pictureStore/image-20220821111024003.png)
+
+对象格式的监听器
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="username">
+  </div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script src="./lib/jquery-v3.6.0.js"></script>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        username: 'admin'
+      },
+      // 所有的侦听器，都应该被定义到 watch 节点下
+      watch: {
+        // 定义对象格式的侦听器
+        username: {
+          // 侦听器的处理函数
+          handler(newVal, oldVal) {
+            console.log(newVal, oldVal)
+          },
+          // immediate 选项的默认值是 false
+          // immediate 的作用是：控制侦听器是否自动触发一次！
+          immediate: true
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+![image-20220821111051292](pictureStore/image-20220821111051292.png)
+
+
+
+![image-20220821111059582](pictureStore/image-20220821111059582.png)
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="info.username">
+    <input type="text" v-model="info.address.city">
+  </div>
+
+  <script src="./lib/vue-2.6.12.js"></script>
+  <script src="./lib/jquery-v3.6.0.js"></script>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        // 用户的信息对象
+        info: {
+          username: 'admin',
+          address: {
+            city: '北京'
+          }
+        }
+      },
+      // 所有的侦听器，都应该被定义到 watch 节点下
+      watch: {
+        /* info: {
+          handler(newVal) {//注意：这里的newVal指的是info这个用户的信息对象，与方式格式对比理解
+            console.log(newVal)
+          },
+          // 开启深度监听，只要对象中任何一个属性变化了，都会触发“对象的侦听器”
+          deep: true
+        } */
+        // 如果要侦听的是对象的子属性的变化，则必须包裹一层单引号
+        'info.username'(newVal) {
+          console.log(newVal)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+### 计算属性
+
+![image-20220821111123828](pictureStore/image-20220821111123828.png)
+
+![image-20220821111136729](pictureStore/image-20220821111136729.png)
+
+特点：
+
+1. 定义的时候，要被定义为“方法”
+2. 在使用计算属性的时候，当普通的属性使用即可
+
+好处：
+
+1. 实现了代码的复用
+2. 只要计算属性中依赖的数据源变化了，则计算属性会自动重新求值！
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.6.12.js"></script>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <span>R：</span>
+      <input type="text" v-model.number="r">
+    </div>
+    <div>
+      <span>G：</span>
+      <input type="text" v-model.number="g">
+    </div>
+    <div>
+      <span>B：</span>
+      <input type="text" v-model.number="b">
+    </div>
+    <hr>
+
+    <!-- 专门用户呈现颜色的 div 盒子 -->
+    <!-- 在属性身上，: 代表  v-bind: 属性绑定 -->
+    <!-- :style 代表动态绑定一个样式对象，它的值是一个 {  } 样式对象 -->
+    <!-- 当前的样式对象中，只包含 backgroundColor 背景颜色 -->
+    <div class="box" :style="{ backgroundColor: rgb }">
+      {{ rgb }}//各种节点的儿子属性可以在body中被任意调用
+    </div>
+    <button @click="show">按钮</button>
+  </div>
+
+  <script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        // 红色
+        r: 0,
+        // 绿色
+        g: 0,
+        // 蓝色
+        b: 0
+      },
+      methods: {
+        // 点击按钮，在终端显示最新的颜色
+        show() {
+          console.log(this.rgb)
+        }
+      },
+      // 所有的计算属性，都要定义到 computed 节点之下
+      // 计算属性在定义的时候，要定义成“方法格式”
+      computed: {
+        // rgb 作为一个计算属性，被定义成了方法格式，
+        // 最终，在这个方法中，要返回一个生成好的 rgb(x,x,x) 的字符串
+        rgb() {
+          return `rgb(${this.r}, ${this.g}, ${this.b})`
+        }
+      }
+    });
+
+    console.log(vm)
+  </script>
+</body>
+
+</html>
+```
+
+
+
+### axios
+
+用法见Ajax
+
+![image-20220821140234957](pictureStore/image-20220821140234957.png)
+
+>
+>
+>注意：axios发起请求后返回的是一个promise对象实例
+
+#### 直接利用axios发起ajax请求
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="./lib/axios.js"></script>
+  <script>
+    // http://www.liulongbin.top:3006/api/getbooks
+
+    // 1. 调用 axios 方法得到的返回值是 Promise 对象
+    axios({
+      // 请求方式
+      method: 'GET',
+      // 请求的地址
+      url: 'http://www.liulongbin.top:3006/api/getbooks',
+      // URL 中的查询参数
+      params: {
+        id: 1
+      },
+      // 请求体参数
+      data: {}
+    }).then(function (result) {
+      console.log(result)
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+#### 结合await和async调用axios发起get和post请求
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="btnPost">发起POST请求</button>
+  <button id="btnGet">发起GET请求</button>
+
+  <script src="./lib/axios.js"></script>
+  <script>
+    document.querySelector('#btnPost').addEventListener('click', async function () {
+      // 如果调用某个方法的返回值是 Promise 实例，则前面可以添加 await！
+      // await 只能用在被 async “修饰”的方法中
+      const { data } = await axios({
+        method: 'POST',
+        url: 'http://www.liulongbin.top:3006/api/post',
+        data: {
+          name: 'zs',
+          age: 20
+        }
+      })
+
+      console.log(data)
+    })
+
+    document.querySelector('#btnGet').addEventListener('click', async function () {
+      // 解构赋值的时候，使用 : 进行重命名
+      // 1. 调用 axios 之后，使用 async/await 进行简化
+      // 2. 使用解构赋值，从 axios 封装的大对象中，把 data 属性解构出来
+      // 3. 把解构出来的 data 属性，使用 冒号 进行重命名，一般都重命名为 { data: res }
+      const { data: res } = await axios({
+        method: 'GET',
+        url: 'http://www.liulongbin.top:3006/api/getbooks'
+      })
+
+      console.log(res.data)
+    })
+
+    // $.ajax()   $.get()  $.post()
+    // axios()    axios.get()    axios.post()    axios.delete()   axios.put()
+  </script>
+</body>
+
+</html>
+```
+
+#### 基于axios.get和axios.post发起请求
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btnGET">GET</button>
+  <button id="btnPOST">POST</button>
+
+  <script src="./lib/axios.js"></script>
+  <script>
+    document.querySelector('#btnGET').addEventListener('click', async function () {
+      /* axios.get('url地址', {
+        // GET 参数
+        params: {}
+      }) */
+
+      const { data: res } = await axios.get('http://www.liulongbin.top:3006/api/getbooks', {
+        params: { id: 1 }
+      })
+      console.log(res)
+    })
+
+    document.querySelector('#btnPOST').addEventListener('click', async function () {
+      // axios.post('url', { /* POST 请求体数据 */ })
+      const { data: res } = await axios.post('http://www.liulongbin.top:3006/api/post', { name: 'zs', gender: '女' })
+      console.log(res)
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+
+
+### vue-cli
+
+![image-20220821111154916](pictureStore/image-20220821111154916.png)
+
+
+
+
+
+![image-20220821111206984](pictureStore/image-20220821111206984.png)
+
+![image-20220821111213855](pictureStore/image-20220821111213855.png)
+
+>
+>
+>注意：1.cmd输入vue -V不报错说明安装成功
+>
+>2.项目名称不能用中文
+
+![image-20220821111221104](pictureStore/image-20220821111221104.png)
+
+
+
+### Vue组件
+
+![image-20220821111238592](pictureStore/image-20220821111238592.png)
+
+![image-20220821111245878](pictureStore/image-20220821111245878.png)
+
+![image-20220821111253064](pictureStore/image-20220821111253064.png)
+
+![image-20220821111259701](pictureStore/image-20220821111259701.png)
+
+![image-20220821111309126](pictureStore/image-20220821111309126.png)
+
+>
+>
+>注意：script下export deafult里的用法和vue实例对象类似
+
+![image-20220821111316598](pictureStore/image-20220821111316598.png)
+
+![image-20220821111329693](pictureStore/image-20220821111329693.png)
+
+![image-20220821111337152](pictureStore/image-20220821111337152.png)
+
+App.vue
+
+```vue
+<template>
+  <div>
+    <div class="test-box">
+      <h3>这是用户自定义的 Test.vue --- {{ username }}</h3>
+      <button @click="chagneName">修改用户名</button>
+    </div>
+    <div>123</div>
+  </div>
+</template>
+<!-- template之中只能有一个根节点，即只能所有结构只能被一对div包起来 -->
+<script>
+// 默认导出。这是固定写法！
+export default {
+  // data 数据源
+  // 注意：.vue 组件中的 data 不能像之前一样，不能指向对象。
+  // 注意：组件中的 data 必须是一个函数
+  data() {
+    // 这个 return 出去的 { } 中，可以定义数据
+    return {
+      username: 'admin'
+    }
+  },
+  methods: {
+    chagneName() {
+      // 在组件中， this 就表示当前组件的实例对象
+      console.log(this)
+      this.username = '哇哈哈'
+    }
+  },
+  // 当前组件中的侦听器
+  watch: {},
+  // 当前组件中的计算属性
+  computed: {},
+  // 当前组件中的过滤器
+  filters: {}
+}
+</script>
+<!-- 启动less语法以及根节点具有唯一性 -->
+<!-- 必须是less语法，故必须有lang=less -->
+<style lang="less">
+.test-box {
+  background-color: pink;
+  h3 {
+    color: red;
+  }
+}
+</style>
+
+```
+
+
+
+main.js
+
+```js
+// 导入 vue 这个包，得到 Vue 构造函数
+import Vue from 'vue'
+// 导入 App.vue 根组件，将来要把 App.vue 中的模板结构，渲染到 HTML 页面中
+// import App from './App.vue'
+import Test from './Test.vue'
+
+Vue.config.productionTip = false
+
+// 创建 Vue 的实例对象
+new Vue({
+  // 把 render 函数指定的组件，渲染到 HTML 页面中,render函数指定的组件就是根节点
+  render: h => h(Test)
+}).$mount('#app')
+
+// Vue 实例的 $mount() 方法，作用和 el 属性完全一样！
+
+```
+
+![image-20220821111346620](pictureStore/image-20220821111346620.png)
+
+![image-20220821111354242](pictureStore/image-20220821111354242.png)
+
+![image-20220821111400985](pictureStore/image-20220821111400985.png)
+
+![image-20220821111408421](pictureStore/image-20220821111408421.png)
+
+![image-20220821111415877](pictureStore/image-20220821111415877.png)
+
+>
+>
+>注意：用v-bind动态绑定自定义属性init时init属性的值是个数字，不用则仅仅是个字符串
+
+
+
+ 
+
+![image-20220821111424713](pictureStore/image-20220821111424713.png)
+
+![image-20220821111431728](pictureStore/image-20220821111431728.png)
+
+![image-20220821111438650](pictureStore/image-20220821111438650.png)
+
+![image-20220821111446723](pictureStore/image-20220821111446723.png)
+
+![image-20220821111453931](pictureStore/image-20220821111453931.png)
+
+#### 组件的基本使用
+
+![image-20220821111528744](pictureStore/image-20220821111528744.png)
+
+![image-20220821111653693](pictureStore/image-20220821111653693.png)
+
+>
+>
+>属性选择器：
+>
+>```
+>/* 存在 href 属性并且属性值匹配"https://example.org"的<a> 元素 */
+>a[href="https://example.org"] {
+>  color: green;
+>}
+>```
+
+![image-20220821111701847](pictureStore/image-20220821111701847.png)
+
+
+
+理解：1.导入组件并以标签的形式使用时，组件才完成了实例化
+
+   		 2.浏览器只能识别js代码，因为有js引擎，vue必须经过vue-template-compiler后被解析成js代码才可以被浏览器识别
+
+ 
+
+总结：
+
+
+
+过滤器
+
+过滤器的注意点
+
+1. 要定义到 filters 节点下，**本质是一个函数**
+2. 在过滤器函数中，**一定要有 return 值**
+3. 在过滤器的形参中，可以获取到“管道符”前面待处理的那个值
+4. 如果全局过滤器和私有过滤器名字一致，此时按照“**就近原则**”，调用的是”私有过滤器“
+
+
+
+watch 侦听器
+
+
+
+侦听器的格式
+
+1. 方法格式的侦听器
+   + 缺点1：无法在刚进入页面的时候，自动触发！！！
+   + 缺点2：如果侦听的是一个对象，如果对象中的属性发生了变化，不会触发侦听器！！！因为方法格式的侦听器是直接侦听data的属性，而不能侦听data属性的属性
+2. 对象格式的侦听器
+   + 好处1：可以通过 **immediate** 选项，让侦听器自动触发！！！
+   + 好处2：可以通过 **deep** 选项，让侦听器深度监听对象中每个属性的变化！！！
+
+
+
+计算属性
+
+
+
+特点：
+
+1. 定义的时候，要被定义为“方法”
+2. 在使用计算属性的时候，当普通的属性使用即可
+
+好处：
+
+1. 实现了代码的复用
+2. 只要计算属性中依赖的数据源变化了，则计算属性会自动重新求值！
+
+
+
+axios
+
+> axios 是一个专注于网络请求的库！
+
+
+
+axios 的基本使用
+
+1. 发起 GET 请求：
+
+   ```js
+   axios({
+     // 请求方式
+     method: 'GET',
+     // 请求的地址
+     url: 'http://www.liulongbin.top:3006/api/getbooks',
+     // URL 中的查询参数
+     params: {
+       id: 1
+     }
+   }).then(function (result) {
+     console.log(result)
+   })
+   ```
+
+2. 发起 POST 请求：
+
+   ```js
+   document.querySelector('#btnPost').addEventListener('click', async function () {
+     // 如果调用某个方法的返回值是 Promise 实例，则前面可以添加 await！
+     // await 只能用在被 async “修饰”的方法中
+     const { data: res } = await axios({
+       method: 'POST', 
+       url: 'http://www.liulongbin.top:3006/api/post',
+       data: {
+         name: 'zs',
+         age: 20
+       }
+     })
+   
+     console.log(res)
+   })
+   ```
+
+
+
+vue-cli 的使用
+
+1. 在终端下运行如下的命令，创建指定名称的项目：
+
+   ```bash
+   vue cerate 项目的名称
+   ```
+
+2. vue 项目中 src 目录的构成：
+
+   ```
+   assets 文件夹：存放项目中用到的静态资源文件，例如：css 样式表、图片资源
+   components 文件夹：程序员封装的、可复用的组件，都要放到 components 目录下
+   main.js 是项目的入口文件。整个项目的运行，要先执行 main.js
+   App.vue 是项目的根组件。
+   ```
+
+   
+
+## 生命周期&数据共享
+
+![image-20220821215551488](pictureStore/image-20220821215551488.png)
+
+### 组件的生命周期
+
+![image-20220821215901618](pictureStore/image-20220821215901618.png)
+
+![image-20220821215917415](pictureStore/image-20220821215917415.png)
+
+![image-20220821215924361](pictureStore/image-20220821215924361.png)
+
+
+
+### 组件之间的数据共享
+
+![image-20220821215941211](pictureStore/image-20220821215941211.png)
+
+![image-20220821215952633](pictureStore/image-20220821215952633.png)
+
+![image-20220821220001594](pictureStore/image-20220821220001594.png)
+
+![image-20220821220009611](pictureStore/image-20220821220009611.png)
+
+![image-20220821220048360](pictureStore/image-20220821220048360.png)
+
+![image-20220821220057226](pictureStore/image-20220821220057226.png)
+
+
+
+
+
+### ref引用
+
+![image-20220821220120672](pictureStore/image-20220821220120672.png)
+
+![image-20220821220129397](pictureStore/image-20220821220129397.png)
+
+![image-20220821220137355](pictureStore/image-20220821220137355.png)
+
+![image-20220821220145626](pictureStore/image-20220821220145626.png)
+
+![image-20220821220154397](pictureStore/image-20220821220154397.png)
+
+![image-20220821220209345](pictureStore/image-20220821220209345.png)
+
+
+
+
+
+### 购物车案例
+
+![image-20220821220229685](pictureStore/image-20220821220229685.png)
+
+![image-20220821220238102](pictureStore/image-20220821220238102.png)
+
+![image-20220821220247600](pictureStore/image-20220821220247600.png)

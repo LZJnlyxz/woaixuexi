@@ -750,7 +750,7 @@ function itheima(options) {
 
 
 
-### ==<u>6.axios</u>==
+### ==<u>axios</u>==
 
 ![image-20220802120625734](C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220802120625734.png)
 

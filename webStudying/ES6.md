@@ -1522,7 +1522,7 @@ console.log(s.description) //尚硅谷
 
 ```
 
-## 6.Promise
+## Promise
 
 ```javascript
 <script>
