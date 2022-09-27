@@ -1,0 +1,234 @@
+@font-face {
+    font-family: icons;
+    src: url(../fonts/icons.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  .iconfont {
+    font-family: icons;
+    font-style: normal;
+    font-weight: 400;
+  }
+* {
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body,
+html,
+.page {
+    height: 100%;
+    width: 100%;
+    max-width: 1242px;
+    min-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+}
+.page {
+    background: #d43d34;
+}
+header {
+    height: 297px;
+    background: #d43d34;
+}
+header h1 {
+    font-size: 30px;
+    color: #fffdfc;
+    padding:35px 0 40px 0 ;
+    text-align: center;
+}
+.lanmu {
+    font-size: 22px;
+    display: flex;
+    height: 120px;
+    line-height: 120px;
+    /* justify-content: space-around; */
+    /* space-around为啥不起作用 */
+    color: #fffdfc;
+}
+.haowen {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+    height: 120px;
+    margin-left: 37px;
+    background-color: #aa302d;
+    border: 1px solid transparent;
+    border-radius: 15px 0 0 15px;
+}
+.haowen h3,
+.zixun h3 {
+    display: flex;
+    height: 120px;
+    text-align: center;
+}
+.haowen h3::before {
+    content: '';
+    display: block;
+    margin-top: 37px;
+    margin-right: 35px;
+    height: 46px;
+    width: 46px;
+    background:url(../images/icon_article.webp) no-repeat center;
+}
+.zixun {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+    height: 120px;
+    margin-right: 37px;
+    background-color: #bd372e;
+    border: 1px solid transparent;
+    border-radius: 0 15px 15px 0;
+}
+.zixun h3::before {
+    content: '';
+    display: block;
+    margin-top: 37px;
+    margin-right: 35px;
+    height: 46px;
+    width: 46px;
+    background:url(../images/icon_hot.webp) no-repeat center;
+}
+.title {
+    height: 165px;
+    background-color: #fff;
+    /* border: 1px solid transparent; */
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+.wenzhang {
+    width: 160px;
+    height: 77px;
+    line-height: 77px;
+    text-align: center;
+    font-size: 28px;
+    color: #fff;
+    background-color: #d43d34;
+    border: 1px solid transparent;
+    border-radius:7px;
+    margin: 64px 0 0 46px;
+}
+.news {
+    padding-top: 42px;
+    padding: 42px 44px 0;
+    background-color: #ececec;
+}
+.top {
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    margin: 0 0 46px;
+}
+/* 非块级元素指定垂直内外边距必须转换为块级元素 */
+.pic {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin:45px 45px 40px ;
+    border-radius: 15px;
+    /* width: 100%; */
+    height: 443px;
+    background-color: pink;
+}
+.top1 .pic a::before {
+    content: '';
+    width: 110px;
+    height: 63px;
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    background: url(../images/rank-top1.png) no-repeat center;
+}
+/* 为什么伪元素对齐不了 */
+.top .pic a img {
+   width: 100%;
+   height: 100%;
+}
+.top h3 {
+    font-weight: 500;
+    font-size: 45px;
+    color: black;
+    padding: 0 45px 69px;
+}
+.top h3 a {
+    color: black;
+}
+.top .more {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 90px 65px 46px;
+    color: #888888;
+    font-size: 28px;
+}
+.top .right {
+    line-height:77px;
+}
+.top .more .icon-comment {
+    margin-right: 46px;
+}
+.top .more .icon-comment::before {
+    /* vertical-align: middle; */
+    margin-right: 20px;
+    font-size: 31px;
+}
+.icon-thumb::before {
+    /* vertical-align: middle; */
+    margin-right: 20px;
+    font-size: 31px;
+}
+.top2 .pic a::before {
+    content: '';
+    width: 110px;
+    height: 63px;
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    background: url(../images/rank-top2.png) no-repeat center;
+}
+.top2 .more .left {
+    display: flex;
+    justify-content: space-between;
+    width: 190px;
+    height: 77px;
+    background-color: #f7f7f7;
+    border-radius: 50px;
+    line-height: 77px;
+}
+.top2 .more .left::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url(../images/icon_topic.png) no-repeat center;
+    background-color: #fff;
+    margin-left: 15px;
+    margin-top: 18px;
+}
+.runner {
+    height: 77px;
+    font-size: 38px;
+    margin-right: 30px;
+}
+.top3 .pic a::before {
+    content: '';
+    width: 110px;
+    height: 63px;
+    position: absolute;
+    top: -6px;
+    left: -2px;
+    background: url(../images/rank-top3.png) no-repeat center;
+}
+
+
+
