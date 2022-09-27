@@ -1,4 +1,4 @@
-# Vue2&&Vue3
+#  **Vue2**&&Vue3
 
 学习流程
 
@@ -1495,6 +1495,12 @@ vue-cli创建项目步骤截图
 
 ![image-20220821111253064](pictureStore/image-20220821111253064.png)
 
+>
+>
+>注意：快速创建vue组件结构的快捷键：键入>后选择第一个项目
+
+![image-20220901171020282](pictureStore/image-20220901171020282.png)
+
 ![image-20220821111259701](pictureStore/image-20220821111259701.png)
 
 ![image-20220821111309126](pictureStore/image-20220821111309126.png)
@@ -1643,6 +1649,12 @@ scope属性
    		 2.浏览器只能识别js代码，因为有js引擎，vue必须经过vue-template-compiler后被解析成js代码才可以被浏览器识别
 
  
+
+
+
+
+
+
 
 
 
@@ -1807,6 +1819,12 @@ vue-cli 的使用
 
 ![image-20220821220057226](pictureStore/image-20220821220057226.png)
 
+>
+>
+>理解：bus只是一个中间件，为bus绑定了share事件，$on方法只是监听bus 的share事件
+>
+>反思：多去理解为什么
+
 
 
 
@@ -1823,9 +1841,94 @@ vue-cli 的使用
 
 ![image-20220821220154397](pictureStore/image-20220821220154397.png)
 
+上述代码会报错，can not read property focus of undifined ，意思是不能找到undifined的属性focus，原因是在inputVisible的值更新为true后，页面的dom结构并未更新，具体流程见组件的生命周期图，此时输入框还未被创建，故此时找不到input元素，所以是undifined ，从而报错
+
+>
+>
+>注意：不能使用update生命周期函数，因为每次数据变化都会触发该函数，第一次聚焦后再失去焦点时会报错，因为失去焦点时input会被动态删除，此时找不到input元素，会报同上的错误，即undifined
+
 ![image-20220821220209345](pictureStore/image-20220821220209345.png)
 
 
+
+#### 数组的some方法
+
+```js
+<body>
+//都是遍历数组的方法，效率不同
+  <script>
+    const arr = ['小红', '你大红', '苏大强', '宝']
+
+    // forEach 循环一旦开始，无法在中间被停止
+    /* arr.forEach((item, index) => {
+      console.log('object')
+      if (item === '苏大强') {
+        console.log(index)
+      }
+    }) */
+
+    arr.some((item, index) => {
+      console.log('ok')
+      if (item === '苏大强') {
+        console.log(index)
+        // 在找到对应的项之后，可以通过 return true 固定的语法，来终止 some 循环
+        return true
+      }
+    })
+  </script>
+</body>
+```
+
+
+
+#### 数组的every方法
+
+```js
+<body>
+    //判断数组中的每一项是否都满足特定的条件，若所有项都满足则返回一个true，否则返回一个false
+  <script>
+    const arr = [
+      { id: 1, name: '西瓜', state: true },
+      { id: 2, name: '榴莲', state: false },
+      { id: 3, name: '草莓', state: true },
+    ]
+
+    // 需求：判断数组中，水果是否被全选了！
+    const result = arr.every(item => item.state)
+    console.log(result)
+  </script>
+</body>
+```
+
+
+
+#### 数组的reduce方法
+
+```js
+<body>
+    //reduce方法即是对数组循环累加的方法
+  <script>
+    const arr = [
+      { id: 1, name: '西瓜', state: true, price: 10, count: 1 },
+      { id: 2, name: '榴莲', state: false, price: 80, count: 2 },
+      { id: 3, name: '草莓', state: true, price: 20, count: 3 },
+    ]
+
+    // 需求：把购物车数组中，已勾选的水果，总价累加起来！
+    /* let amt = 0 // 总价
+        arr.filter(item => item.state).forEach(item => {
+          amt += item.price * item.count
+        })
+    
+        console.log(amt) */
+
+    // arr.filter(item => item.state).reduce((累加的结果, 当前循环项) => { }, 初始值)
+    const result = arr.filter(item => item.state).reduce((amt, item) => amt += item.price * item.count, 0)//把每次累加的结果作为下次循环的第一个形参
+
+    console.log(result)
+  </script>
+</body>
+```
 
 
 
@@ -1835,4 +1938,307 @@ vue-cli 的使用
 
 ![image-20220821220238102](pictureStore/image-20220821220238102.png)
 
-![image-20220821220247600](pictureStore/image-20220821220247600.png)
+![image-20220824193305503](pictureStore/image-20220824193305503.png)
+
+
+
+
+
+分析封装props两种方案的优缺点
+
+![01.关于自定义组件的属性传递问题](pictureStore/01.关于自定义组件的属性传递问题-16613443908774.png)
+
+
+
+分析如何修改商品的勾选状态
+
+![02.修改商品状态的思路](pictureStore/02.修改商品状态的思路.png)
+
+
+
+
+
+**项目课总结：1. 锻炼自学能力**
+
+​       				 **2.锻炼debug能力**
+
+​						**3.锻炼解决问题能力（完成需求能力）**
+
+​			![image-20220821220247600](pictureStore/image-20220821220247600.png)
+
+
+
+## 动态组件&插槽&自定义组件
+
+day6
+
+![image-20220826122044105](pictureStore/image-20220826122044105.png)
+
+![image-20220826122053176](pictureStore/image-20220826122053176.png)
+
+### 动态组件
+
+![image-20220826122115277](pictureStore/image-20220826122115277.png)
+
+![image-20220826122126153](pictureStore/image-20220826122126153.png)
+
+![image-20220826122136312](pictureStore/image-20220826122136312.png)
+
+![image-20220826122144271](pictureStore/image-20220826122144271.png)
+
+![image-20220826122151776](pictureStore/image-20220826122151776.png)
+
+矛盾属性：exclude 指定的组件实例不会被缓存 ，与include不能同时出现，eg.exclude="Right"
+
+ 则Right组件不会被缓存
+
+>
+>
+>了解组件注册名称和组件声明时name的区别
+
+App.vue
+
+```vue
+<template>
+  <div class="app-container">
+    <h1>App 根组件</h1>
+    <hr />
+
+    <button @click="comName = 'Left'">展示 Left</button>
+    <button @click="comName = 'Right'">展示 Right</button>
+
+    <div class="box">
+      <!-- 渲染 Left 组件和 Right 组件 -->
+      <!-- 1. component 标签是 vue 内置的，作用：组件的占位符 -->
+      <!-- 2. is 属性的值，表示要渲染的组件的名字 -->
+      <!-- 3. is 属性的值，应该是组件在 components 节点下的注册名称 -->
+
+      <!-- keep-alive 会把内部的组件进行缓存，而不是销毁组件 -->
+      <!-- 在使用 keep-alive 的时候，可以通过 include 指定哪些组件需要被缓存； -->
+      <!-- 或者，通过 exclude 属性指定哪些组件不需要被缓存；但是：不要同时使用 include 和 exclude 这两个属性 -->
+      <keep-alive exclude="MyRight">
+        <component :is="comName"></component>
+      </keep-alive>
+    </div>
+  </div>
+</template>
+
+<script>
+import Left from '@/components/Left.vue'
+import Right from '@/components/Right.vue'
+
+export default {
+  data() {
+    return {
+      // comName 表示要展示的组件的名字
+      comName: 'Left'
+    }
+  },
+  components: {
+    // 如果在“声明组件”的时候，没有为组件指定 name 名称，则组件的名称默认就是“注册时候的名称”
+    Left,
+    Right
+  }
+}
+</script>
+
+<style lang="less">
+.app-container {
+  padding: 1px 20px 20px;
+  background-color: #efefef;
+}
+.box {
+  display: flex;
+}
+</style>
+
+```
+
+
+
+Right.vue
+
+```vue
+<template>
+  <div class="right-container">
+    <h3>Right 组件</h3>
+  </div>
+</template>
+
+<script>
+export default {
+  // 当提供了 name 属性之后，组件的名称，就是 name 属性的值
+  // 对比：
+  // 1. 组件的 “注册名称” 的主要应用场景是：以标签的形式，把注册好的组件，渲染和使用到页面结构之中
+  // 2. 组件声明时候的 “name” 名称的主要应用场景：结合 <keep-alive> 标签实现组件缓存功能；以及在调试工具中看到组件的 name 名称
+  name: 'MyRight'
+}
+</script>
+
+<style lang="less">
+.right-container {
+  padding: 0 20px 20px;
+  background-color: lightskyblue;
+  min-height: 250px;
+  flex: 1;
+}
+</style>
+
+```
+
+
+
+### 插槽
+
+![image-20220826122210427](pictureStore/image-20220826122210427.png)
+
+![image-20220826122245316](pictureStore/image-20220826122245316.png)
+
+![image-20220826122331137](pictureStore/image-20220826122331137.png)
+
+![image-20220826122338205](pictureStore/image-20220826122338205.png)
+
+、![image-20220826122346855](pictureStore/image-20220826122346855.png)
+
+![image-20220826122354000](pictureStore/image-20220826122354000.png)
+
+![image-20220826122403449](pictureStore/image-20220826122403449.png)
+
+App.vue
+
+```vue
+<template>
+  <div class="app-container">
+    <h1 v-color="color">App 根组件</h1>
+    <p v-color="'red'">测试</p>
+
+    <button @click="color = 'green'">改变 color 的颜色值</button>
+    <hr />
+
+    <Article>
+      <template #title>
+        <h3>一首诗</h3>
+      </template>
+
+      <template #content="{ msg, user }">
+        <div>
+          <p>啊，大海，全是水。</p>
+          <p>啊，蜈蚣，全是腿。</p>
+          <p>啊，辣椒，净辣嘴。</p>
+          <p>{{ msg }}</p>
+          <p>{{ user.name }}</p>
+        </div>
+      </template>
+
+      <template #author>
+        <div>作者：彬果锅</div>
+      </template>
+    </Article>
+
+    <hr />
+
+    <div class="box" style="display: none;">
+      <!-- 渲染 Left 组件和 Right 组件 -->
+      <Left>
+        <!-- 默认情况下，在使用组件的时候，提供的内容都会被填充到名字为 default 的插槽之中 -->
+        <!-- 1. 如果要把内容填充到指定名称的插槽中，需要使用 v-slot: 这个指令 -->
+        <!-- 2. v-slot: 后面要跟上插槽的名字 -->
+        <!-- 3. v-slot: 指令不能直接用在元素身上，必须用在 template 标签上 -->
+        <!-- 4. template 这个标签，它是一个虚拟的标签，只起到包裹性质的作用，但是，不会被渲染为任何实质性的 html 元素 -->
+        <!-- 5. v-slot: 指令的简写形式是 # -->
+        <template #default>
+          <p>这是在 Left 组件的内容区域，声明的 p 标签</p>
+        </template>
+      </Left>
+    </div>
+  </div>
+</template>
+
+<script>
+import Left from '@/components/Left.vue'
+import Article from '@/components/Article.vue'
+
+export default {
+  data() {
+    return {
+      color: 'blue'
+    }
+  },
+  components: {
+    Left,
+    Article
+  },
+  // 私有自定义指令的节点
+  directives: {
+    // 定义名为 color 的指令，指向一个配置对象
+    /* color: {
+      // 当指令第一次被绑定到元素上的时候，会立即触发 bind 函数
+      // 形参中的 el 表示当前指令所绑定到的那个 DOM 对象
+      bind(el, binding) {
+        console.log('触发了 v-color 的 bind 函数')
+        el.style.color = binding.value
+      },
+      // 在 DOM 更新的时候，会触发 update 函数
+      update(el, binding) {
+        console.log('触发了 v-color 的 update 函数')
+        el.style.color = binding.value
+      }
+    } */
+    color(el, binding) {
+      el.style.color = binding.value
+    }
+  }
+}
+</script>
+
+<style lang="less">
+.app-container {
+  padding: 1px 20px 20px;
+  background-color: #efefef;
+}
+.box {
+  display: flex;
+}
+</style>
+
+```
+
+
+
+![image-20220826122412830](pictureStore/image-20220826122412830.png)
+
+![image-20220826122420454](pictureStore/image-20220826122420454.png)
+
+>
+>
+>注意：v-slot指令只能用在组件或者template标签上
+
+![image-20220826122427227](pictureStore/image-20220826122427227.png)
+
+>
+>
+>注意：$event参数除了可以用于接受点击对象外，还可以用来接受多个参数中被覆盖的那一项
+
+看
+
+### 自定义指令
+
+![image-20220826122545000](pictureStore/image-20220826122545000.png)
+
+![image-20220826122551221](pictureStore/image-20220826122551221.png)
+
+![image-20220826122557867](pictureStore/image-20220826122557867.png)
+
+![image-20220826122605837](pictureStore/image-20220826122605837.png)
+
+![image-20220826122614551](pictureStore/image-20220826122614551.png)
+
+![image-20220826122621388](pictureStore/image-20220826122621388.png)
+
+![image-20220826122630982](pictureStore/image-20220826122630982.png)
+
+![image-20220826122638705](pictureStore/image-20220826122638705.png)
+
+![image-20220826122644980](pictureStore/image-20220826122644980.png)
+
+![image-20220826122653885](pictureStore/image-20220826122653885.png)
